@@ -1,0 +1,14 @@
+{
+    "python.defaultInterpreterPath": "/home/seb/miniconda3/envs/comfy/bin/python",
+    "python.testing.pytestEnabled": true,
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "editor.formatOnSave": true,
+    "editor.rulers": [
+        100
+    ]
+}
