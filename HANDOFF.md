@@ -1,7 +1,7 @@
 # HANDOFF
 
 Status: Draft
-Version: 0.2.0
+Version: 0.3.0
 Owner: Project Curvature
 Last Updated: 2026-07-13
 
@@ -90,7 +90,10 @@ Environment
 - Git
 - VS Code
 - Conda
-- ComfyUI
+- Dedicated Curvature Conda environment
+- Reproducible environment definition
+- Pinned Python dependencies
+- Installation and verification guide
 
 Core
 
@@ -121,6 +124,25 @@ Verified:
 - RemoteManager integration completed
 - Live ComfyUI READY/OFFLINE state verified
 
+Build
+
+BUILD-001 completed.
+
+Verified:
+
+- Clean Conda environment created from environment.yml
+- Python 3.11.15 used
+- requirements.txt installed successfully
+- pip dependency check passed
+- 4 automated telemetry tests passed
+- Console started successfully
+- System Status screen verified
+- System Diagnostics state READY
+- Workshop Status screen verified
+- Workflow Engine screen verified
+- AI Runtime screen verified
+- Remote ComfyUI state READY
+
 Main AI Runtime
 
 Role: AI Runtime
@@ -133,17 +155,18 @@ Port: 8188
 
 # 6. Current Sprint
 
-BUILD-001
+REMOTE-003
 
 Goal:
 
-Create a fully reproducible Curvature development environment.
+Extend AI Runtime diagnostics with verified remote runtime telemetry.
 
-Deliverables:
+Objectives:
 
-- requirements.txt
-- environment.yml
-- installation guide
+- GPU information
+- VRAM usage
+- Queue status
+- Runtime diagnostics
 
 ---
 
@@ -161,25 +184,29 @@ These items are intentionally postponed.
 
 # 8. Exact Next Step
 
-BUILD-001
-
-Create:
-
-- requirements.txt
-- environment.yml
-
-Verify that a clean machine can recreate the complete development environment.
-
-Next Sprint:
-
 REMOTE-003
 
-Objectives:
+Before implementation:
 
-- GPU information
-- VRAM usage
-- Queue status
-- Runtime diagnostics
+- Read current Remote Runtime files
+- Read current AI Runtime Console files
+- Identify the existing ComfyUI status request path
+- Extend the current verified path without changing architecture
+
+Required current files:
+
+- core/remote/manager.py
+- core/remote/workstation.py
+- core/remote/__init__.py
+- console/runtime.py
+- console/menu.py
+- console/main.py
+- console/ui.py
+- related tests
+
+First implementation target:
+
+Display verified remote GPU and VRAM information in the AI Runtime Console screen.
 
 ---
 

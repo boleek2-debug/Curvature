@@ -1,7 +1,7 @@
 # ROADMAP
 
 Status: Draft
-Version: 0.2.0
+Version: 0.3.0
 Owner: Project Curvature
 Last Updated: 2026-07-13
 
@@ -25,11 +25,11 @@ Curvature Platform Foundation
 
 Current Sprint
 
-BUILD-001
+REMOTE-003
 
 Objective
 
-Create a reproducible development environment using Conda and pip.
+Extend AI Runtime diagnostics with verified remote GPU information, VRAM usage, queue status and runtime diagnostics.
 
 ---
 
@@ -42,6 +42,11 @@ Foundation
 - VS Code workspace
 - Conda environment
 - ComfyUI environment
+- BUILD-001 completed
+- Dedicated Curvature environment
+- Reproducible environment definition
+- Pinned Python dependencies
+- Installation and verification guide
 
 Curvature Core
 
@@ -69,12 +74,6 @@ Remote
 ---
 
 # Planned Milestones
-
-BUILD
-
-- requirements.txt
-- environment.yml
-- installation guide
 
 Remote Runtime
 

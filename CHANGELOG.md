@@ -1,7 +1,7 @@
 # CHANGELOG
 
 Status: Active
-Version: 0.2.0
+Version: 0.3.0
 Owner: Project Curvature
 Last Updated: 2026-07-13
 
@@ -18,6 +18,42 @@ Ideas belong in PIPELINE.
 Current operational state belongs in HANDOFF.
 
 Architecture belongs in BLUEPRINT.
+
+---
+
+## 2026-07-13
+
+### BUILD-001
+
+Completed
+
+- Dedicated Curvature Conda environment
+- environment.yml
+- requirements.txt
+- Installation guide
+- Clean environment recreation procedure
+- Environment verification procedure
+
+Verified
+
+- Environment created from environment.yml
+- Environment name: curvature
+- Python 3.11.15
+- Interpreter path: /home/seb/miniconda3/envs/curvature/bin/python
+- requirements.txt installed successfully
+- pip check reported no broken requirements
+- 4 automated telemetry tests passed
+- Console launched successfully
+- System Status screen displayed live telemetry
+- System Diagnostics state READY
+- Workshop Status screen displayed
+- Workflow Engine screen displayed
+- AI Runtime screen displayed
+- Remote ComfyUI state READY
+
+Result
+
+Curvature Platform now has a clean, dedicated and reproducible development environment independent from the ComfyUI environment.
 
 ---
 
