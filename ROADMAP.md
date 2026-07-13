@@ -1,7 +1,7 @@
 # ROADMAP
 
 Status: Draft
-Version: 0.3.0
+Version: 0.4.0
 Owner: Project Curvature
 Last Updated: 2026-07-13
 
@@ -25,9 +25,13 @@ Curvature Platform Foundation
 
 Current Sprint
 
+No new sprint started.
+
+Most recently completed sprint
+
 REMOTE-003
 
-Objective
+Completed objective
 
 Extend AI Runtime diagnostics with verified remote GPU information, VRAM usage, queue status and runtime diagnostics.
 
@@ -70,6 +74,16 @@ Remote
 - AI Runtime Console
 - RemoteManager integration
 - Live ComfyUI status
+- REMOTE-003 completed
+- Remote GPU information
+- Remote VRAM usage
+- Queue monitoring
+- Remote operating system information
+- Remote RAM usage
+- ComfyUI version diagnostics
+- Remote Python version diagnostics
+- Remote PyTorch version diagnostics
+- Automated Remote Runtime tests
 
 ---
 
@@ -77,9 +91,6 @@ Remote
 
 Remote Runtime
 
-- GPU information
-- VRAM usage
-- Queue monitoring
 - Remote commands
 - Service heartbeat
 
@@ -128,3 +139,5 @@ A complete MMORPGVR world.
 Only completed work belongs in CHANGELOG.
 
 Ideas that are intentionally postponed belong in PIPELINE.
+
+The next sprint must be selected after REMOTE-003 is committed and pushed.

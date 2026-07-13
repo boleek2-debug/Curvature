@@ -1,7 +1,7 @@
 # HANDOFF
 
 Status: Draft
-Version: 0.3.0
+Version: 0.4.0
 Owner: Project Curvature
 Last Updated: 2026-07-13
 
@@ -103,6 +103,23 @@ Core
 - Console foundation
 - Workflow foundation
 
+Build
+
+BUILD-001 completed.
+
+Verified:
+
+- Clean Conda environment created from environment.yml
+- Python 3.11.15 used
+- requirements.txt installed successfully
+- pip dependency check passed
+- Console started successfully
+- System Status screen verified
+- System Diagnostics state READY
+- Workshop Status screen verified
+- Workflow Engine screen verified
+- AI Runtime screen verified
+
 Remote
 
 REMOTE-001 completed.
@@ -124,49 +141,73 @@ Verified:
 - RemoteManager integration completed
 - Live ComfyUI READY/OFFLINE state verified
 
-Build
+REMOTE-003 completed.
 
-BUILD-001 completed.
+Implemented:
+
+- HTTP JSON requests through Workstation
+- ComfyUI /system_stats integration
+- ComfyUI /queue integration
+- Remote GPU information
+- Remote VRAM usage
+- Remote queue monitoring
+- Remote operating system information
+- Remote RAM usage
+- ComfyUI version
+- Remote Python version
+- Remote PyTorch version
+- ATTENTION state when the service port is reachable but runtime diagnostics are unavailable
+- Automated Remote Runtime tests
 
 Verified:
 
-- Clean Conda environment created from environment.yml
-- Python 3.11.15 used
-- requirements.txt installed successfully
-- pip dependency check passed
-- 4 automated telemetry tests passed
-- Console started successfully
-- System Status screen verified
-- System Diagnostics state READY
-- Workshop Status screen verified
-- Workflow Engine screen verified
-- AI Runtime screen verified
-- Remote ComfyUI state READY
+- Tailscale Serve hostname routing
+- Verified endpoint: thing:8188
+- ComfyUI /system_stats returned HTTP 200 and valid JSON
+- ComfyUI /queue returned HTTP 200 and valid JSON
+- NVIDIA GeForce RTX 4060 detected
+- Live VRAM values displayed
+- Live queue values displayed
+- Windows runtime information displayed
+- Live RAM values displayed
+- ComfyUI 0.26.2 displayed
+- Python 3.13.12 displayed
+- PyTorch 2.10.0+cu130 displayed
+- Console AI Runtime state READY
+- 16 automated tests passed
 
 Main AI Runtime
 
+Name: Main Workstation
+
 Role: AI Runtime
 
-Endpoint: 100.98.198.68
+Tailscale hostname: thing
 
-Port: 8188
+Verified service endpoint: http://thing:8188
+
+ComfyUI system statistics endpoint: /system_stats
+
+ComfyUI queue endpoint: /queue
 
 ---
 
 # 6. Current Sprint
 
-REMOTE-003
+REMOTE-003 closure
 
-Goal:
+Status:
 
-Extend AI Runtime diagnostics with verified remote runtime telemetry.
+Implementation and verification complete.
 
-Objectives:
+Remaining actions:
 
-- GPU information
-- VRAM usage
-- Queue status
-- Runtime diagnostics
+- Update project documentation
+- Run final tests
+- Commit
+- Push
+
+No new sprint has been started.
 
 ---
 
@@ -184,29 +225,28 @@ These items are intentionally postponed.
 
 # 8. Exact Next Step
 
-REMOTE-003
+Complete REMOTE-003 repository closure.
 
-Before implementation:
+Required sequence:
 
-- Read current Remote Runtime files
-- Read current AI Runtime Console files
-- Identify the existing ComfyUI status request path
-- Extend the current verified path without changing architecture
+1. Replace HANDOFF.md, CHANGELOG.md and ROADMAP.md with the completed versions.
+2. Run the complete automated test suite.
+3. Verify that all 16 tests pass.
+4. Review git status.
+5. Commit the REMOTE-003 implementation and documentation.
+6. Push the commit to origin/main.
+7. Select the next sprint from the existing Roadmap without changing architecture during the closure step.
 
-Required current files:
+Files expected in the REMOTE-003 commit:
 
+- console/runtime.py
+- core/remote/__init__.py
 - core/remote/manager.py
 - core/remote/workstation.py
-- core/remote/__init__.py
-- console/runtime.py
-- console/menu.py
-- console/main.py
-- console/ui.py
-- related tests
-
-First implementation target:
-
-Display verified remote GPU and VRAM information in the AI Runtime Console screen.
+- tests/test_remote.py
+- HANDOFF.md
+- CHANGELOG.md
+- ROADMAP.md
 
 ---
 

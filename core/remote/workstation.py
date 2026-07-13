@@ -1,4 +1,8 @@
+import json
 import socket
+from typing import Any
+from urllib.error import HTTPError, URLError
+from urllib.request import urlopen
 
 
 class Workstation:
@@ -25,3 +29,30 @@ class Workstation:
                 return True
         except (TimeoutError, ConnectionError, OSError):
             return False
+
+    def get_json(
+        self,
+        port: int,
+        path: str,
+        timeout: float = 2.0,
+    ) -> dict[str, Any] | None:
+        normalized_path = path if path.startswith("/") else f"/{path}"
+        url = f"http://{self.endpoint}:{port}{normalized_path}"
+
+        try:
+            with urlopen(url, timeout=timeout) as response:
+                payload = json.load(response)
+        except (
+            HTTPError,
+            URLError,
+            TimeoutError,
+            ConnectionError,
+            OSError,
+            json.JSONDecodeError,
+        ):
+            return None
+
+        if not isinstance(payload, dict):
+            return None
+
+        return payload

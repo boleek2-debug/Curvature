@@ -1,7 +1,7 @@
 # CHANGELOG
 
 Status: Active
-Version: 0.3.0
+Version: 0.4.0
 Owner: Project Curvature
 Last Updated: 2026-07-13
 
@@ -18,6 +18,50 @@ Ideas belong in PIPELINE.
 Current operational state belongs in HANDOFF.
 
 Architecture belongs in BLUEPRINT.
+
+---
+
+## 2026-07-13
+
+### REMOTE-003
+
+Completed
+
+- HTTP JSON request support in Workstation
+- ComfyUI /system_stats integration
+- ComfyUI /queue integration
+- Remote GPU information
+- Remote VRAM usage and load
+- Remote queue running count
+- Remote queue pending count
+- Remote queue total
+- Remote operating system information
+- Remote RAM usage and load
+- ComfyUI version display
+- Remote Python version display
+- Remote PyTorch version display
+- Runtime diagnostics ATTENTION state
+- Automated Remote Runtime test suite
+
+Verified
+
+- Tailscale Serve hostname routing through thing:8188
+- /system_stats returned HTTP 200 and valid JSON
+- /queue returned HTTP 200 and valid JSON
+- NVIDIA GeForce RTX 4060 detected
+- Live VRAM values displayed
+- Live queue values displayed
+- Windows runtime information displayed
+- Live RAM values displayed
+- ComfyUI 0.26.2 displayed
+- Python 3.13.12 displayed
+- PyTorch 2.10.0+cu130 displayed
+- AI Runtime Console state READY
+- 16 automated tests passed
+
+Result
+
+The AI Runtime Console now displays verified live telemetry and diagnostics from the remote ComfyUI workstation over Tailscale.
 
 ---
 
@@ -123,7 +167,7 @@ Verified
 
 Current verified endpoint
 
-100.98.198.68:8188
+thing:8188
 
 ---
 
