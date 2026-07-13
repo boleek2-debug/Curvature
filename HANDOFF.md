@@ -1,7 +1,7 @@
 # HANDOFF
 
 Status: Draft
-Version: 0.4.0
+Version: 0.4.1
 Owner: Project Curvature
 Last Updated: 2026-07-13
 
@@ -21,11 +21,17 @@ The workshop is always developed before the game itself.
 
 # 2. Current Priority
 
-Laptop-side Curvature Platform.
+Wake-on-LAN for the Main Workstation.
 
-Nothing has higher priority.
+This is the immediate operational priority.
 
-Current focus:
+Reason:
+
+- Wake-on-LAN must be ready before Wednesday.
+- Remote access will be required during an eight-day trip.
+- The Main Workstation must be startable remotely before further Remote Runtime work continues.
+
+Current platform focus remains:
 
 - Curvature Core
 - Console
@@ -33,7 +39,7 @@ Current focus:
 - AI Runtime integration
 - Workflow foundation
 
-Marian is intentionally postponed.
+Marian remains intentionally postponed.
 
 ---
 
@@ -65,12 +71,14 @@ Frontends
 
 Core is always the source of truth.
 
+The current Wake-on-LAN task does not change this architecture.
+
 ---
 
 # 4. Engineering Rules
 
 1. Never guess.
-2. Request current files before modifying existing code.
+2. Request current files before modifying existing code when their state is uncertain.
 3. Deliver complete replacement files.
 4. One sprint has one goal.
 5. Every sprint finishes with working functionality.
@@ -175,6 +183,8 @@ Verified:
 - PyTorch 2.10.0+cu130 displayed
 - Console AI Runtime state READY
 - 16 automated tests passed
+- Commit completed
+- Push to origin/main completed
 
 Main AI Runtime
 
@@ -194,68 +204,88 @@ ComfyUI queue endpoint: /queue
 
 # 6. Current Sprint
 
-REMOTE-003 closure
+WOL-001
 
-Status:
+Goal:
 
-Implementation and verification complete.
+Enable reliable remote startup of the Main Workstation before Wednesday.
 
-Remaining actions:
+Required outcome:
 
-- Update project documentation
-- Run final tests
-- Commit
-- Push
-
-No new sprint has been started.
+- Main Workstation can be powered on remotely while the operator is away from the home network.
+- Wake request can travel through a verified Tailscale-connected relay on the home LAN.
+- Startup is confirmed by a verifiable online or service state.
 
 ---
 
-# 7. Deferred Work
+# 7. WOL-001 Scope
 
-- Wake-on-LAN
+Required verification:
+
+- Main Workstation uses a wired Ethernet connection
+- Motherboard BIOS/UEFI Wake-on-LAN support
+- Windows network adapter Wake-on-LAN settings
+- Wake on Magic Packet
+- Power management settings
+- Windows Fast Startup state
+- Network adapter MAC address
+- Local Wake-on-LAN test
+- Availability of an always-on device inside the home LAN
+- Tailscale connectivity of the relay device
+- Remote Wake-on-LAN test from outside the home LAN
+- Main Workstation startup confirmation
+- ComfyUI availability confirmation after startup
+
+Implementation must not begin by guessing the relay device or network path.
+
+---
+
+# 8. Deferred Work
+
+- REMOTE-004 Service Heartbeat
+- Remote commands
 - Curvature Assistant
 - HUD
 - Marian
 - Windows/Linux benchmark
 
-These items are intentionally postponed.
+These items remain intentionally postponed until WOL-001 is complete.
 
 ---
 
-# 8. Exact Next Step
+# 9. Exact Next Step
 
-Complete REMOTE-003 repository closure.
+Start WOL-001 with infrastructure verification.
 
-Required sequence:
+On the Main Workstation verify:
 
-1. Replace HANDOFF.md, CHANGELOG.md and ROADMAP.md with the completed versions.
-2. Run the complete automated test suite.
-3. Verify that all 16 tests pass.
-4. Review git status.
-5. Commit the REMOTE-003 implementation and documentation.
-6. Push the commit to origin/main.
-7. Select the next sprint from the existing Roadmap without changing architecture during the closure step.
+1. Current motherboard or computer model.
+2. BIOS/UEFI Wake-on-LAN settings.
+3. Windows network adapter name.
+4. Wake-on-LAN advanced properties.
+5. Power management properties.
+6. Windows Fast Startup state.
+7. Wired Ethernet link.
+8. Active IPv4 address.
+9. Physical MAC address.
 
-Files expected in the REMOTE-003 commit:
+Then identify an always-on device on the same home LAN that can:
 
-- console/runtime.py
-- core/remote/__init__.py
-- core/remote/manager.py
-- core/remote/workstation.py
-- tests/test_remote.py
-- HANDOFF.md
-- CHANGELOG.md
-- ROADMAP.md
+- remain powered while the Main Workstation is off,
+- connect to the home Ethernet or Wi-Fi network,
+- connect to Tailscale,
+- send a Wake-on-LAN magic packet inside the home LAN.
+
+No Curvature code changes are required until the Wake-on-LAN network path is verified manually.
 
 ---
 
-# 9. Session End Checklist
+# 10. Session End Checklist
 
 Before ending a work session:
 
 - Update HANDOFF.md
-- Run tests
+- Run tests when code changed
 - Commit
 - Push
 - Record the next exact step

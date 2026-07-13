@@ -1,7 +1,7 @@
 # ROADMAP
 
 Status: Draft
-Version: 0.4.0
+Version: 0.4.1
 Owner: Project Curvature
 Last Updated: 2026-07-13
 
@@ -25,7 +25,11 @@ Curvature Platform Foundation
 
 Current Sprint
 
-No new sprint started.
+WOL-001
+
+Objective
+
+Enable reliable remote startup of the Main Workstation before Wednesday for an eight-day period of remote use.
 
 Most recently completed sprint
 
@@ -87,12 +91,43 @@ Remote
 
 ---
 
+# Active Milestone
+
+## WOL-001 — Wake-on-LAN
+
+Goal
+
+Allow the Main Workstation to be powered on remotely through a verified home-LAN relay reachable over Tailscale.
+
+Required deliverables
+
+- BIOS/UEFI Wake-on-LAN verification
+- Windows network adapter configuration
+- Fast Startup verification
+- Wired Ethernet verification
+- Local Wake-on-LAN test
+- Home-LAN relay identification
+- Tailscale relay verification
+- Remote Wake-on-LAN test
+- Startup confirmation
+- ComfyUI availability confirmation after wake
+
+Priority
+
+Immediate.
+
+Deadline
+
+Before Wednesday.
+
+---
+
 # Planned Milestones
 
 Remote Runtime
 
+- REMOTE-004 Service Heartbeat
 - Remote commands
-- Service heartbeat
 
 Workflow Engine
 
@@ -140,4 +175,4 @@ Only completed work belongs in CHANGELOG.
 
 Ideas that are intentionally postponed belong in PIPELINE.
 
-The next sprint must be selected after REMOTE-003 is committed and pushed.
+WOL-001 temporarily takes priority over REMOTE-004 because remote startup is operationally required before Wednesday.
