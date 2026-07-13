@@ -1,9 +1,11 @@
 # CHANGELOG
 
-Status: Active Version: 0.1.0 Owner: Project Curvature Last Updated:
-2026-07-13
+Status: Active
+Version: 0.2.0
+Owner: Project Curvature
+Last Updated: 2026-07-13
 
-------------------------------------------------------------------------
+---
 
 # Purpose
 
@@ -17,7 +19,31 @@ Current operational state belongs in HANDOFF.
 
 Architecture belongs in BLUEPRINT.
 
-------------------------------------------------------------------------
+---
+
+## 2026-07-13
+
+### REMOTE-002
+
+Completed
+
+- AI Runtime Console screen
+- AI Runtime menu entry
+- RemoteManager integration
+- Live ComfyUI state
+
+Verified
+
+- READY state displayed when ComfyUI was available
+- OFFLINE state displayed when ComfyUI was unavailable
+- Remote status obtained from RemoteManager
+- Manual verification completed
+
+Result
+
+Console now communicates with the remote AI Runtime and displays the real service state.
+
+---
 
 ## 2026-07-13
 
@@ -25,18 +51,18 @@ Architecture belongs in BLUEPRINT.
 
 Completed
 
--   Initial HANDOFF document
--   Initial CURVATURE document
--   Initial BLUEPRINT document
--   Initial ROADMAP document
--   Initial PIPELINE document
--   Initial CHANGELOG document
+- Initial HANDOFF document
+- Initial CURVATURE document
+- Initial BLUEPRINT document
+- Initial ROADMAP document
+- Initial PIPELINE document
+- Initial CHANGELOG document
 
 Result
 
 Project documentation foundation established.
 
-------------------------------------------------------------------------
+---
 
 ## 2026-07-13
 
@@ -44,26 +70,26 @@ Project documentation foundation established.
 
 Completed
 
--   Remote Runtime foundation
--   Workstation abstraction
--   RemoteManager implementation
--   Tailscale integration
--   Remote endpoint abstraction
--   AI Runtime role
--   Remote ComfyUI detection
+- Remote Runtime foundation
+- Workstation abstraction
+- RemoteManager implementation
+- Tailscale integration
+- Remote endpoint abstraction
+- AI Runtime role
+- Remote ComfyUI detection
 
 Verified
 
--   OFFLINE detection works correctly
--   ONLINE detection works correctly
--   Remote AI Runtime reachable through Tailscale
--   ComfyUI availability successfully verified
+- OFFLINE detection works correctly
+- ONLINE detection works correctly
+- Remote AI Runtime reachable through Tailscale
+- ComfyUI availability successfully verified
 
 Current verified endpoint
 
 100.98.198.68:8188
 
-------------------------------------------------------------------------
+---
 
 ## 2026-07-12
 
@@ -71,27 +97,13 @@ Current verified endpoint
 
 Completed
 
--   Core package
--   Telemetry
--   Diagnostics
--   Indicators
--   Console foundation
--   Workflow foundation
+- Core package
+- Telemetry
+- Diagnostics
+- Indicators
+- Console foundation
+- Workflow foundation
 
 Verified
 
 Telemetry tests completed successfully.
-
-------------------------------------------------------------------------
-
-## Future Entries
-
-Every completed sprint receives:
-
--   Date
--   Sprint
--   Completed work
--   Verification
--   Result
-
-Nothing enters CHANGELOG until it has been implemented and verified.
