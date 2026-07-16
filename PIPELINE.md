@@ -1,9 +1,9 @@
 # PIPELINE
 
 Status: Draft
-Version: 0.2.0
+Version: 0.3.0
 Owner: Project Curvature
-Last Updated: 2026-07-13
+Last Updated: 2026-07-14
 
 ---
 
@@ -17,13 +17,89 @@ Only when an item is promoted does it move into the Roadmap.
 
 ---
 
-# Promoted Items
+# Infrastructure
 
-## Wake-on-LAN
+## S20 FE Wake-on-LAN Relay
 
 Purpose
 
-Allow Curvature to start the Main Workstation remotely.
+Use the retired Samsung Galaxy S20 FE as an always-on Wake-on-LAN relay for the Main Workstation.
+
+Planned topology
+
+    Remote Operator Device
+        |
+    Tailscale
+        |
+    Samsung Galaxy S20 FE
+        |
+    Home Wi-Fi
+        |
+    Wake-on-LAN Magic Packet
+        |
+    Main Workstation
+
+Planned components
+
+- Samsung Galaxy S20 FE
+- Permanent home Wi-Fi connection
+- Permanent charger connection
+- Tailscale
+- Termux
+- Wake-on-LAN utility
+- Small authenticated wake endpoint or equivalent command path
+
+Required configuration
+
+- Tailscale logged into the Curvature tailnet
+- Incoming Tailscale connections allowed
+- Battery optimisation disabled for Tailscale
+- Battery optimisation disabled for Termux
+- Termux installed from a supported source
+- Wake-on-LAN package installed
+- Main Workstation MAC address configured
+- Local Wake-on-LAN test
+- Remote Wake-on-LAN test through Tailscale
+- Main Workstation startup verification
+- Tailscale availability verification after startup
+- ComfyUI READY verification after startup
+
+Known Main Workstation network adapter
+
+- Adapter: Intel I219-V
+- MAC address: D4-5D-64-27-5E-9B
+- Wired Ethernet connection: verified
+- Wake on Magic Packet: enabled
+- Windows wake permission: enabled
+- Fast Startup: unavailable and not blocking Wake-on-LAN
+
+Current operational decision
+
+The Main Workstation will remain powered on during the upcoming eight-day trip.
+
+Sleep and hibernation must remain disabled.
+
+Monitors may remain switched off.
+
+Status
+
+Deferred until after the trip.
+
+---
+
+## Conventional Wake-on-LAN Relay
+
+Purpose
+
+Allow Curvature to start the Main Workstation through an always-on device inside the home LAN.
+
+Potential relay devices
+
+- Raspberry Pi
+- Mini-PC
+- NAS
+- Old laptop
+- Dedicated low-power relay device
 
 Planned flow
 
@@ -43,17 +119,9 @@ Planned flow
 
 Status
 
-Promoted to ROADMAP as WOL-001.
-
-Reason
-
-Remote startup is operationally required before Wednesday for an eight-day period of remote use.
-
-Wake-on-LAN is no longer a deferred Pipeline item.
+Deferred
 
 ---
-
-# Infrastructure
 
 ## Windows vs Linux AI Runtime Benchmark
 
@@ -142,4 +210,4 @@ Deferred
 
 Pipeline items never interrupt the active sprint.
 
-Promoted items are recorded here for traceability but are executed from the Roadmap.
+They are reviewed only when the current sprint is complete or when the user explicitly promotes one.
