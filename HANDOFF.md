@@ -1,9 +1,9 @@
 # HANDOFF
 
 Status: Draft
-Version: 0.4.1
+Version: 0.4.2
 Owner: Project Curvature
-Last Updated: 2026-07-13
+Last Updated: 2026-07-16
 
 ---
 
@@ -21,15 +21,24 @@ The workshop is always developed before the game itself.
 
 # 2. Current Priority
 
-Wake-on-LAN for the Main Workstation.
+Restore and harden remote access to the Main Workstation.
 
-This is the immediate operational priority.
+The Main Workstation is physically powered on, but its Tailscale device `thing` is currently offline.
 
-Reason:
+The immediate priority for Saturday is:
 
-- Wake-on-LAN must be ready before Wednesday.
-- Remote access will be required during an eight-day trip.
-- The Main Workstation must be startable remotely before further Remote Runtime work continues.
+- restore Tailscale connectivity,
+- identify the actual failure cause,
+- prevent the same failure from recurring,
+- verify remote ComfyUI access again.
+
+Current working hypothesis:
+
+- Tailscale Run Unattended may not be enabled,
+- the Windows user session may not currently be logged in,
+- Tailscale may therefore not have returned after restart or session loss.
+
+This hypothesis is not yet verified.
 
 Current platform focus remains:
 
@@ -71,7 +80,7 @@ Frontends
 
 Core is always the source of truth.
 
-The current Wake-on-LAN task does not change this architecture.
+The current Tailscale recovery task does not change this architecture.
 
 ---
 
@@ -194,93 +203,147 @@ Role: AI Runtime
 
 Tailscale hostname: thing
 
-Verified service endpoint: http://thing:8188
+Expected service endpoint: http://thing:8188
 
 ComfyUI system statistics endpoint: /system_stats
 
 ComfyUI queue endpoint: /queue
 
+Current remote state:
+
+- Main Workstation physically powered on
+- Tailscale device `thing` offline
+- Last observed Tailscale state: offline
+- ComfyUI unreachable remotely because the Tailscale path is unavailable
+
 ---
 
-# 6. Current Sprint
+# 6. Current Operational Task
 
-WOL-001
+Tailscale Recovery and Resilience
 
 Goal:
 
-Enable reliable remote startup of the Main Workstation before Wednesday.
+Restore reliable unattended remote access to the Main Workstation.
 
 Required outcome:
 
-- Main Workstation can be powered on remotely while the operator is away from the home network.
-- Wake request can travel through a verified Tailscale-connected relay on the home LAN.
-- Startup is confirmed by a verifiable online or service state.
+- `thing` returns online,
+- Tailscale works before Windows user login,
+- Tailscale survives a restart,
+- Tailscale Serve returns automatically,
+- ComfyUI becomes remotely reachable again,
+- a recurring failure is detected or recovered automatically.
+
+No new Curvature implementation sprint has started.
+
+REMOTE-004 remains the next software sprint after infrastructure recovery.
 
 ---
 
-# 7. WOL-001 Scope
+# 7. Saturday Recovery Scope
 
-Required verification:
+Required verification sequence:
 
-- Main Workstation uses a wired Ethernet connection
-- Motherboard BIOS/UEFI Wake-on-LAN support
-- Windows network adapter Wake-on-LAN settings
-- Wake on Magic Packet
-- Power management settings
-- Windows Fast Startup state
-- Network adapter MAC address
-- Local Wake-on-LAN test
-- Availability of an always-on device inside the home LAN
-- Tailscale connectivity of the relay device
-- Remote Wake-on-LAN test from outside the home LAN
-- Main Workstation startup confirmation
-- ComfyUI availability confirmation after startup
+1. Have Marta log in to Windows.
+2. Observe whether `thing` immediately returns online.
+3. Check the Windows Tailscale service status.
+4. Check the Tailscale service startup type.
+5. Verify whether Run Unattended is enabled.
+6. Enable Run Unattended if it is disabled.
+7. Check device key expiry for `thing`.
+8. Verify current Tailscale authentication state.
+9. Verify Tailscale Serve configuration.
+10. Verify whether Tailscale Serve returns after restart.
+11. Verify ComfyUI startup behaviour.
+12. Configure Tailscale service recovery if required.
+13. Add a watchdog only if service recovery is insufficient.
+14. Perform a full Windows restart.
+15. Do not log in.
+16. Verify from Curvature Dev that `thing` returns online.
+17. Verify `http://thing:8188/system_stats`.
+18. Verify AI Runtime state READY in Curvature Console.
 
-Implementation must not begin by guessing the relay device or network path.
+The initial login test is diagnostic.
+
+If logging in causes `thing` to return online immediately, this strongly supports the Run Unattended hypothesis, but the remaining checks must still be completed.
 
 ---
 
-# 8. Deferred Work
+# 8. Wake-on-LAN Status
 
+WOL-001 is not complete.
+
+Verified:
+
+- Main Workstation motherboard: ASUS PRIME Z490M-PLUS
+- Network adapter: Intel I219-V
+- Wired Ethernet connection
+- MAC address: D4-5D-64-27-5E-9B
+- Wake on Magic Packet enabled
+- Windows wake permission enabled
+- Fast Startup unavailable and not blocking Wake-on-LAN
+
+Blocked:
+
+- no configured always-on home-LAN relay,
+- no completed local Wake-on-LAN test,
+- no completed remote Wake-on-LAN test.
+
+Decision:
+
+- S20 FE relay implementation is deferred until after the trip.
+- The Main Workstation was intended to remain powered on during the trip.
+- Tailscale resilience must be fixed before relying on this operational model again.
+
+---
+
+# 9. Deferred Work
+
+- WOL-001 completion
+- S20 FE Wake-on-LAN relay
 - REMOTE-004 Service Heartbeat
 - Remote commands
+- Curvature hardware validation
+- Battery and inverter testing
 - Curvature Assistant
 - HUD
 - Marian
 - Windows/Linux benchmark
 
-These items remain intentionally postponed until WOL-001 is complete.
+Hardware validation, battery testing and resulting hardware changes remain deferred until the user confirms that the inverter is available.
 
 ---
 
-# 9. Exact Next Step
+# 10. Exact Next Step
 
-Start WOL-001 with infrastructure verification.
+On Saturday, begin with the Main Workstation Windows session.
 
-On the Main Workstation verify:
+First diagnostic:
 
-1. Current motherboard or computer model.
-2. BIOS/UEFI Wake-on-LAN settings.
-3. Windows network adapter name.
-4. Wake-on-LAN advanced properties.
-5. Power management properties.
-6. Windows Fast Startup state.
-7. Wired Ethernet link.
-8. Active IPv4 address.
-9. Physical MAC address.
+1. Marta logs in to Windows.
+2. From Curvature Dev run:
 
-Then identify an always-on device on the same home LAN that can:
+       tailscale status
+       tailscale ping thing
+       curl --max-time 5 http://thing:8188/system_stats
 
-- remain powered while the Main Workstation is off,
-- connect to the home Ethernet or Wi-Fi network,
-- connect to Tailscale,
-- send a Wake-on-LAN magic packet inside the home LAN.
+3. Record whether `thing` returns online immediately after login.
 
-No Curvature code changes are required until the Wake-on-LAN network path is verified manually.
+Then inspect the Main Workstation using an elevated PowerShell session:
+
+    Get-Service Tailscale |
+        Select-Object Name, Status, StartType
+
+    tailscale status
+
+Do not change service recovery, scheduled tasks or watchdog configuration until the current state is captured.
+
+No Curvature code changes are required during the initial recovery diagnosis.
 
 ---
 
-# 10. Session End Checklist
+# 11. Session End Checklist
 
 Before ending a work session:
 

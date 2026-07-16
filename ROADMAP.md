@@ -1,9 +1,9 @@
 # ROADMAP
 
 Status: Draft
-Version: 0.4.1
+Version: 0.4.2
 Owner: Project Curvature
-Last Updated: 2026-07-13
+Last Updated: 2026-07-16
 
 ---
 
@@ -23,13 +23,29 @@ Current Development Phase
 
 Curvature Platform Foundation
 
-Current Sprint
+Current Operational Priority
 
-WOL-001
+Tailscale Recovery and Resilience
 
 Objective
 
-Enable reliable remote startup of the Main Workstation before Wednesday for an eight-day period of remote use.
+Restore reliable unattended access to the Main Workstation and prevent another loss of the remote Tailscale path.
+
+Current remote condition
+
+- Main Workstation physically powered on
+- Tailscale device `thing` offline
+- Remote ComfyUI unavailable because the Tailscale path is down
+
+Current working hypothesis
+
+Run Unattended may not be enabled.
+
+This has not yet been verified.
+
+Next software sprint
+
+REMOTE-004 Service Heartbeat
 
 Most recently completed sprint
 
@@ -91,7 +107,38 @@ Remote
 
 ---
 
-# Active Milestone
+# Active Operational Milestone
+
+## Tailscale Recovery and Resilience
+
+Goal
+
+Make remote access to the Main Workstation reliable without requiring an interactive Windows login.
+
+Required deliverables
+
+- Login-response diagnostic
+- Tailscale service status verification
+- Automatic service startup verification
+- Run Unattended verification and configuration
+- Device key expiry verification
+- Tailscale authentication verification
+- Tailscale Serve restart verification
+- ComfyUI startup verification
+- Windows service recovery configuration if required
+- Watchdog only if required
+- Full restart test without login
+- Remote `thing` availability confirmation
+- Remote `/system_stats` confirmation
+- Curvature AI Runtime READY confirmation
+
+Target work session
+
+Saturday, 2026-07-18.
+
+---
+
+# Paused Milestone
 
 ## WOL-001 — Wake-on-LAN
 
@@ -99,26 +146,31 @@ Goal
 
 Allow the Main Workstation to be powered on remotely through a verified home-LAN relay reachable over Tailscale.
 
-Required deliverables
+Verified preparation
+
+- ASUS PRIME Z490M-PLUS identified
+- Intel I219-V identified
+- Wired Ethernet verified
+- MAC address recorded
+- Wake on Magic Packet enabled
+- Windows wake permission enabled
+- Fast Startup not blocking Wake-on-LAN
+
+Blocked deliverables
 
 - BIOS/UEFI Wake-on-LAN verification
-- Windows network adapter configuration
-- Fast Startup verification
-- Wired Ethernet verification
 - Local Wake-on-LAN test
-- Home-LAN relay identification
+- Home-LAN relay implementation
 - Tailscale relay verification
 - Remote Wake-on-LAN test
 - Startup confirmation
 - ComfyUI availability confirmation after wake
 
-Priority
+Status
 
-Immediate.
+Paused until after the trip.
 
-Deadline
-
-Before Wednesday.
+The planned S20 FE relay remains in PIPELINE.
 
 ---
 
@@ -141,6 +193,26 @@ Curvature Interface
 - HUD foundation
 - Slavic 24th-century design language
 - Integrated Console
+
+---
+
+# Deferred Hardware Validation
+
+Curvature hardware validation includes:
+
+- battery health,
+- full-shutdown self-discharge,
+- real runtime,
+- peak-load stability,
+- vehicle AC or inverter compatibility,
+- full Curvature mission,
+- suspend and sleep behaviour.
+
+Status
+
+Deferred until the user confirms that the inverter is available.
+
+Hardware validation must not interrupt Tailscale recovery or the existing software roadmap before that confirmation.
 
 ---
 
@@ -175,4 +247,4 @@ Only completed work belongs in CHANGELOG.
 
 Ideas that are intentionally postponed belong in PIPELINE.
 
-WOL-001 temporarily takes priority over REMOTE-004 because remote startup is operationally required before Wednesday.
+Infrastructure recovery takes priority over REMOTE-004 because the remote AI Runtime cannot currently be reached.

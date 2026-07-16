@@ -1,9 +1,9 @@
 # PIPELINE
 
 Status: Draft
-Version: 0.3.0
+Version: 0.4.0
 Owner: Project Curvature
-Last Updated: 2026-07-14
+Last Updated: 2026-07-16
 
 ---
 
@@ -11,13 +11,69 @@ Last Updated: 2026-07-14
 
 The Pipeline stores valuable ideas that are intentionally postponed.
 
-Items in this document must not interrupt the current sprint.
+Items in this document must not interrupt the current operational task or software sprint.
 
 Only when an item is promoted does it move into the Roadmap.
 
 ---
 
 # Infrastructure
+
+## Curvature Hardware Validation Pipeline
+
+Purpose
+
+Create a standard validation process for development laptops and workstations used by Project Curvature.
+
+Planned documentation
+
+Create a dedicated root-level document:
+
+    HARDWARE_VALIDATION.md
+
+Planned validation scope
+
+- Battery health check
+- Full-shutdown self-discharge test
+- Real runtime test
+- Peak-load battery stability test
+- AC and inverter compatibility test
+- Full Curvature development mission test
+- Suspend and sleep behaviour test
+
+Required battery data
+
+- Design capacity
+- Full charge capacity
+- Battery health percentage
+- Charge cycle count
+- Current charge level
+- Battery model and manufacturer where available
+
+Vehicle power target
+
+- Curvature Dev ASUS ROG laptop
+- Mercedes Turismo 2
+- 12 V vehicle socket
+- 15 A protected circuit
+- compatible inverter or 12 V laptop adapter
+
+Final device status
+
+- READY
+- READY WITH LIMITATIONS
+- ATTENTION
+- FAILED
+
+Activation condition
+
+Do not promote or schedule hardware validation until the user explicitly confirms that the inverter is available.
+
+Status
+
+Deferred pending inverter confirmation.
+
+---
 
 ## S20 FE Wake-on-LAN Relay
 
@@ -73,14 +129,6 @@ Known Main Workstation network adapter
 - Windows wake permission: enabled
 - Fast Startup: unavailable and not blocking Wake-on-LAN
 
-Current operational decision
-
-The Main Workstation will remain powered on during the upcoming eight-day trip.
-
-Sleep and hibernation must remain disabled.
-
-Monitors may remain switched off.
-
 Status
 
 Deferred until after the trip.
@@ -120,6 +168,39 @@ Planned flow
 Status
 
 Deferred
+
+---
+
+## Tailscale Watchdog
+
+Purpose
+
+Detect and recover loss of the Main Workstation Tailscale connection after the native Windows service configuration has been verified.
+
+Possible responsibilities
+
+- periodically verify Tailscale backend state,
+- restart the Tailscale service when the backend is unhealthy,
+- record recovery attempts,
+- avoid restart loops,
+- expose a verifiable health state to Curvature later.
+
+Activation rule
+
+Do not implement a watchdog before checking:
+
+- Run Unattended,
+- Windows service startup type,
+- service recovery options,
+- device key expiry,
+- authentication state,
+- Tailscale Serve recovery after restart.
+
+A watchdog is a fallback, not the first repair.
+
+Status
+
+Candidate after Saturday diagnostics.
 
 ---
 
@@ -208,6 +289,6 @@ Deferred
 
 # Rule
 
-Pipeline items never interrupt the active sprint.
+Pipeline items never interrupt the active operational task or software sprint.
 
-They are reviewed only when the current sprint is complete or when the user explicitly promotes one.
+They are reviewed only when the current work is complete or when the user explicitly promotes one.
