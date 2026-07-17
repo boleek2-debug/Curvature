@@ -1,21 +1,27 @@
 # HANDOFF
 
 Status: Draft
-Version: 0.4.2
+Version: 0.5.0
 Owner: Project Curvature
-Last Updated: 2026-07-16
+Last Updated: 2026-07-18
 
 ---
 
 # 1. Mission
 
-Project Curvature is a long-term engineering project.
+Project Curvature is a long-term engineering and world-building project.
 
-The final objective is a fully playable MMORPG and, eventually, an MMORPGVR world.
+Curvature Platform is the production workshop.
 
-Curvature Platform is the production workshop used to build that world.
+The final objective is a persistent living world accessible through:
 
-The workshop is always developed before the game itself.
+- Chronicle Client / MUD,
+- 2D,
+- 3D,
+- VR,
+- future multiplayer and MMORPG scale.
+
+Those frontends must expose the same world state, history, characters and consequences.
 
 ---
 
@@ -23,329 +29,231 @@ The workshop is always developed before the game itself.
 
 Restore and harden remote access to the Main Workstation.
 
-The Main Workstation is physically powered on, but its Tailscale device `thing` is currently offline.
+The Main Workstation is physically powered on, but Tailscale device `thing` is offline.
 
-The immediate priority for Saturday is:
+Immediate recovery goals:
 
 - restore Tailscale connectivity,
 - identify the actual failure cause,
-- prevent the same failure from recurring,
-- verify remote ComfyUI access again.
+- prevent recurrence,
+- verify remote ComfyUI access.
 
-Current working hypothesis:
+Working hypothesis:
 
-- Tailscale Run Unattended may not be enabled,
-- the Windows user session may not currently be logged in,
-- Tailscale may therefore not have returned after restart or session loss.
+- Run Unattended may not be enabled,
+- the Windows user session may not be logged in,
+- Tailscale may therefore not have returned.
 
-This hypothesis is not yet verified.
+This remains unverified.
 
-Current platform focus remains:
+---
 
-- Curvature Core
+# 3. Strategic Direction
+
+After infrastructure recovery:
+
+1. REMOTE-004 — Minimal Service Heartbeat
+2. WORLD-001 — Persistent World State
+3. LANG-001 — Historical Reconstruction Foundation
+4. WORLD-002 — Time, Events and Chronicle
+5. NPC-001 — Identity, Memory, Goals and Voice
+6. CHRONICLE-001 — First Playable Chronicle Client
+
+The Chronicle Client / MUD is the first world-facing frontend.
+
+The first version may be single-player.
+
+The language foundation is based on Proto-Slavic reconstruction and the probable early medieval West Slavic and Polan linguistic environment.
+
+Missing language elements must be created through explicit and documented rules.
+
+---
+
+# 4. Current Architecture
+
+Current Platform:
+
+- Core
+- Services
 - Console
 - Remote Runtime
-- AI Runtime integration
+- AI Runtime
 - Workflow foundation
 
-Marian remains intentionally postponed.
+Approved planned architecture:
+
+- World Core
+- Persistent World State
+- Time
+- Events
+- Chronicle
+- Characters
+- Memory
+- Language
+- Consequences
+- Chronicle Client / MUD
+- later 2D, 3D and VR frontends
+
+Core remains the source of truth for platform state.
+
+World Core will become the source of truth for world state.
 
 ---
 
-# 3. Current Architecture
-
-Infrastructure
-
-    Linux
-        |
-Curvature Platform
-        |
-   +----+-------------------+
-   |                        |
- Core                  Services
-   |                        |
-Telemetry             Remote Runtime
-Diagnostics           AI Runtime
-Indicators            Workflow Engine
-Configuration         Asset Pipeline
-Logging               World Builder
-
-Frontends
-
-- Console
-- Future HUD
-- Future Mobile
-- Future Web
-- Future VR
-
-Core is always the source of truth.
-
-The current Tailscale recovery task does not change this architecture.
-
----
-
-# 4. Engineering Rules
+# 5. Engineering Rules
 
 1. Never guess.
 2. Request current files before modifying existing code when their state is uncertain.
 3. Deliver complete replacement files.
-4. One sprint has one goal.
-5. Every sprint finishes with working functionality.
-6. Every displayed state must be verifiable.
-7. Test → Commit → Push.
-8. Update HANDOFF after every completed sprint.
-9. Project documentation is written in English.
-10. Development discussion is in Polish.
+4. Label every delivered file as replace, create or leave unchanged.
+5. One sprint has one goal.
+6. Every sprint finishes with working functionality.
+7. Every displayed state must be verifiable.
+8. Test → Commit → Push.
+9. Update HANDOFF after completed work.
+10. Project documentation is written in English.
+11. Development discussion is in Polish.
 
 ---
 
-# 5. Completed Work
+# 6. Completed Work
 
-Environment
+## BUILD-001
 
-- Linux development environment
-- Git
-- VS Code
-- Conda
-- Dedicated Curvature Conda environment
-- Reproducible environment definition
-- Pinned Python dependencies
-- Installation and verification guide
+Completed and verified:
 
-Core
+- dedicated Curvature Conda environment,
+- reproducible environment definition,
+- pinned Python dependencies,
+- installation guide,
+- automated tests,
+- Console operation.
 
-- Telemetry
-- Diagnostics
-- Indicators
-- Console foundation
-- Workflow foundation
+## REMOTE-001
 
-Build
+Completed and verified:
 
-BUILD-001 completed.
+- Tailscale communication,
+- remote workstation abstraction,
+- ComfyUI detection.
 
-Verified:
+## REMOTE-002
 
-- Clean Conda environment created from environment.yml
-- Python 3.11.15 used
-- requirements.txt installed successfully
-- pip dependency check passed
-- Console started successfully
-- System Status screen verified
-- System Diagnostics state READY
-- Workshop Status screen verified
-- Workflow Engine screen verified
-- AI Runtime screen verified
+Completed and verified:
 
-Remote
+- AI Runtime Console,
+- RemoteManager integration,
+- live READY and OFFLINE state.
 
-REMOTE-001 completed.
+## REMOTE-003
 
-Verified:
+Completed and verified:
 
-- Tailscale communication
-- Remote AI Runtime detection
-- ComfyUI detection on port 8188
-- Positive ONLINE test
-- Negative OFFLINE test
+- HTTP JSON requests,
+- `/system_stats`,
+- `/queue`,
+- GPU,
+- VRAM,
+- queue,
+- operating system,
+- RAM,
+- ComfyUI version,
+- Python version,
+- PyTorch version,
+- READY, ATTENTION and OFFLINE state,
+- 16 automated tests,
+- commit and push.
 
-REMOTE-002 completed.
+Verified AI Runtime endpoint:
 
-Verified:
-
-- AI Runtime menu added
-- AI Runtime Console screen implemented
-- RemoteManager integration completed
-- Live ComfyUI READY/OFFLINE state verified
-
-REMOTE-003 completed.
-
-Implemented:
-
-- HTTP JSON requests through Workstation
-- ComfyUI /system_stats integration
-- ComfyUI /queue integration
-- Remote GPU information
-- Remote VRAM usage
-- Remote queue monitoring
-- Remote operating system information
-- Remote RAM usage
-- ComfyUI version
-- Remote Python version
-- Remote PyTorch version
-- ATTENTION state when the service port is reachable but runtime diagnostics are unavailable
-- Automated Remote Runtime tests
-
-Verified:
-
-- Tailscale Serve hostname routing
-- Verified endpoint: thing:8188
-- ComfyUI /system_stats returned HTTP 200 and valid JSON
-- ComfyUI /queue returned HTTP 200 and valid JSON
-- NVIDIA GeForce RTX 4060 detected
-- Live VRAM values displayed
-- Live queue values displayed
-- Windows runtime information displayed
-- Live RAM values displayed
-- ComfyUI 0.26.2 displayed
-- Python 3.13.12 displayed
-- PyTorch 2.10.0+cu130 displayed
-- Console AI Runtime state READY
-- 16 automated tests passed
-- Commit completed
-- Push to origin/main completed
-
-Main AI Runtime
-
-Name: Main Workstation
-
-Role: AI Runtime
-
-Tailscale hostname: thing
-
-Expected service endpoint: http://thing:8188
-
-ComfyUI system statistics endpoint: /system_stats
-
-ComfyUI queue endpoint: /queue
-
-Current remote state:
-
-- Main Workstation physically powered on
-- Tailscale device `thing` offline
-- Last observed Tailscale state: offline
-- ComfyUI unreachable remotely because the Tailscale path is unavailable
+    http://thing:8188
 
 ---
 
-# 6. Current Operational Task
+# 7. Current Operational Task
 
 Tailscale Recovery and Resilience
 
-Goal:
-
-Restore reliable unattended remote access to the Main Workstation.
-
-Required outcome:
-
-- `thing` returns online,
-- Tailscale works before Windows user login,
-- Tailscale survives a restart,
-- Tailscale Serve returns automatically,
-- ComfyUI becomes remotely reachable again,
-- a recurring failure is detected or recovered automatically.
-
-No new Curvature implementation sprint has started.
-
-REMOTE-004 remains the next software sprint after infrastructure recovery.
-
----
-
-# 7. Saturday Recovery Scope
-
 Required verification sequence:
 
-1. Have Marta log in to Windows.
-2. Observe whether `thing` immediately returns online.
-3. Check the Windows Tailscale service status.
-4. Check the Tailscale service startup type.
-5. Verify whether Run Unattended is enabled.
-6. Enable Run Unattended if it is disabled.
-7. Check device key expiry for `thing`.
-8. Verify current Tailscale authentication state.
-9. Verify Tailscale Serve configuration.
-10. Verify whether Tailscale Serve returns after restart.
-11. Verify ComfyUI startup behaviour.
-12. Configure Tailscale service recovery if required.
-13. Add a watchdog only if service recovery is insufficient.
-14. Perform a full Windows restart.
-15. Do not log in.
-16. Verify from Curvature Dev that `thing` returns online.
-17. Verify `http://thing:8188/system_stats`.
-18. Verify AI Runtime state READY in Curvature Console.
-
-The initial login test is diagnostic.
-
-If logging in causes `thing` to return online immediately, this strongly supports the Run Unattended hypothesis, but the remaining checks must still be completed.
-
----
-
-# 8. Wake-on-LAN Status
-
-WOL-001 is not complete.
-
-Verified:
-
-- Main Workstation motherboard: ASUS PRIME Z490M-PLUS
-- Network adapter: Intel I219-V
-- Wired Ethernet connection
-- MAC address: D4-5D-64-27-5E-9B
-- Wake on Magic Packet enabled
-- Windows wake permission enabled
-- Fast Startup unavailable and not blocking Wake-on-LAN
-
-Blocked:
-
-- no configured always-on home-LAN relay,
-- no completed local Wake-on-LAN test,
-- no completed remote Wake-on-LAN test.
-
-Decision:
-
-- S20 FE relay implementation is deferred until after the trip.
-- The Main Workstation was intended to remain powered on during the trip.
-- Tailscale resilience must be fixed before relying on this operational model again.
-
----
-
-# 9. Deferred Work
-
-- WOL-001 completion
-- S20 FE Wake-on-LAN relay
-- REMOTE-004 Service Heartbeat
-- Remote commands
-- Curvature hardware validation
-- Battery and inverter testing
-- Curvature Assistant
-- HUD
-- Marian
-- Windows/Linux benchmark
-
-Hardware validation, battery testing and resulting hardware changes remain deferred until the user confirms that the inverter is available.
-
----
-
-# 10. Exact Next Step
-
-On Saturday, begin with the Main Workstation Windows session.
-
-First diagnostic:
-
 1. Marta logs in to Windows.
-2. From Curvature Dev run:
+2. Observe whether `thing` returns online.
+3. Check Tailscale service status.
+4. Check service startup type.
+5. Verify Run Unattended.
+6. Enable it if disabled.
+7. Check device key expiry.
+8. Verify authentication state.
+9. Verify Tailscale Serve.
+10. Verify ComfyUI startup.
+11. Configure service recovery if required.
+12. Add a watchdog only if native recovery is insufficient.
+13. Restart Windows.
+14. Do not log in.
+15. Verify `thing` from Curvature Dev.
+16. Verify `/system_stats`.
+17. Verify AI Runtime READY.
 
-       tailscale status
-       tailscale ping thing
-       curl --max-time 5 http://thing:8188/system_stats
+No Curvature code changes are required during initial diagnosis.
 
-3. Record whether `thing` returns online immediately after login.
+---
 
-Then inspect the Main Workstation using an elevated PowerShell session:
+# 8. Exact Next Step
+
+From Curvature Dev after Marta logs in:
+
+    tailscale status
+    tailscale ping thing
+    curl --max-time 5 http://thing:8188/system_stats
+
+Then on the Main Workstation in elevated PowerShell:
 
     Get-Service Tailscale |
         Select-Object Name, Status, StartType
 
     tailscale status
 
-Do not change service recovery, scheduled tasks or watchdog configuration until the current state is captured.
+Capture the current state before changing recovery, scheduled tasks or watchdog configuration.
 
-No Curvature code changes are required during the initial recovery diagnosis.
+---
+
+# 9. Paused and Deferred Work
+
+Paused:
+
+- WOL-001
+
+Deferred:
+
+- S20 FE Wake-on-LAN relay,
+- conventional Wake-on-LAN relay,
+- hardware validation,
+- battery and inverter testing,
+- hardware adjustments,
+- Curvature Assistant,
+- HUD,
+- Marian,
+- Windows/Linux benchmark.
+
+Hardware validation remains deferred until the user confirms that the inverter is available.
+
+---
+
+# 10. Documentation Structure
+
+- `CURVATURE.md` — project vision and philosophy
+- `BLUEPRINT.md` — current and approved technical architecture
+- `WORLD.md` — persistent living-world principles
+- `LANGUAGE.md` — reconstruction and language-construction method
+- `ROADMAP.md` — ordered development direction
+- `HANDOFF.md` — current operational state and exact next step
+- `PIPELINE.md` — deferred ideas only
+- `CHANGELOG.md` — completed and verified work
+- `README.md` — repository overview and usage
 
 ---
 
 # 11. Session End Checklist
-
-Before ending a work session:
 
 - Update HANDOFF.md
 - Run tests when code changed
@@ -353,4 +261,4 @@ Before ending a work session:
 - Push
 - Record the next exact step
 
-A new ChatGPT instance should always read this document first.
+A new ChatGPT instance should read HANDOFF.md first.

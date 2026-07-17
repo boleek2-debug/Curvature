@@ -1,46 +1,101 @@
 # Project Curvature
 
-> Building the workshop before building the world.
+> Build the minimum reliable workshop, then use it to create a living world.
 
 ## Overview
 
-Project Curvature is a long-term engineering project whose final objective is
-a fully playable MMORPG and, eventually, an MMORPGVR world.
+Project Curvature is a long-term engineering and world-building project.
 
-The current phase is focused on building **Curvature Platform**: the production
-workshop that will coordinate the technologies, tools and workflows required
-to create that world.
+Its final objective is a persistent living world that can be experienced through progressively richer frontends:
 
-Curvature Platform is not the final product.
+- Chronicle Client / MUD
+- 2D
+- 3D
+- VR
+- future multiplayer and MMORPG scale
 
-It is the system used to build the final product.
+Curvature Platform is the production workshop used to create, operate and evolve that world.
 
-## Current Development Focus
+The Platform is not the world.
 
-The current priority is the laptop-side Curvature Platform.
+The different frontends are not separate games.
+
+They are different portals into the same persistent world state, history, characters and consequences.
+
+## Current State
 
 Implemented foundations include:
 
 - Curvature Core
-- local telemetry
+- telemetry
 - diagnostics
-- operational indicators
-- text Console
+- indicators
+- Console
 - Workflow Engine foundation
 - Remote Runtime
-- Tailscale communication
+- Tailscale integration
 - remote ComfyUI detection
-- AI Runtime Console screen
+- GPU and VRAM diagnostics
+- queue monitoring
+- remote runtime diagnostics
+- reproducible Curvature environment
+- automated tests
+
+The current operational priority is restoring reliable unattended Tailscale access to the Main Workstation.
+
+The next software sprint is `REMOTE-004 — Minimal Service Heartbeat`.
+
+## Strategic Direction
+
+After infrastructure recovery, development moves toward the first living-world vertical slice:
+
+1. Persistent World State
+2. Historical Language Reconstruction Foundation
+3. Time, Events and Chronicle
+4. Character Identity, Memory, Goals and Voice
+5. First Playable Chronicle Client / MUD
+
+The first Chronicle Client may be single-player.
+
+Its purpose is to prove that the world persists, remembers and reacts before graphics are introduced.
+
+## World Philosophy
+
+The world must:
+
+- survive restarts,
+- preserve history,
+- remember actions,
+- create durable consequences,
+- maintain character identity,
+- separate fact from narration,
+- remain accessible through text, 2D, 3D and VR.
+
+The intended experience is similar to a book written through human thought and action.
+
+## Language Philosophy
+
+The world language is based on historical reconstruction, especially Proto-Slavic and the probable speech environment of early medieval West Slavic communities, including the Polans.
+
+The project does not claim that a complete historically certain language survived.
+
+It will:
+
+- reconstruct supported forms,
+- record uncertainty,
+- distinguish evidence from invention,
+- create missing vocabulary through explicit rules,
+- support later dialect and language evolution.
+
+See `LANGUAGE.md`.
 
 ## Architecture
 
-Curvature Platform is divided into three main layers:
+### Platform Core
 
-### Core
+The source of truth for platform state.
 
-The source of truth for system state.
-
-Current Core components include:
+Current components include:
 
 - Telemetry
 - Diagnostics
@@ -51,10 +106,6 @@ Current Core components include:
 
 ### Services
 
-Operational systems used by the production workshop.
-
-Current and planned services include:
-
 - Remote Runtime
 - AI Runtime
 - Workflow Engine
@@ -62,39 +113,55 @@ Current and planned services include:
 - World Builder
 - Export
 
+### Planned World Core
+
+The future source of truth for world state.
+
+Planned components:
+
+- Persistent World State
+- Time
+- Events
+- Chronicle
+- Places
+- Characters
+- Memory
+- Language
+- Consequences
+
 ### Frontends
 
-Interfaces that display information supplied by Core and Services.
-
-Current and planned frontends include:
+Current:
 
 - Console
-- mandatory future HUD
+
+Planned:
+
+- Chronicle Client / MUD
+- 2D
+- 3D
+- VR
 - Mobile
 - Web
-- VR
 
-Frontends must never invent system state.
-
-Every displayed status must be based on verified information.
+Frontends never invent authoritative state.
 
 ## Engineering Principles
 
-Project Curvature follows these rules:
-
 1. Never guess.
-2. Request current files before modifying uncertain existing code.
-3. Provide complete replacement files.
-4. One sprint has one goal.
-5. Every sprint ends with working functionality.
-6. Every displayed state must be verifiable.
-7. Core is the source of truth.
-8. Frontends only present Core and Service data.
-9. Test before commit.
-10. Commit before push.
-11. Update `HANDOFF.md` after completed work.
-12. Code and documentation are written in English.
-13. Development discussion is conducted in Polish.
+2. Verify everything.
+3. Request current files when their state is uncertain.
+4. Deliver complete replacement files.
+5. Label files as replace, create or leave unchanged.
+6. One sprint has one goal.
+7. Every sprint ends with working functionality.
+8. Core is the source of truth for platform state.
+9. World Core will be the source of truth for world state.
+10. Test before commit.
+11. Commit before push.
+12. Update `HANDOFF.md` after completed work.
+13. Code and documentation are written in English.
+14. Development discussion is conducted in Polish.
 
 ## Development Environment
 
@@ -109,7 +176,7 @@ cd Curvature
 
 ```bash
 conda env create -f environment.yml
-conda activate comfy
+conda activate curvature
 ```
 
 ### Install pinned Python packages
@@ -118,16 +185,16 @@ conda activate comfy
 python -m pip install -r requirements.txt
 ```
 
-### Run the Console
-
-```bash
-python -m console.main
-```
-
 ### Run automated tests
 
 ```bash
 python -m pytest -v
+```
+
+### Run the Console
+
+```bash
+python -m console.main
 ```
 
 ## Current Remote Topology
@@ -142,22 +209,26 @@ Main Workstation
    ComfyUI
 ```
 
-The laptop and the main workstation are not expected to share a local network.
+The Main Workstation currently acts as the remote AI Runtime.
 
-Remote communication is designed around Tailscale.
+The verified service hostname is:
 
-The main workstation currently acts as the remote AI Runtime.
+```text
+thing:8188
+```
 
-## Project Documentation
+## Documentation
 
-- `HANDOFF.md` — current operational state and exact next step
+- `HANDOFF.md` — current state and exact next step
 - `CURVATURE.md` — project vision and philosophy
-- `BLUEPRINT.md` — current technical architecture
-- `ROADMAP.md` — planned development direction
-- `PIPELINE.md` — deferred ideas and future features
+- `BLUEPRINT.md` — current and approved architecture
+- `WORLD.md` — living-world principles
+- `LANGUAGE.md` — language reconstruction and construction method
+- `ROADMAP.md` — ordered development direction
+- `PIPELINE.md` — deferred ideas
 - `CHANGELOG.md` — completed and verified work
 
-A new development session or ChatGPT instance should read `HANDOFF.md` first.
+A new session should read `HANDOFF.md` first.
 
 ## Development Workflow
 
@@ -172,30 +243,15 @@ Working implementation
   |
 Tests
   |
-Git commit
+Commit
   |
-GitHub push
+Push
   |
-Documentation update
+Documentation
   |
 Next sprint
 ```
 
-## Current Sprint
-
-`BUILD-001`
-
-Objective:
-
-Create a reproducible Curvature development environment using:
-
-- `environment.yml`
-- `requirements.txt`
-- documented installation commands
-
 ## Long-Term Goal
 
-Project Curvature is complete only when the production workshop has enabled
-the creation of a living, playable MMORPG world.
-
-The later objective is to extend that world into MMORPGVR.
+Curvature succeeds when the same persistent world can be entered through text, 2D, 3D and VR without losing history, identity or consequence.

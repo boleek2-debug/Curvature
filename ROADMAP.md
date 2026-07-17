@@ -1,9 +1,9 @@
 # ROADMAP
 
 Status: Draft
-Version: 0.4.2
+Version: 0.5.0
 Owner: Project Curvature
-Last Updated: 2026-07-16
+Last Updated: 2026-07-18
 
 ---
 
@@ -11,7 +11,7 @@ Last Updated: 2026-07-16
 
 This roadmap describes the planned evolution of Project Curvature.
 
-It shows where the project is today and the intended direction of development.
+It shows where the project is today and the intended order of development.
 
 It is not a changelog.
 
@@ -43,23 +43,42 @@ Run Unattended may not be enabled.
 
 This has not yet been verified.
 
-Next software sprint
-
-REMOTE-004 Service Heartbeat
-
 Most recently completed sprint
 
 REMOTE-003
 
-Completed objective
+Next software sprint
 
-Extend AI Runtime diagnostics with verified remote GPU information, VRAM usage, queue status and runtime diagnostics.
+REMOTE-004 — Minimal Service Heartbeat
+
+---
+
+# Strategic Direction
+
+Curvature will move from a reliable minimum workshop into an early living-world vertical slice.
+
+The workshop will not be expanded indefinitely before the world begins.
+
+Approved progression:
+
+1. restore infrastructure reliability,
+2. complete a minimal heartbeat,
+3. create persistent world state,
+4. establish the historical language foundation,
+5. add time, events and Chronicle,
+6. add character identity, memory, goals and voice,
+7. create the first playable Chronicle Client / MUD,
+8. expand the Platform and world together,
+9. add 2D,
+10. add 3D,
+11. add VR,
+12. grow toward multiplayer and MMORPG scale.
 
 ---
 
 # Completed Milestones
 
-Foundation
+## Foundation
 
 - Linux development environment
 - Git repository
@@ -72,19 +91,19 @@ Foundation
 - Pinned Python dependencies
 - Installation and verification guide
 
-Curvature Core
+## Curvature Core
 
 - Telemetry
 - Diagnostics
 - Indicators
 - Console foundation
 
-Workflow
+## Workflow
 
 - Workflow registry
 - Workflow states
 
-Remote
+## Remote
 
 - REMOTE-001 completed
 - Tailscale integration
@@ -117,24 +136,178 @@ Make remote access to the Main Workstation reliable without requiring an interac
 
 Required deliverables
 
-- Login-response diagnostic
-- Tailscale service status verification
-- Automatic service startup verification
-- Run Unattended verification and configuration
-- Device key expiry verification
-- Tailscale authentication verification
-- Tailscale Serve restart verification
-- ComfyUI startup verification
-- Windows service recovery configuration if required
-- Watchdog only if required
-- Full restart test without login
-- Remote `thing` availability confirmation
-- Remote `/system_stats` confirmation
-- Curvature AI Runtime READY confirmation
+- login-response diagnostic,
+- Tailscale service status verification,
+- automatic service startup verification,
+- Run Unattended verification and configuration,
+- device key expiry verification,
+- Tailscale authentication verification,
+- Tailscale Serve restart verification,
+- ComfyUI startup verification,
+- Windows service recovery configuration if required,
+- watchdog only if required,
+- full restart test without login,
+- remote `thing` availability confirmation,
+- remote `/system_stats` confirmation,
+- Curvature AI Runtime READY confirmation.
 
-Target work session
+---
 
-Saturday, 2026-07-18.
+# Near-Term Software Milestones
+
+## REMOTE-004 — Minimal Service Heartbeat
+
+Goal
+
+Provide a small, reliable and verifiable heartbeat for the Main Workstation and remote AI Runtime.
+
+Required deliverables
+
+- host reachability state,
+- Tailscale path state,
+- ComfyUI API state,
+- last successful verification time,
+- failure transition handling,
+- automated tests.
+
+Scope rule
+
+REMOTE-004 must remain small.
+
+It must not delay the first World Core work through unnecessary infrastructure expansion.
+
+---
+
+## WORLD-001 — Persistent World State
+
+Goal
+
+Create the minimum authoritative World Core.
+
+Required deliverables
+
+- persistent world identifier,
+- one place,
+- basic entities,
+- state storage,
+- load after restart,
+- verified state transitions,
+- automated tests.
+
+---
+
+## LANG-001 — Historical Reconstruction Foundation
+
+Goal
+
+Create a trustworthy method for reconstructing and extending the world's language.
+
+Required deliverables
+
+- provenance model,
+- confidence categories,
+- Proto-Slavic research structure,
+- early West Slavic and Polan reference framework,
+- initial phonological assumptions,
+- controlled construction rules,
+- small initial lexicon,
+- naming rules.
+
+---
+
+## WORLD-002 — Time, Events and Chronicle
+
+Goal
+
+Give the world ordered history and durable consequence.
+
+Required deliverables
+
+- world time,
+- verified events,
+- cause and effect links,
+- persistent Chronicle entries,
+- restart continuity,
+- automated tests.
+
+---
+
+## NPC-001 — Identity, Memory, Goals and Voice
+
+Goal
+
+Create characters that persist as world entities.
+
+Required deliverables
+
+- identity,
+- knowledge,
+- memory,
+- goals,
+- relationships,
+- cultural profile,
+- linguistic profile,
+- recognisable voice constraints.
+
+---
+
+## CHRONICLE-001 — First Playable Chronicle Client
+
+Goal
+
+Create the first world-facing frontend.
+
+Required vertical slice
+
+- one persistent place,
+- several characters,
+- natural-language player intent,
+- verified world actions,
+- memory,
+- consequences,
+- Chronicle output,
+- restart continuity.
+
+The first version may be single-player.
+
+It is the first proof that the living world exists.
+
+---
+
+# Later Milestones
+
+## Language Development
+
+- expanded lexicon,
+- grammar growth,
+- dialects,
+- language evolution,
+- ritual and social registers,
+- translated and original dialogue.
+
+## World Development
+
+- additional places,
+- expanded characters,
+- economy,
+- conflict,
+- travel,
+- cultures,
+- larger histories.
+
+## Frontend Progression
+
+- 2D client,
+- 3D client,
+- VR client.
+
+## Multiplayer Progression
+
+- networking,
+- shared world rules,
+- concurrency,
+- multiplayer systems,
+- MMORPG scale.
 
 ---
 
@@ -142,57 +315,21 @@ Saturday, 2026-07-18.
 
 ## WOL-001 — Wake-on-LAN
 
-Goal
-
-Allow the Main Workstation to be powered on remotely through a verified home-LAN relay reachable over Tailscale.
-
 Verified preparation
 
 - ASUS PRIME Z490M-PLUS identified
 - Intel I219-V identified
-- Wired Ethernet verified
+- wired Ethernet verified
 - MAC address recorded
 - Wake on Magic Packet enabled
 - Windows wake permission enabled
 - Fast Startup not blocking Wake-on-LAN
-
-Blocked deliverables
-
-- BIOS/UEFI Wake-on-LAN verification
-- Local Wake-on-LAN test
-- Home-LAN relay implementation
-- Tailscale relay verification
-- Remote Wake-on-LAN test
-- Startup confirmation
-- ComfyUI availability confirmation after wake
 
 Status
 
 Paused until after the trip.
 
 The planned S20 FE relay remains in PIPELINE.
-
----
-
-# Planned Milestones
-
-Remote Runtime
-
-- REMOTE-004 Service Heartbeat
-- Remote commands
-
-Workflow Engine
-
-- Dependency verification
-- Workflow execution
-- Progress reporting
-- History
-
-Curvature Interface
-
-- HUD foundation
-- Slavic 24th-century design language
-- Integrated Console
 
 ---
 
@@ -212,32 +349,7 @@ Status
 
 Deferred until the user confirms that the inverter is available.
 
-Hardware validation must not interrupt Tailscale recovery or the existing software roadmap before that confirmation.
-
----
-
-# Long-Term Goals
-
-World Production
-
-- World Builder
-- Character production
-- Environment production
-- Asset production
-
-Game Production
-
-- Game engine integration
-- Networking
-- Multiplayer systems
-
-Final Objective
-
-A complete MMORPG.
-
-Future Objective
-
-A complete MMORPGVR world.
+It must not interrupt the software roadmap before that confirmation.
 
 ---
 
@@ -245,6 +357,6 @@ A complete MMORPGVR world.
 
 Only completed work belongs in CHANGELOG.
 
-Ideas that are intentionally postponed belong in PIPELINE.
+Ideas intentionally postponed belong in PIPELINE.
 
-Infrastructure recovery takes priority over REMOTE-004 because the remote AI Runtime cannot currently be reached.
+Living World, Language and Chronicle are now core roadmap items, not Pipeline ideas.

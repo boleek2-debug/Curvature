@@ -1,132 +1,206 @@
 # CURVATURE
 
-Status: Draft Version: 0.1.0 Owner: Project Curvature Last Updated:
-2026-07-13
+Status: Draft
+Version: 0.2.0
+Owner: Project Curvature
+Last Updated: 2026-07-18
 
-------------------------------------------------------------------------
+---
 
 # Purpose
 
-Project Curvature is a long-term engineering project.
+Project Curvature is a long-term engineering and world-building project.
 
-Its final objective is the creation of a fully playable MMORPG and,
-eventually, an MMORPGVR world.
+Its final objective is a persistent living world that can be experienced through progressively richer interfaces:
 
-Curvature Platform is the production workshop created to make that
-objective possible.
+- Chronicle Client / MUD
+- 2D
+- 3D
+- VR
+- multiplayer and eventually MMORPG scale
 
-The Platform is not the game.
+Curvature Platform is the production workshop created to make that world possible.
 
-It is the engineering environment used to build the game.
+The Platform is not the world.
 
-------------------------------------------------------------------------
+It is the engineering environment used to create, operate, observe and evolve the world.
+
+---
 
 # Core Philosophy
 
 ## Workshop First
 
-The workshop is always built before the world.
+The workshop must exist before the world can be built reliably.
 
-Every feature added to Curvature must improve the production workshop.
+However, the workshop is not developed indefinitely in isolation.
 
-Only then can it improve the MMORPG.
+> Build the minimum reliable workshop, then use it immediately to create a living slice of the world.
 
-------------------------------------------------------------------------
+Every major platform capability must eventually prove its value by enabling world creation, operation or continuity.
 
-## Production First
+## Living World First
 
-Curvature is designed around production capability rather than visual
-appearance.
+The world is not defined by graphics.
 
-The Platform must always answer one question:
+Chronicle Client / MUD, 2D, 3D and VR are not separate games. They are different portals into the same persistent world state, history, characters and consequences.
 
-> Is the workshop ready to work?
+## Chronicle
 
-------------------------------------------------------------------------
+The world must remember.
+
+Actions, decisions, relationships and events must leave a durable trace.
+
+The Chronicle is the historical memory of the world and the basis for continuity, consequence, reputation, memory and future interpretation of past events.
+
+The intended experience is similar to a book that writes itself through human thought and action.
+
+## Language
+
+Language is a structural part of the world, not decoration.
+
+The linguistic foundation will be based on historical reconstruction, especially Proto-Slavic and the probable speech environment of early medieval West Slavic communities, including the Polans.
+
+The project must never pretend that a complete historically certain language survived.
+
+It must:
+
+- reconstruct what can be supported,
+- mark uncertainty,
+- define explicit construction rules,
+- create missing vocabulary consistently,
+- allow dialects and daughter forms to develop from the same foundation.
+
+The player's input language and the world's internal language are separate layers.
 
 ## Source of Truth
 
-Curvature Core is the single source of truth.
+Curvature Core is the source of truth for platform state.
 
-Frontends never invent state.
+The future World Core will be the source of truth for world state.
 
-Every operator-visible indicator must be based on real telemetry,
-diagnostics or verified services.
+Frontends never invent authoritative state.
 
-------------------------------------------------------------------------
+Every world-facing description must be grounded in actual world state, events, memory and known uncertainty.
 
-# Platform Layers
+---
+
+# Platform and World Layers
 
 Infrastructure
 
--   Linux
--   Git
--   Development tools
--   NVIDIA / CUDA
--   Network
+- Linux
+- Windows AI Runtime
+- Git
+- Development tools
+- NVIDIA / CUDA
+- Tailscale
+- Network
+- Reproducible environments
 
 Curvature Platform
 
--   Core
--   Services
--   Frontends
+- Core
+- Services
+- Frontends
+- World Core
 
 Core
 
--   Telemetry
--   Diagnostics
--   Indicators
--   Configuration
--   Logging
+- Telemetry
+- Diagnostics
+- Indicators
+- Configuration
+- Logging
+- Events
 
 Services
 
--   Remote Runtime
--   AI Runtime
--   Workflow Engine
--   Asset Pipeline
--   World Builder
--   Export
+- Remote Runtime
+- AI Runtime
+- Workflow Engine
+- Asset Pipeline
+- World Builder
+- Export
+
+World Core
+
+- Persistent World State
+- Time
+- Events
+- Chronicle
+- Places
+- Characters
+- Memory
+- Language
+- Consequences
 
 Frontends
 
--   Console
--   Future HUD
--   Mobile
--   Web
--   VR
+- Console
+- Chronicle Client / MUD
+- Future 2D client
+- Future 3D client
+- Future VR client
+- Future mobile and web interfaces
 
-------------------------------------------------------------------------
+---
+
+# First World-Facing Milestone
+
+The first world-facing proof of concept will be a text-based Chronicle Client.
+
+It must demonstrate that the world can:
+
+- persist,
+- remember,
+- interpret actions,
+- react,
+- maintain character identity,
+- preserve consequences,
+- write its own Chronicle.
+
+It may begin as a single-player experience.
+
+Multiplayer is not required to prove the living-world model.
+
+---
 
 # Engineering Philosophy
 
-Project Curvature follows several permanent rules.
+- Never guess.
+- Verify everything.
+- One sprint has one goal.
+- Architecture before implementation.
+- Complete file replacements.
+- Request current files when their state is uncertain.
+- Test before commit.
+- Commit before push.
+- Update HANDOFF after completed work.
+- Code and documentation are written in English.
+- Development discussion is conducted in Polish.
 
--   Never guess.
--   Verify everything.
--   One sprint has one goal.
--   Architecture before implementation.
--   Complete file replacements.
--   Test before commit.
--   Commit before push.
+---
 
-------------------------------------------------------------------------
+# Visual and Cultural Direction
 
-# Visual Direction
+The long-term interface and world direction are inspired by Slavic cultures and the previously established 24th-century Slavic civilisation.
 
-The long-term user interface is inspired by the previously established
-24th-century Slavic civilisation.
+Operational interfaces must prioritise clarity over decoration.
 
-The future HUD must prioritise operational clarity over decoration.
+World-facing interfaces must preserve cultural consistency across text, 2D, 3D and VR.
 
-------------------------------------------------------------------------
+---
 
 # Long-Term Objective
 
 Project Curvature is complete only when:
 
--   Curvature Platform is capable of producing game content efficiently.
--   The MMORPG world is playable.
--   The MMORPGVR world becomes a natural extension of that universe.
-
-Everything developed inside Curvature must contribute to that objective.
+- Curvature Platform can reliably build and operate world systems.
+- The persistent world survives restarts and frontend changes.
+- The Chronicle preserves history and consequences.
+- Characters have identity, memory, goals and recognisable voices.
+- The language system remains historically grounded and internally consistent.
+- The Chronicle Client proves the world through text.
+- 2D, 3D and VR become richer portals into the same world.
+- Multiplayer and MMORPG scale can grow from the same foundations.
