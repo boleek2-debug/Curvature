@@ -1,7 +1,7 @@
 # CHANGELOG
 
 Status: Active
-Version: 0.5.0
+Version: 0.6.0
 Owner: Project Curvature
 Last Updated: 2026-07-18
 
@@ -18,6 +18,70 @@ Ideas belong in PIPELINE.
 Current operational state belongs in HANDOFF.
 
 Architecture belongs in BLUEPRINT.
+
+---
+
+## 2026-07-18
+
+### LANG-001
+
+Completed
+
+- language form classification model
+- confidence level model
+- provenance model
+- language entry model
+- versioned lexicon model
+- JSON lexicon storage
+- validation separating reconstruction, plausibility, Curvature-derived forms, fiction and uncertainty
+- automated language foundation tests
+
+Verified
+
+- reconstructed forms require provenance
+- Curvature-derived forms cannot claim high historical confidence
+- fictional forms cannot claim historical provenance
+- duplicate entry identifiers are rejected
+- lexicon entries survive save and load
+- lexicon JSON format version is preserved
+- missing lexicon files are rejected
+- 36 automated project tests passed
+- commit and push completed
+
+Result
+
+Curvature now has a technical language foundation that distinguishes historical evidence from controlled invention.
+
+---
+
+## 2026-07-18
+
+### WORLD-001
+
+Completed
+
+- persistent world identifier
+- Place model
+- Entity model
+- authoritative WorldState
+- controlled state transitions
+- versioned JSON world storage
+- load after restart
+- automated World Core tests
+
+Verified
+
+- world identifier persists across save and load
+- entities cannot reference unknown places
+- entity movement validates destinations
+- world state survives save and load
+- world JSON format version is preserved
+- 28 automated project tests passed
+- commit and push completed
+
+Result
+
+Curvature now has the first minimum authoritative and persistent World Core.
 
 ---
 

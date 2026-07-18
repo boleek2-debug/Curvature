@@ -1,7 +1,7 @@
 # ROADMAP
 
 Status: Draft
-Version: 0.6.0
+Version: 0.7.0
 Owner: Project Curvature
 Last Updated: 2026-07-18
 
@@ -25,7 +25,7 @@ Transition from Curvature Platform Foundation to Living World Foundation
 
 Most recently completed sprint
 
-REMOTE-004 — Minimal Service Heartbeat
+LANG-001 — Historical Reconstruction Foundation
 
 Current verified remote state
 
@@ -34,11 +34,13 @@ Current verified remote state
 - ComfyUI API is READY
 - AI Runtime Heartbeat is READY
 - current and last successful verification timestamps are displayed
-- 21 automated project tests pass
+- 36 automated project tests pass
+- WORLD-001 verified
+- LANG-001 verified
 
 Next software sprint
 
-WORLD-001 — Persistent World State
+WORLD-002 — Time, Events and Chronicle
 
 ---
 
@@ -122,7 +124,7 @@ Approved progression:
 
 ---
 
-# Active Software Milestone
+# Completed Living World Milestones
 
 ## WORLD-001 — Persistent World State
 
@@ -155,8 +157,6 @@ It must prove authoritative persistence before adding:
 
 ---
 
-# Near-Term Software Milestones
-
 ## LANG-001 — Historical Reconstruction Foundation
 
 Goal
@@ -175,6 +175,8 @@ Required deliverables
 - naming rules
 
 ---
+
+# Active Software Milestone
 
 ## WORLD-002 — Time, Events and Chronicle
 
@@ -232,6 +234,47 @@ Required vertical slice
 The first version may be single-player.
 
 It is the first proof that the living world exists.
+
+---
+
+# Approved Developer Tooling
+
+## ASSISTANT-001 — Curvature Console MVP
+
+Purpose
+
+Create an internal development client with permanent workspaces for:
+
+- Curvature Project
+- Curvature Core
+- Curvature Research
+
+Each workspace automatically loads its role, documentation and current state.
+
+Status
+
+Approved for future implementation.
+
+Priority
+
+High — Developer Tooling
+
+Scheduling rule
+
+Do not interrupt WORLD-002 or another active sprint.
+
+The first future milestone is architecture and technology evaluation at a safe stopping point.
+
+Required planning deliverables
+
+- architecture proposal
+- technology evaluation
+- implementation roadmap
+- estimated development effort
+- repository structure
+- MVP specification
+
+Curvature Console is not part of Curvature Platform and not part of gameplay.
 
 ---
 

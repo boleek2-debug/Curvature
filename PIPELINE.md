@@ -1,7 +1,7 @@
 # PIPELINE
 
 Status: Draft
-Version: 0.5.0
+Version: 0.6.0
 Owner: Project Curvature
 Last Updated: 2026-07-18
 
@@ -156,13 +156,63 @@ Deferred
 
 # Platform
 
-## Curvature Assistant
+## ASSISTANT-001 — Curvature Console MVP
 
-Project-aware assistant integrated into Curvature Platform.
+Purpose
+
+Create an official internal developer tool for persistent, role-based AI workspaces with automatic context loading.
+
+Permanent workspaces
+
+- Curvature Project
+- Curvature Core
+- Curvature Research
+
+MVP requirements
+
+- automatic role loading
+- automatic documentation loading
+- department state restoration
+- loaded context display
+- immediate usability without manual copy and paste
+- strict department separation
+
+Required planning deliverables
+
+- architecture proposal
+- technology evaluation
+- implementation roadmap
+- estimated development effort
+- repository structure
+- MVP specification
+
+Future features outside the MVP
+
+- repository and Git integration
+- automatic handoff generation
+- context refresh
+- department messaging
+- shared knowledge index
+- plugin support
+- Chronicle integration
+- voice mode
+- local AI support
+
+Boundary
+
+Curvature Console is not part of Curvature Platform and not part of gameplay.
 
 Status
 
-Deferred
+Approved for future implementation.
+
+Priority
+
+High — Developer Tooling
+
+Activation rule
+
+Do not interrupt the active software sprint.
 
 ---
 
