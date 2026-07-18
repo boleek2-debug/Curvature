@@ -1,601 +1,407 @@
 # CURVATURE CONSOLE ARCHITECTURE
 
-Status: Approved Architecture Proposal
-Version: 0.1.0
+Status: Approved and Amended
+Version: 1.0.0
 Owner: Project Curvature
 Last Updated: 2026-07-18
-Milestone: ASSISTANT-001A
+Milestone: ASSISTANT-001
 
 ---
 
 # 1. Purpose
 
-Curvature Console is a standalone internal development application for coordinating three permanent Project Curvature departments:
+Curvature Console is a standalone internal development application coordinating:
 
-- Curvature Project
-- Curvature Core
-- Curvature Research
+- Curvature Project;
+- Curvature Core;
+- Curvature Research.
 
-It is not part of:
+It is separate from:
 
-- Curvature Platform
-- World Core
-- Chronicle Client
-- gameplay
+- Curvature Platform;
+- World Core;
+- Chronicle Client;
+- gameplay.
 
-Its purpose is to preserve role boundaries, project continuity, department state, shared awareness and controlled cross-department handoffs.
-
----
-
-# 2. Core Product Requirement
-
-All three workspaces must be visible simultaneously in the default desktop view.
-
-The application must present:
-
-    +----------------------+----------------------+----------------------+
-    | Curvature Project    | Curvature Core       | Curvature Research   |
-    +----------------------+----------------------+----------------------+
-    | direction            | architecture         | sources              |
-    | decisions            | implementation       | evidence             |
-    | priorities           | tests                | hypotheses           |
-    | roadmap              | repository state     | confidence           |
-    +----------------------+----------------------+----------------------+
-
-The departments are peers.
-
-The default interface must not hide departments behind tabs.
-
-Each panel must provide:
-
-- independent conversation history
-- independent input
-- independent scrolling
-- independent loaded context
-- visible department status
-- resizable width
-- temporary focus or enlargement
-- restoration to the three-panel view without state loss
+It preserves department state, context, authority boundaries and controlled continuity across ChatGPT threads.
 
 ---
 
-# 3. Department Authority
+# 2. Non-Negotiable Cost Architecture
 
-## Curvature Project
+Normal Console operation must not require spending beyond the user's existing ChatGPT Plus subscription.
 
-Owns:
+Therefore the MVP:
 
-- project direction
-- priorities
-- milestone approval
-- scope decisions
-- cross-department arbitration
+- does not use the paid OpenAI API;
+- does not require an API key;
+- does not perform automatic paid requests;
+- uses official ChatGPT Projects as the AI conversation environment;
+- uses local manual transfer packages;
+- keeps all transfer actions user-controlled.
 
-Must not:
-
-- write implementation code
-- decide scientific truth
-- replace Core or Research work
-
-## Curvature Core
-
-Owns:
-
-- software architecture
-- implementation
-- schemas
-- validation
-- persistence
-- tests
-- repository integration
-
-Must not:
-
-- decide scientific truth
-- invent research conclusions
-- independently change project direction
-
-## Curvature Research
-
-Owns:
-
-- scientific and academic research
-- source evaluation
-- evidence assessment
-- competing hypotheses
-- confidence
-- missing knowledge
-- research graph maintenance
-
-Must not:
-
-- define software architecture
-- write production implementation
-- independently change the project roadmap
+Any future provider integration must be optional, disabled by default and approved through a new explicit architecture decision.
 
 ---
 
-# 4. Cross-Department Awareness
-
-Every workspace must be aware of the current state of the other two departments.
-
-Awareness must be controlled.
-
-Each workspace receives:
-
-- its own full role context
-- its own full department state
-- a concise summary of the other departments
-- accepted cross-department outputs
-- relevant blockers
-- pending decisions
-- incoming and outgoing handoffs
-
-A workspace may observe another department.
-
-It must not perform work owned by that department.
-
-When another department must act, the workspace creates a handoff.
-
----
-
-# 5. Department State Bus
-
-Curvature Console must provide a local controlled shared-state layer.
-
-Logical model:
-
-    Department State Bus
-    |
-    +-- Project status
-    +-- Core status
-    +-- Research status
-    +-- active tasks
-    +-- completed outputs
-    +-- blockers
-    +-- decisions required
-    +-- handoffs
-
-The State Bus is not an unrestricted shared conversation.
-
-It publishes structured and intentional department information only.
-
----
-
-# 6. Handoff Model
-
-Handoffs are the approved mechanism for cross-department work.
-
-Required fields:
-
-- identifier
-- source department
-- target department
-- type
-- subject
-- summary
-- requested action
-- supporting references
-- status
-- created timestamp
-- updated timestamp
-
-Initial handoff types:
-
-- Decision Required
-- Research Request
-- Research Result
-- Implementation Request
-- Technical Constraint
-- Clarification Request
-- Review Request
-
-Initial statuses:
-
-- Proposed
-- Acknowledged
-- Accepted
-- Rejected
-- Completed
-
----
-
-# 7. Selected Technology
+# 3. Selected Technology
 
 ## Language
 
-Python 3.11+
-
-Reason:
-
-- matches the existing Curvature development environment
-- allows shared engineering conventions
-- supports direct repository and filesystem access
-- avoids adding JavaScript, Node and Rust toolchains to the MVP
+Python 3.11.
 
 ## Desktop UI
 
-PySide6 with Qt Widgets
-
-Reason:
-
-- native desktop application
-- mature widget system
-- QSplitter supports the required three-panel layout
-- panel sizes can be resized, saved and restored
-- suitable for independent conversation panels
-- direct integration with Python domain and infrastructure layers
-
-## AI Integration
-
-OpenAI Responses API behind an AI provider abstraction.
-
-Rule:
-
-The API generates responses.
-
-Curvature Console owns:
-
-- role definitions
-- context assembly
-- local conversation history
-- department state
-- handoffs
-- project continuity
-
-The architecture must permit future providers without changing the domain model.
+PySide6 with Qt Widgets.
 
 ## Operational Storage
 
-SQLite
-
-Stores:
-
-- conversations
-- messages
-- department states
-- department summaries
-- handoffs
-- panel layout state
-- application settings
-- provider conversation identifiers where applicable
+SQLite.
 
 ## Human-Readable Configuration
 
-YAML and Markdown
-
-Stores:
-
-- workspace configuration
-- role definitions
-- responsibility boundaries
-- document assignments
-- context assembly rules
-- project documentation
+YAML and Markdown.
 
 ## Repository Access
 
-Read-only for the MVP.
+Read-only access to Project Curvature during the MVP.
 
-Curvature Console reads configured Project Curvature repositories and documents.
+## AI Workflow
 
-Repository writing, Git operations and automatic HANDOFF generation remain outside the MVP.
+Official ChatGPT under the user's existing Plus subscription.
 
----
+Curvature Console owns:
 
-# 8. Repository Boundary
+- roles;
+- context assembly;
+- local state;
+- transfer packages;
+- conversation records;
+- attachment manifests;
+- thread handoffs;
+- later Department State Bus and cross-department handoffs.
 
-Curvature Console must use a separate repository:
-
-    ~/curvature-console
-
-It must not be implemented inside the Curvature Platform repository.
-
-Reasons:
-
-- it is a separate internal product
-- it has its own UI and release cycle
-- it has different dependencies
-- it must not couple its failures to World Core or Platform
-- it may later support multiple repositories
-- it reads Project Curvature repositories rather than becoming part of them
-
-The initial configured Project Curvature repository is:
-
-    ~/Curvature
+ChatGPT provides AI responses through the official user interface.
 
 ---
 
-# 9. Logical Architecture
+# 4. Repository Boundary
 
-    Curvature Console
-    |
-    +-- Presentation
-    |   +-- MainWindow
-    |   +-- ThreePanelLayout
-    |   +-- ProjectPanel
-    |   +-- CorePanel
-    |   +-- ResearchPanel
-    |
-    +-- Application
-    |   +-- WorkspaceManager
-    |   +-- ContextOrchestrator
-    |   +-- DepartmentStateBus
-    |   +-- HandoffManager
-    |   +-- ConversationManager
-    |
-    +-- Domain
-    |   +-- Department
-    |   +-- Workspace
-    |   +-- DepartmentState
-    |   +-- DepartmentSummary
-    |   +-- Handoff
-    |   +-- Conversation
-    |   +-- ContextPackage
-    |
-    +-- Infrastructure
-    |   +-- RepositoryReader
-    |   +-- DocumentLoader
-    |   +-- SQLiteStore
-    |   +-- OpenAIResponsesProvider
-    |   +-- SecretStore
-    |
-    +-- Configuration
-        +-- project.yaml
-        +-- core.yaml
-        +-- research.yaml
-        +-- role documents
+Curvature Console repository:
+
+```text
+~/curvature-console
+```
+
+Project Curvature repository:
+
+```text
+~/Curvature
+```
+
+Console must not automatically edit or run Git operations in the Project Curvature repository during the MVP.
 
 ---
 
-# 10. Context Assembly
+# 5. Three-Panel Workspace
 
-Each department receives an isolated context package.
+All departments are visible simultaneously:
 
-Private department context:
+```text
++----------------------+----------------------+----------------------+
+| Curvature Project    | Curvature Core       | Curvature Research   |
++----------------------+----------------------+----------------------+
+```
 
-- role definition
-- allowed responsibilities
-- prohibited responsibilities
-- required documents
-- department state
-- active task
-- department conversation history
-- context assembly rules
+Each panel has independent:
 
-Shared context:
+- role;
+- context;
+- draft;
+- local conversation;
+- attachments;
+- transfer actions;
+- persistence;
+- Focus state.
 
-- concise department summaries
-- accepted outputs
-- blockers
-- required decisions
-- relevant handoffs
-
-Full conversation histories are not shared automatically between departments.
+Attachments are not shared automatically.
 
 ---
 
-# 11. Processing Flow
+# 6. Department Authority
 
-    start application
-    → restore Project, Core and Research
-    → load role definitions
-    → load assigned documents
-    → load department states
-    → load department summaries
-    → load handoffs
-    → assemble isolated context for each department
-    → display all three panels simultaneously
-    → process independent AI requests
-    → persist messages, states, summaries and handoffs
+## Project
+
+Owns direction, priorities, approval, scope and arbitration.
+
+## Core
+
+Owns architecture, implementation, schemas, persistence, validation and tests.
+
+## Research
+
+Owns sources, evidence, hypotheses, confidence, missing knowledge and research graph.
+
+A department may observe concise state from another department.
+
+It must not perform another department's work.
+
+Cross-department action requires an explicit handoff.
 
 ---
 
-# 12. Concurrency
+# 7. ChatGPT Projects Model
 
-Each workspace may have one active AI request.
+Approved structure:
 
-The UI must remain responsive while requests are running.
+```text
+ChatGPT Project: Curvature Project
+ChatGPT Project: Curvature Core
+ChatGPT Project: Curvature Research
+```
 
-MVP approach:
+Each Project may contain successive department chats.
 
-- background worker per active request
-- UI updates through Qt signals
-- cancellation where supported
-- no blocking API calls on the main UI thread
+Project memory is helpful but is not authoritative storage.
 
-All three departments may process requests independently.
+Authoritative continuity comes from:
+
+- repository documentation;
+- SQLite department state;
+- explicit package content;
+- thread handoffs;
+- later structured State Bus and handoffs.
+
+---
+
+# 8. Transfer Package Model
+
+## Task Package
+
+Purpose:
+
+Frequent work inside the current ChatGPT thread.
+
+Content:
+
+- department identity;
+- authority boundary;
+- full role;
+- bounded excerpts from configured documents;
+- bounded recent local conversation;
+- current task;
+- attachment manifest;
+- response instructions.
+
+The Task Package favours compactness.
+
+## Thread Handoff Package
+
+Purpose:
+
+Continue work in a new chat inside the same ChatGPT Project.
+
+Content:
+
+- department identity;
+- authority boundary;
+- full loaded context;
+- larger bounded conversation excerpt;
+- current task;
+- attachment manifest;
+- explicit continuation instructions.
+
+The Thread Handoff Package favours continuity.
+
+---
+
+# 9. Thread Pressure
+
+Official ChatGPT does not expose exact remaining thread capacity to Curvature Console.
+
+Console may maintain an advisory estimate:
+
+```text
+GREEN
+AMBER
+RED
+```
+
+The estimate may use:
+
+- recorded package size;
+- recorded imported response size;
+- local conversation size;
+- attachment count;
+- time and work since the last handoff.
+
+AMBER prepares the user for a handoff.
+
+RED recommends a new chat in the same ChatGPT Project.
+
+Console must not claim the estimate is an exact ChatGPT token reading.
+
+---
+
+# 10. Manual Processing Flow
+
+```text
+start Console
+→ restore three workspaces
+→ load roles and configured documents
+→ restore local state and attachments
+→ prepare Task or Thread Handoff Package
+→ preview package
+→ copy package
+→ user pastes package into official ChatGPT
+→ user receives response
+→ user imports response into Console
+→ Console persists department continuity
+```
+
+No paid request is made by Console.
+
+---
+
+# 11. Logical Components
+
+```text
+Curvature Console
+|
++-- Presentation
+|   +-- MainWindow
+|   +-- DepartmentPanel
+|   +-- ContextPreviewDialog
+|   +-- TransferPackageDialog
+|
++-- Infrastructure
+|   +-- RepositoryReader
+|   +-- WorkspaceContextLoader
+|   +-- TransferPackageBuilder
+|   +-- SQLiteStateStore
+|
++-- Configuration
+|   +-- workspace YAML
+|   +-- role Markdown
+|
++-- Planned
+    +-- ResponseImporter
+    +-- ConversationRecordStore
+    +-- ThreadPressureEstimator
+    +-- DepartmentStateBus
+    +-- HandoffManager
+```
+
+There is no mandatory AI provider component in the MVP.
+
+---
+
+# 12. Persistence
+
+Current SQLite state includes:
+
+- department conversation text;
+- department draft;
+- attachment metadata;
+- splitter layout;
+- focused department.
+
+Planned additions:
+
+- structured conversation entries;
+- package records;
+- thread identifiers;
+- handoff records;
+- thread pressure state;
+- department summaries.
 
 ---
 
 # 13. MVP Scope
 
-ASSISTANT-001B must provide:
+The MVP must provide:
 
-- standalone PySide6 desktop application
-- three simultaneous side-by-side department panels
-- independent panel input and history
-- resizable panels
-- saved and restored panel layout
-- temporary single-panel focus
-- automatic role loading
-- automatic document loading
-- visible loaded-context list
-- manual context refresh
-- local conversation persistence
-- persistent department state
-- Department State Bus
-- controlled department summaries
-- handoff creation
-- handoff status tracking
-- OpenAI provider integration
-- strict authority boundaries
+- standalone PySide6 application;
+- three simultaneous department panels;
+- isolated roles and context;
+- independent state and attachments;
+- persistent restart continuity;
+- Task Package;
+- Thread Handoff Package;
+- response import;
+- structured local conversation records;
+- thread pressure estimation;
+- controlled Department State Bus;
+- explicit handoffs;
+- strict authority boundaries;
+- zero mandatory paid API usage.
 
 ---
 
 # 14. Outside the MVP
 
-- repository write integration
-- automatic Git operations
-- automatic HANDOFF generation
-- unrestricted department messaging
-- shared semantic knowledge index
-- plugin architecture
-- Chronicle interface integration
-- voice mode
-- local AI provider
-- remote synchronization
-- multi-user collaboration
+- automatic repository writes;
+- automatic Git operations;
+- unrestricted department messaging;
+- unsupported browser automation;
+- shared unrestricted conversation history;
+- plugin architecture;
+- voice mode;
+- remote synchronisation;
+- multi-user collaboration;
+- mandatory paid providers.
 
 ---
 
-# 15. Proposed Repository Structure
+# 15. Implementation Roadmap
 
-    curvature-console/
-    |
-    +-- README.md
-    +-- HANDOFF.md
-    +-- ROADMAP.md
-    +-- CHANGELOG.md
-    +-- pyproject.toml
-    +-- environment.yml
-    +-- .gitignore
-    |
-    +-- src/
-    |   +-- curvature_console/
-    |       +-- __init__.py
-    |       +-- main.py
-    |       |
-    |       +-- presentation/
-    |       +-- application/
-    |       +-- domain/
-    |       +-- infrastructure/
-    |       +-- configuration/
-    |
-    +-- config/
-    |   +-- workspaces/
-    |       +-- project.yaml
-    |       +-- core.yaml
-    |       +-- research.yaml
-    |
-    +-- roles/
-    |   +-- project.md
-    |   +-- core.md
-    |   +-- research.md
-    |
-    +-- data/
-    |   +-- .gitkeep
-    |
-    +-- tests/
-        +-- unit/
-        +-- integration/
+## B1
 
----
+Repository and application foundation — completed.
 
-# 16. Implementation Roadmap
+## B2
 
-## ASSISTANT-001B1 — Repository and Application Foundation
+Three-panel desktop shell — completed.
 
-- separate repository
-- reproducible environment
-- package structure
-- application entry point
-- empty main window
-- automated startup test
+## Attachments
 
-## ASSISTANT-001B2 — Three-Panel Desktop Shell
+Independent attachment queues — completed.
 
-- Project, Core and Research panels
-- QSplitter layout
-- independent scrolling and input
-- resize persistence
-- temporary panel focus
-- UI tests where practical
+## B3
 
-## ASSISTANT-001B3 — Workspace Configuration and Context Loading
+Workspace configuration and context loading — completed.
 
-- YAML workspace definitions
-- role documents
-- repository reader
-- document loader
-- context preview
-- manual refresh
+## B4
 
-## ASSISTANT-001B4 — Local State and Conversation Persistence
+Local state and restart persistence — completed.
 
-- SQLite schema
-- conversation storage
-- department state storage
-- panel layout storage
-- restart continuity
+## B5
 
-## ASSISTANT-001B5 — AI Provider Integration
+ChatGPT Plus workflow:
 
-- provider abstraction
-- OpenAI Responses provider
-- background requests
-- independent department conversations
-- error states
-- API configuration
+1. Task and Thread Handoff packages;
+2. response import;
+3. structured conversation records;
+4. thread pressure estimation;
+5. workflow verification.
 
-## ASSISTANT-001B6 — Department State Bus and Handoffs
+## B6
 
-- department summaries
-- blockers and decisions
-- handoff model
-- handoff status transitions
-- controlled cross-department awareness
-- authority instructions in every context
+Department State Bus and handoffs.
 
-## ASSISTANT-001B7 — MVP Verification and Closeout
+## B7
 
-- end-to-end three-department workflow
-- restart continuity
-- authority-boundary verification
-- documentation
-- packaging instructions
-- commit and push
+MVP verification and closeout.
 
 ---
 
-# 17. Effort Estimate
+# 16. Governing Rules
 
-For one developer with AI assistance:
-
-- B1: small
-- B2: medium
-- B3: medium
-- B4: medium
-- B5: medium to large
-- B6: medium to large
-- B7: medium
-
-Expected MVP scale:
-
-- approximately 7 implementation sprints
-- likely several thousand lines of application and test code
-- functional desktop shell should appear early
-- reliable department coordination requires the later persistence, provider and handoff sprints
-
----
-
-# 18. Architecture Decision
-
-Approved baseline:
-
-    Python 3.11+
-    PySide6 / Qt Widgets
-    horizontal QSplitter
-    three simultaneous DepartmentPanel instances
-    SQLite operational storage
-    YAML and Markdown configuration
-    OpenAI Responses API through provider abstraction
-    read-only Project Curvature repository access
-    separate curvature-console repository
-    isolated department contexts
-    Department State Bus
-    controlled handoffs
-
-This architecture is the baseline for ASSISTANT-001B.
-
-Any major deviation requires an explicit Project Curvature decision.
+```text
+Observe other departments.
+Respect their authority.
+Do not perform their work.
+Create a handoff when their action is required.
+Use official ChatGPT through the existing Plus subscription.
+Do not create hidden or automatic paid operations.
+```

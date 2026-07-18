@@ -1,7 +1,7 @@
 # ROADMAP
 
-Status: Draft
-Version: 0.9.0
+Status: Active
+Version: 1.0.0
 Owner: Project Curvature
 Last Updated: 2026-07-18
 
@@ -11,11 +11,25 @@ Last Updated: 2026-07-18
 
 This roadmap describes the approved order of Project Curvature development.
 
-It is not a changelog.
-
 Completed work belongs in CHANGELOG.
 
 Deferred ideas belong in PIPELINE.
+
+Current operational state belongs in HANDOFF.
+
+---
+
+# Product Constraint
+
+Normal Curvature Console operation must not require spending beyond the user's existing ChatGPT Plus subscription.
+
+The MVP uses:
+
+- official ChatGPT Projects for AI conversations;
+- manual, user-controlled transfer packages;
+- local Console persistence;
+- no paid OpenAI API;
+- no automatic paid model or tool calls.
 
 ---
 
@@ -23,264 +37,214 @@ Deferred ideas belong in PIPELINE.
 
 Current phase:
 
+```text
 Research Enablement and Living World Foundation
+```
 
-Most recently completed sprint:
+Completed Project milestones:
 
-LANG-001 — Technical Language Foundation
+- BUILD-001
+- REMOTE-001
+- REMOTE-002
+- REMOTE-003
+- REMOTE-004
+- WORLD-001
+- LANG-001
 
-Current verified state:
+Current verified Project baseline:
 
-- WORLD-001 completed
-- LANG-001 completed
-- 36 automated project tests pass
-- persistent World Core exists
-- technical language storage and validation foundation exists
+```text
+36 automated tests passed
+```
 
-Next active sprint:
+Active Console milestone:
 
-ASSISTANT-001A — Architecture and Technology Evaluation
+```text
+ASSISTANT-001B5 — ChatGPT Plus Workflow Integration
+```
 
----
+Active implementation unit:
 
-# Strategic Decision
-
-Curvature now requires a dedicated internal development application before large-scale LANGUAGE research begins.
-
-LANG-001 provides technical structures for language data.
-
-Curvature Research must provide the actual scientific content.
-
-The Curvature Console is a three-department coordination application.
-
-All three workspaces must be visible simultaneously as equal side-by-side panels.
-
-It is required to preserve:
-
-- department roles
-- research context
-- research state
-- publication analysis
-- research queues
-- source relationships
-- missing knowledge
-- continuous research graphs
-- cross-department awareness
-- strict authority boundaries
-- controlled handoffs
-
-For this reason, ASSISTANT-001 has been promoted ahead of WORLD-002.
-
-WORLD-002 remains approved and is postponed, not cancelled.
+```text
+ASSISTANT-001B5.1 — Task Package and Thread Handoff Package
+```
 
 ---
 
-# Completed Milestones
-
-## BUILD-001 — Reproducible Development Environment
-
-Completed and verified.
-
-## REMOTE-001 — Remote Runtime Foundation
-
-Completed and verified.
-
-## REMOTE-002 — AI Runtime Console
-
-Completed and verified.
-
-## REMOTE-003 — Remote Runtime Diagnostics
-
-Completed and verified.
-
-## REMOTE-004 — Minimal Service Heartbeat
-
-Completed and verified.
-
-## WORLD-001 — Persistent World State
-
-Completed and verified:
-
-- persistent world identifier
-- Place and Entity models
-- authoritative WorldState
-- controlled state transitions
-- versioned JSON storage
-- load after restart
-- automated tests
-
-## LANG-001 — Technical Language Foundation
-
-Completed and verified:
-
-- language form classifications
-- confidence levels
-- provenance model
-- LanguageEntry model
-- versioned Lexicon model
-- JSON storage
-- validation separating historical evidence from controlled invention
-- automated tests
-
-LANG-001 is infrastructure.
-
-It does not claim that the scientific reconstruction, phonology, lexicon or naming system is complete.
-
----
-
-# Active Milestone
+# Curvature Console Milestones
 
 ## ASSISTANT-001A — Architecture and Technology Evaluation
 
-Goal
+Completed.
 
-Select a reliable architecture for the Curvature Console.
+The selected implementation is:
 
-Required deliverables
+- separate `~/curvature-console` repository;
+- Python 3.11;
+- PySide6 Qt Widgets;
+- SQLite;
+- YAML and Markdown;
+- read-only access to `~/Curvature`.
 
-- architecture proposal
-- technology comparison
-- selected implementation approach
-- repository boundary decision
-- repository structure
-- three-panel interaction model
-- workspace configuration model
-- context assembly model
-- department state model
-- Department State Bus design
-- handoff model
-- authority enforcement strategy
-- conversation persistence model
-- AI provider strategy
-- MVP specification
-- effort estimate
-- implementation roadmap
+The original paid-provider decision has been superseded by the zero-additional-cost ChatGPT Plus workflow.
 
-Evaluation targets
+## ASSISTANT-001B1 — Repository and Application Foundation
 
-- OpenAI API and Responses API
-- Electron
-- Tauri
-- native Python desktop frameworks
-- local browser application
-- other suitable approaches
+Completed and verified.
 
-Completion rule
+## ASSISTANT-001B2 — Three-Panel Desktop Shell
 
-No implementation begins until the recommendation is explicit and justified.
+Completed and verified.
+
+## Per-Department Attachments
+
+Completed and verified.
+
+## ASSISTANT-001B3 — Workspace Configuration and Context Loading
+
+Completed and verified.
+
+## ASSISTANT-001B4 — Local State and Conversation Persistence
+
+Completed and verified:
+
+- SQLite operational state;
+- independent department state;
+- drafts and conversation text;
+- attachment metadata;
+- persistent screenshots;
+- splitter layout;
+- Focus mode;
+- restart continuity.
+
+Verified Console baseline:
+
+```text
+22 passed
+```
+
+## ASSISTANT-001B5 — ChatGPT Plus Workflow Integration
+
+Goal:
+
+Use the existing ChatGPT Plus subscription without paid API integration.
+
+### B5.1 — Task Package and Thread Handoff Package
+
+Deliver:
+
+- compact Task Package;
+- comprehensive Thread Handoff Package;
+- department authority;
+- full role;
+- mode-specific document inclusion;
+- bounded conversation;
+- current task;
+- attachment manifest;
+- preview;
+- exact clipboard copy;
+- no network call;
+- no API dependency;
+- automated tests.
+
+### B5.2 — Assistant Response Import
+
+Deliver:
+
+- explicit target department;
+- response preview;
+- accepted response import;
+- original text preservation;
+- local persistence;
+- automated tests.
+
+### B5.3 — Structured Department Conversation Records
+
+Deliver:
+
+- user and assistant entries;
+- timestamps;
+- transfer source markers;
+- restart persistence;
+- migration from plain transcript where required.
+
+### B5.4 — Thread Pressure Estimation
+
+Deliver:
+
+- locally estimated package and conversation size;
+- GREEN / AMBER / RED state;
+- advisory warning;
+- Thread Handoff generation from AMBER or RED;
+- no claim of exact ChatGPT capacity.
+
+### B5.5 — Workflow Verification and Closeout
+
+Verify:
+
+- Project workflow;
+- Core workflow;
+- Research workflow;
+- ChatGPT Project thread transition;
+- attachment isolation;
+- restart continuity;
+- zero network calls;
+- zero paid dependencies;
+- documentation.
+
+## ASSISTANT-001B6 — Department State Bus and Handoffs
+
+- structured department summaries;
+- controlled cross-department awareness;
+- explicit handoffs;
+- authority enforcement;
+- no automatic sharing of full conversations.
+
+## ASSISTANT-001B7 — MVP Verification and Closeout
+
+- end-to-end workflow;
+- restart continuity;
+- authority boundaries;
+- cost rule;
+- packaging;
+- documentation.
 
 ---
 
-# Next Milestone
-
-## ASSISTANT-001B — Curvature Console MVP
-
-Goal
-
-Create a standalone desktop application that restores permanent AI workspaces without manual context rebuilding.
-
-Required workspaces
-
-- Curvature Project
-- Curvature Core
-- Curvature Research
-
-Required MVP capabilities
-
-- three equal workspaces visible simultaneously
-- side-by-side three-panel layout
-- independent panel scrolling and input
-- resizable panels
-- temporary panel focus without state loss
-- automatic role loading
-- automatic document loading
-- separate conversation histories
-- persistent department state
-- context preview
-- loaded-file visibility
-- manual context refresh
-- AI provider integration
-- controlled cross-department awareness
-- Department State Bus
-- handoff creation and status tracking
-- strict department separation
-
-Boundary
-
-Curvature Console is not Curvature Platform and is not gameplay.
-
----
-
-# Research Enablement Milestone
+# Research Enablement
 
 ## RESEARCH-001 — Operational Research Workspace
 
-Goal
+Goal:
 
-Make coordinated LANGUAGE work operational across Project, Core and Research, with Curvature Research providing the first content-heavy workflow.
+Make coordinated LANGUAGE research operational across Project, Core and Research.
 
-Required capabilities
+Required capabilities:
 
-- load research role and protocol
-- load LANGUAGE research context
-- maintain research state and queue
-- track active publications
-- record references
-- identify missing knowledge
-- create follow-up research tasks
-- maintain a connected research graph
-- preserve department continuity
-- publish Research status to the Department State Bus
-- receive Project decisions and Core requests
-- create controlled handoffs without crossing authority boundaries
-
----
-
-# Language Research Phase
+- research role and protocol;
+- publication analysis;
+- evidence and confidence;
+- references;
+- missing knowledge;
+- follow-up tasks;
+- connected research graph;
+- controlled handoffs.
 
 ## LANGUAGE Research Foundation
 
 Owned by Curvature Research.
 
-Research scope
+Must distinguish:
 
-- Proto-Slavic evidence
-- early West Slavic evidence
-- the probable linguistic environment of the Polans
-- competing reconstructions
-- phonological hypotheses
-- morphology
-- naming evidence
-- confidence assessment
-- explicit uncertainty
-- documented construction rules for missing material
-
-Outputs must distinguish:
-
-- reconstructed
-- plausible
-- Curvature-derived
-- intentionally fictional
-- uncertain
-
----
+- reconstructed;
+- plausible;
+- Curvature-derived;
+- intentionally fictional;
+- uncertain.
 
 ## LANG-002 — Research Data Intake
 
-Goal
-
-Import verified Curvature Research outputs into the Core language system.
-
-Required deliverables
-
-- documented research interchange format
-- validation of imported records
-- provenance preservation
-- confidence preservation
-- competing-form preservation
-- rejection of invalid records
-- versioned import
-- automated tests
+Import verified Research outputs into the Core language system while preserving provenance, confidence and competing forms.
 
 ---
 
@@ -288,50 +252,27 @@ Required deliverables
 
 ## WORLD-002 — Time, Events and Chronicle
 
-Goal
-
-Give the world ordered history and durable consequence.
-
-Required deliverables
-
-- world time
-- verified events
-- cause and effect links
-- persistent Chronicle entries
-- restart continuity
-- automated tests
+Give the world ordered history and durable consequences.
 
 ## NPC-001 — Identity, Memory, Goals and Voice
-
-Goal
 
 Create persistent characters with identity, knowledge, memory, goals, relationships and voice constraints.
 
 ## CHRONICLE-001 — First Playable Chronicle Client
 
-Goal
-
-Create the first world-facing frontend and prove the living world through a text-first vertical slice.
+Prove the living world through the first text-first world-facing vertical slice.
 
 ---
 
 # Later Direction
 
-1. expand Language and World Core together
-2. expand Chronicle Client
-3. add 2D
-4. add 3D
-5. add VR
-6. add multiplayer foundations
-7. grow toward MMORPG scale
-
----
-
-# Infrastructure Hardening
-
-Main Workstation restart safety and Wake-on-LAN remain paused until safe physical access is available.
-
-Do not remotely restart while GRUB defaults to Mint and nobody is physically present.
+1. expand Language and World Core together;
+2. expand Chronicle Client;
+3. add 2D;
+4. add 3D;
+5. add VR;
+6. add multiplayer foundations;
+7. grow toward MMORPG scale.
 
 ---
 

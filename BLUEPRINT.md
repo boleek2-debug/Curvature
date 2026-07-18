@@ -299,6 +299,23 @@ Shared context contains only:
 
 This preserves awareness without role collapse.
 
+## ChatGPT Plus Workflow
+
+Curvature Console uses official ChatGPT Projects through a manual, user-controlled workflow.
+
+Approved department projects:
+
+- Curvature Project
+- Curvature Core
+- Curvature Research
+
+The Console provides two package modes:
+
+- compact Task Package for normal work;
+- comprehensive Thread Handoff Package for moving to a new chat.
+
+The Console does not require the paid OpenAI API or an API key.
+
 ## Logical Components
 
 Curvature Console requires:
@@ -313,7 +330,7 @@ Curvature Console requires:
 - Department State Bus
 - Handoff Manager
 - Conversation Store
-- AI Provider abstraction
+- ChatGPT Transfer Package Builder
 - Workspace configuration
 
 ## Core Processing Flow
@@ -327,6 +344,9 @@ Curvature Console requires:
     → load handoffs
     → assemble isolated context for each workspace
     → display all three workspaces simultaneously
+    → prepare Task or Thread Handoff Package
+    → user transfers it to official ChatGPT
+    → import the response
     → persist conversations, department state and handoffs
 
 ## Authority Rule
@@ -550,3 +570,22 @@ Separate fact from narration.
 Expand one sprint at a time.
 
 Use the minimum reliable workshop to create the first living slice early.
+
+---
+
+# Curvature Console Architecture Amendment
+
+The earlier mandatory AI-provider wording in this document is superseded.
+
+The approved MVP workflow is:
+
+- official ChatGPT Projects;
+- existing ChatGPT Plus subscription;
+- manual Task Packages;
+- manual Thread Handoff Packages;
+- response import;
+- no required OpenAI API;
+- no API key;
+- no automatic paid requests.
+
+`ASSISTANT_ARCHITECTURE.md` is the detailed source of truth for the amended Console architecture.

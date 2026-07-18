@@ -23,6 +23,26 @@ Architecture belongs in BLUEPRINT.
 
 ## 2026-07-18
 
+### Curvature Console ChatGPT Plus Architecture Amendment
+
+Accepted
+
+- mandatory paid OpenAI API integration removed from the Console MVP
+- official ChatGPT Projects selected as the AI conversation environment
+- zero additional mandatory AI cost rule adopted
+- Task Package approved for normal work
+- Thread Handoff Package approved for moving to a new chat
+- local GREEN / AMBER / RED thread-pressure estimation approved as advisory
+- unsupported browser automation rejected
+- repository documentation and Console state remain authoritative continuity layers
+
+Result
+
+Curvature Console can coordinate long-running Project, Core and Research work without requiring API billing beyond the existing ChatGPT Plus subscription.
+
+---
+
+
 ### LANG-001
 
 Completed
