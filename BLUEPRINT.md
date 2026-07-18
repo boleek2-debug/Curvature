@@ -1,7 +1,7 @@
 # BLUEPRINT
 
 Status: Draft
-Version: 0.2.0
+Version: 0.3.0
 Owner: Project Curvature
 Last Updated: 2026-07-18
 
@@ -91,6 +91,257 @@ Current implementation:
 
 - Workflow registry
 - Workflow states
+
+---
+
+---
+
+# Curvature Console Architecture
+
+Curvature Console is a standalone internal development application.
+
+It is separate from:
+
+- Curvature Platform
+- World Core
+- Chronicle Client
+- gameplay
+
+Its purpose is to coordinate three permanent departments:
+
+- Curvature Project
+- Curvature Core
+- Curvature Research
+
+## Three-Panel Workspace Model
+
+All three departmental workspaces must be visible at the same time.
+
+The default desktop layout is:
+
+    +----------------------+----------------------+----------------------+
+    | Curvature Project    | Curvature Core       | Curvature Research   |
+    +----------------------+----------------------+----------------------+
+    | direction            | architecture         | sources              |
+    | decisions            | implementation       | evidence             |
+    | priorities           | tests                | hypotheses           |
+    | roadmap              | repository state     | confidence           |
+    +----------------------+----------------------+----------------------+
+
+The workspaces are peers.
+
+No workspace is treated as the primary workspace with the other two hidden behind tabs.
+
+Each panel must support:
+
+- independent scrolling
+- independent conversation history
+- independent input
+- independent loaded context
+- visible department status
+- resizable width
+- temporary focus or enlargement
+- restoration to the three-panel view without losing state
+
+## Department Responsibilities
+
+### Curvature Project
+
+Owns:
+
+- project direction
+- priorities
+- milestone approval
+- scope decisions
+- cross-department arbitration
+
+Must not:
+
+- write implementation code
+- decide scientific truth
+- replace Curvature Core or Curvature Research work
+
+### Curvature Core
+
+Owns:
+
+- software architecture
+- implementation
+- schemas
+- validation
+- persistence
+- tests
+- repository integration
+
+Must not:
+
+- decide scientific truth
+- invent research conclusions
+- independently change project direction
+
+### Curvature Research
+
+Owns:
+
+- scientific and academic research
+- source evaluation
+- evidence assessment
+- competing hypotheses
+- confidence
+- missing knowledge
+- research graph maintenance
+
+Must not:
+
+- define software architecture
+- write production implementation
+- independently change the project roadmap
+
+## Cross-Department Awareness
+
+Every workspace must be aware of the current state of the other two departments.
+
+Awareness must be provided through explicit shared state, not uncontrolled access to all conversation history.
+
+Each workspace receives:
+
+- its own full role context
+- its own full department state
+- a concise status summary of the other departments
+- accepted cross-department outputs
+- relevant blockers
+- pending decisions
+- incoming and outgoing handoffs
+
+A workspace may observe another department's status.
+
+It must not perform work owned by that department.
+
+When cross-department action is required, the workspace creates a handoff.
+
+## Department State Bus
+
+Curvature Console must provide a controlled shared-state layer:
+
+    Department State Bus
+    |
+    +-- Project status
+    +-- Core status
+    +-- Research status
+    +-- active tasks
+    +-- completed outputs
+    +-- blockers
+    +-- decisions required
+    +-- handoffs
+
+The State Bus is not a shared unrestricted conversation.
+
+It exposes only structured, relevant and intentionally published department information.
+
+## Handoff Model
+
+Handoffs are the approved mechanism for cross-department work.
+
+Required handoff fields:
+
+- identifier
+- source department
+- target department
+- type
+- subject
+- summary
+- requested action
+- supporting references
+- status
+- created timestamp
+- updated timestamp
+
+Initial handoff types:
+
+- Decision Required
+- Research Request
+- Research Result
+- Implementation Request
+- Technical Constraint
+- Clarification Request
+- Review Request
+
+Initial handoff statuses:
+
+- Proposed
+- Acknowledged
+- Accepted
+- Rejected
+- Completed
+
+A workspace must not bypass the handoff model by performing another department's work itself.
+
+## Context Isolation and Context Sharing
+
+Each department has an isolated context package containing:
+
+- role definition
+- allowed responsibilities
+- prohibited responsibilities
+- required documents
+- department state
+- active task
+- conversation history
+- context assembly rules
+
+Shared context contains only:
+
+- department summaries
+- accepted outputs
+- blockers
+- required decisions
+- relevant handoffs
+
+This preserves awareness without role collapse.
+
+## Logical Components
+
+Curvature Console requires:
+
+- Desktop UI
+- Three-Panel Layout Manager
+- Workspace Manager
+- Context Orchestrator
+- Document Loader
+- Repository Reader
+- Department State Store
+- Department State Bus
+- Handoff Manager
+- Conversation Store
+- AI Provider abstraction
+- Workspace configuration
+
+## Core Processing Flow
+
+    start application
+    → restore all three workspaces
+    → load each department role
+    → load each department documents
+    → load each department state
+    → load shared department summaries
+    → load handoffs
+    → assemble isolated context for each workspace
+    → display all three workspaces simultaneously
+    → persist conversations, department state and handoffs
+
+## Authority Rule
+
+Curvature Console coordinates departments.
+
+It does not erase their boundaries.
+
+The governing rule for every workspace is:
+
+    Observe other departments.
+    Respect their authority.
+    Do not perform their work.
+    Create a handoff when their action is required.
+
 
 ---
 

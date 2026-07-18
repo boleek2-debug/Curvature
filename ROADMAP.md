@@ -1,7 +1,7 @@
 # ROADMAP
 
 Status: Draft
-Version: 0.8.0
+Version: 0.9.0
 Owner: Project Curvature
 Last Updated: 2026-07-18
 
@@ -51,7 +51,11 @@ LANG-001 provides technical structures for language data.
 
 Curvature Research must provide the actual scientific content.
 
-The Curvature Console is required to preserve:
+The Curvature Console is a three-department coordination application.
+
+All three workspaces must be visible simultaneously as equal side-by-side panels.
+
+It is required to preserve:
 
 - department roles
 - research context
@@ -61,6 +65,9 @@ The Curvature Console is required to preserve:
 - source relationships
 - missing knowledge
 - continuous research graphs
+- cross-department awareness
+- strict authority boundaries
+- controlled handoffs
 
 For this reason, ASSISTANT-001 has been promoted ahead of WORLD-002.
 
@@ -136,9 +143,13 @@ Required deliverables
 - selected implementation approach
 - repository boundary decision
 - repository structure
+- three-panel interaction model
 - workspace configuration model
 - context assembly model
 - department state model
+- Department State Bus design
+- handoff model
+- authority enforcement strategy
 - conversation persistence model
 - AI provider strategy
 - MVP specification
@@ -176,6 +187,11 @@ Required workspaces
 
 Required MVP capabilities
 
+- three equal workspaces visible simultaneously
+- side-by-side three-panel layout
+- independent panel scrolling and input
+- resizable panels
+- temporary panel focus without state loss
 - automatic role loading
 - automatic document loading
 - separate conversation histories
@@ -184,6 +200,9 @@ Required MVP capabilities
 - loaded-file visibility
 - manual context refresh
 - AI provider integration
+- controlled cross-department awareness
+- Department State Bus
+- handoff creation and status tracking
 - strict department separation
 
 Boundary
@@ -198,7 +217,7 @@ Curvature Console is not Curvature Platform and is not gameplay.
 
 Goal
 
-Make Curvature Research operational inside Curvature Console.
+Make coordinated LANGUAGE work operational across Project, Core and Research, with Curvature Research providing the first content-heavy workflow.
 
 Required capabilities
 
@@ -211,6 +230,9 @@ Required capabilities
 - create follow-up research tasks
 - maintain a connected research graph
 - preserve department continuity
+- publish Research status to the Department State Bus
+- receive Project decisions and Core requests
+- create controlled handoffs without crossing authority boundaries
 
 ---
 
