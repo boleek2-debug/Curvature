@@ -1,5 +1,6 @@
 from .manager import (
     RemoteGpuInfo,
+    RemoteHeartbeatInfo,
     RemoteManager,
     RemoteQueueInfo,
     RemoteRuntimeInfo,
@@ -7,6 +8,7 @@ from .manager import (
 
 __all__ = [
     "RemoteGpuInfo",
+    "RemoteHeartbeatInfo",
     "RemoteManager",
     "RemoteQueueInfo",
     "RemoteRuntimeInfo",

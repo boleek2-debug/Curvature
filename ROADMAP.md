@@ -1,7 +1,7 @@
 # ROADMAP
 
 Status: Draft
-Version: 0.5.0
+Version: 0.6.0
 Owner: Project Curvature
 Last Updated: 2026-07-18
 
@@ -21,58 +21,45 @@ It is not a changelog.
 
 Current Development Phase
 
-Curvature Platform Foundation
-
-Current Operational Priority
-
-Tailscale Recovery and Resilience
-
-Objective
-
-Restore reliable unattended access to the Main Workstation and prevent another loss of the remote Tailscale path.
-
-Current remote condition
-
-- Main Workstation physically powered on
-- Tailscale device `thing` offline
-- Remote ComfyUI unavailable because the Tailscale path is down
-
-Current working hypothesis
-
-Run Unattended may not be enabled.
-
-This has not yet been verified.
+Transition from Curvature Platform Foundation to Living World Foundation
 
 Most recently completed sprint
 
-REMOTE-003
+REMOTE-004 — Minimal Service Heartbeat
+
+Current verified remote state
+
+- endpoint `thing` resolves
+- port `8188` is online
+- ComfyUI API is READY
+- AI Runtime Heartbeat is READY
+- current and last successful verification timestamps are displayed
+- 21 automated project tests pass
 
 Next software sprint
 
-REMOTE-004 — Minimal Service Heartbeat
+WORLD-001 — Persistent World State
 
 ---
 
 # Strategic Direction
 
-Curvature will move from a reliable minimum workshop into an early living-world vertical slice.
+Curvature will now move from the minimum reliable workshop into an early living-world vertical slice.
 
 The workshop will not be expanded indefinitely before the world begins.
 
 Approved progression:
 
-1. restore infrastructure reliability,
-2. complete a minimal heartbeat,
-3. create persistent world state,
-4. establish the historical language foundation,
-5. add time, events and Chronicle,
-6. add character identity, memory, goals and voice,
-7. create the first playable Chronicle Client / MUD,
-8. expand the Platform and world together,
-9. add 2D,
-10. add 3D,
-11. add VR,
-12. grow toward multiplayer and MMORPG scale.
+1. create persistent world state
+2. establish the historical language foundation
+3. add time, events and Chronicle
+4. add character identity, memory, goals and voice
+5. create the first playable Chronicle Client / MUD
+6. expand the Platform and world together
+7. add 2D
+8. add 3D
+9. add VR
+10. grow toward multiplayer and MMORPG scale
 
 ---
 
@@ -122,61 +109,20 @@ Approved progression:
 - ComfyUI version diagnostics
 - Remote Python version diagnostics
 - Remote PyTorch version diagnostics
-- Automated Remote Runtime tests
+- REMOTE-004 completed
+- endpoint resolution state
+- ComfyUI port state
+- ComfyUI API state
+- Heartbeat READY, ATTENTION and OFFLINE states
+- current verification timestamp
+- last successful verification timestamp
+- failure transition handling
+- automated Remote Runtime and heartbeat tests
+- 21 automated project tests passed
 
 ---
 
-# Active Operational Milestone
-
-## Tailscale Recovery and Resilience
-
-Goal
-
-Make remote access to the Main Workstation reliable without requiring an interactive Windows login.
-
-Required deliverables
-
-- login-response diagnostic,
-- Tailscale service status verification,
-- automatic service startup verification,
-- Run Unattended verification and configuration,
-- device key expiry verification,
-- Tailscale authentication verification,
-- Tailscale Serve restart verification,
-- ComfyUI startup verification,
-- Windows service recovery configuration if required,
-- watchdog only if required,
-- full restart test without login,
-- remote `thing` availability confirmation,
-- remote `/system_stats` confirmation,
-- Curvature AI Runtime READY confirmation.
-
----
-
-# Near-Term Software Milestones
-
-## REMOTE-004 — Minimal Service Heartbeat
-
-Goal
-
-Provide a small, reliable and verifiable heartbeat for the Main Workstation and remote AI Runtime.
-
-Required deliverables
-
-- host reachability state,
-- Tailscale path state,
-- ComfyUI API state,
-- last successful verification time,
-- failure transition handling,
-- automated tests.
-
-Scope rule
-
-REMOTE-004 must remain small.
-
-It must not delay the first World Core work through unnecessary infrastructure expansion.
-
----
+# Active Software Milestone
 
 ## WORLD-001 — Persistent World State
 
@@ -186,15 +132,30 @@ Create the minimum authoritative World Core.
 
 Required deliverables
 
-- persistent world identifier,
-- one place,
-- basic entities,
-- state storage,
-- load after restart,
-- verified state transitions,
-- automated tests.
+- persistent world identifier
+- one place
+- basic entities
+- state storage
+- load after restart
+- verified state transitions
+- automated tests
+
+Scope rule
+
+WORLD-001 must remain small.
+
+It must prove authoritative persistence before adding:
+
+- Chronicle
+- NPC intelligence
+- language interpretation
+- multiplayer
+- graphical frontends
+- large-scale procedural generation
 
 ---
+
+# Near-Term Software Milestones
 
 ## LANG-001 — Historical Reconstruction Foundation
 
@@ -204,14 +165,14 @@ Create a trustworthy method for reconstructing and extending the world's languag
 
 Required deliverables
 
-- provenance model,
-- confidence categories,
-- Proto-Slavic research structure,
-- early West Slavic and Polan reference framework,
-- initial phonological assumptions,
-- controlled construction rules,
-- small initial lexicon,
-- naming rules.
+- provenance model
+- confidence categories
+- Proto-Slavic research structure
+- early West Slavic and Polan reference framework
+- initial phonological assumptions
+- controlled construction rules
+- small initial lexicon
+- naming rules
 
 ---
 
@@ -223,12 +184,12 @@ Give the world ordered history and durable consequence.
 
 Required deliverables
 
-- world time,
-- verified events,
-- cause and effect links,
-- persistent Chronicle entries,
-- restart continuity,
-- automated tests.
+- world time
+- verified events
+- cause and effect links
+- persistent Chronicle entries
+- restart continuity
+- automated tests
 
 ---
 
@@ -240,14 +201,14 @@ Create characters that persist as world entities.
 
 Required deliverables
 
-- identity,
-- knowledge,
-- memory,
-- goals,
-- relationships,
-- cultural profile,
-- linguistic profile,
-- recognisable voice constraints.
+- identity
+- knowledge
+- memory
+- goals
+- relationships
+- cultural profile
+- linguistic profile
+- recognisable voice constraints
 
 ---
 
@@ -259,14 +220,14 @@ Create the first world-facing frontend.
 
 Required vertical slice
 
-- one persistent place,
-- several characters,
-- natural-language player intent,
-- verified world actions,
-- memory,
-- consequences,
-- Chronicle output,
-- restart continuity.
+- one persistent place
+- several characters
+- natural-language player intent
+- verified world actions
+- memory
+- consequences
+- Chronicle output
+- restart continuity
 
 The first version may be single-player.
 
@@ -274,40 +235,75 @@ It is the first proof that the living world exists.
 
 ---
 
+# Infrastructure Hardening
+
+## Main Workstation Recovery and Restart Safety
+
+Current condition
+
+Remote access is restored, but the original outage is not fully diagnosed.
+
+Likely operational explanation
+
+A restart may have caused GRUB to boot Linux Mint instead of Windows.
+
+This remains a working explanation, not a verified root cause.
+
+Required physical-access tasks
+
+- set Windows as the default GRUB entry
+- verify Tailscale Windows service status and startup type
+- verify Run Unattended
+- check device key expiry
+- verify Tailscale Serve after restart
+- configure ComfyUI autostart
+- install a remote desktop path
+- perform a controlled restart without login
+- configure native service recovery if required
+- add a watchdog only if required
+
+Safety rule
+
+Do not remotely restart the workstation while GRUB still defaults to Mint and nobody is physically present.
+
+This infrastructure work must be completed when safe physical access is available, but it does not block WORLD-001 while the current remote runtime remains available.
+
+---
+
 # Later Milestones
 
 ## Language Development
 
-- expanded lexicon,
-- grammar growth,
-- dialects,
-- language evolution,
-- ritual and social registers,
-- translated and original dialogue.
+- expanded lexicon
+- grammar growth
+- dialects
+- language evolution
+- ritual and social registers
+- translated and original dialogue
 
 ## World Development
 
-- additional places,
-- expanded characters,
-- economy,
-- conflict,
-- travel,
-- cultures,
-- larger histories.
+- additional places
+- expanded characters
+- economy
+- conflict
+- travel
+- cultures
+- larger histories
 
 ## Frontend Progression
 
-- 2D client,
-- 3D client,
-- VR client.
+- 2D client
+- 3D client
+- VR client
 
 ## Multiplayer Progression
 
-- networking,
-- shared world rules,
-- concurrency,
-- multiplayer systems,
-- MMORPG scale.
+- networking
+- shared world rules
+- concurrency
+- multiplayer systems
+- MMORPG scale
 
 ---
 
@@ -337,13 +333,13 @@ The planned S20 FE relay remains in PIPELINE.
 
 Curvature hardware validation includes:
 
-- battery health,
-- full-shutdown self-discharge,
-- real runtime,
-- peak-load stability,
-- vehicle AC or inverter compatibility,
-- full Curvature mission,
-- suspend and sleep behaviour.
+- battery health
+- full-shutdown self-discharge
+- real runtime
+- peak-load stability
+- vehicle AC or inverter compatibility
+- full Curvature mission
+- suspend and sleep behaviour
 
 Status
 
@@ -359,4 +355,4 @@ Only completed work belongs in CHANGELOG.
 
 Ideas intentionally postponed belong in PIPELINE.
 
-Living World, Language and Chronicle are now core roadmap items, not Pipeline ideas.
+Living World, Language and Chronicle are core roadmap items, not Pipeline ideas.

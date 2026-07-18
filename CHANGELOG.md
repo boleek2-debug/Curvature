@@ -1,9 +1,9 @@
 # CHANGELOG
 
 Status: Active
-Version: 0.4.0
+Version: 0.5.0
 Owner: Project Curvature
-Last Updated: 2026-07-13
+Last Updated: 2026-07-18
 
 ---
 
@@ -18,6 +18,46 @@ Ideas belong in PIPELINE.
 Current operational state belongs in HANDOFF.
 
 Architecture belongs in BLUEPRINT.
+
+---
+
+## 2026-07-18
+
+### REMOTE-004
+
+Completed
+
+- Minimal Service Heartbeat
+- endpoint name resolution check
+- ComfyUI service port check
+- ComfyUI API verification
+- heartbeat state model
+- READY state
+- ATTENTION state
+- OFFLINE state
+- current verification timestamp
+- last successful verification timestamp
+- preservation of the last successful timestamp after later failures
+- heartbeat information in the AI Runtime Console
+- automated heartbeat tests
+
+Verified
+
+- endpoint `thing` resolved successfully
+- port `8188` reported ONLINE
+- `/system_stats` API reported READY
+- Heartbeat state displayed READY
+- current check time displayed
+- last successful check time displayed
+- live NVIDIA GeForce RTX 4060 data remained available
+- live VRAM data remained available
+- live queue data remained available
+- live Windows runtime information remained available
+- 21 automated project tests passed
+
+Result
+
+Curvature now provides a small, explicit and verifiable heartbeat for the remote AI Runtime without treating name resolution alone as proof that the workstation or ComfyUI API is healthy.
 
 ---
 

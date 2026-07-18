@@ -16,6 +16,14 @@ class Workstation:
         self.role = role
         self.endpoint = endpoint
 
+    def endpoint_resolvable(self) -> bool:
+        try:
+            socket.getaddrinfo(self.endpoint, None)
+        except socket.gaierror:
+            return False
+
+        return True
+
     def service_available(
         self,
         port: int,

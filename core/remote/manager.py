@@ -1,7 +1,27 @@
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from typing import Any
 
 from .workstation import Workstation
+
+
+@dataclass(frozen=True)
+class RemoteHeartbeatInfo:
+    endpoint_resolvable: bool
+    service_available: bool
+    api_available: bool
+    checked_at: datetime
+    last_successful_at: datetime | None
+
+    @property
+    def state(self) -> str:
+        if self.api_available:
+            return "READY"
+
+        if self.service_available:
+            return "ATTENTION"
+
+        return "OFFLINE"
 
 
 @dataclass(frozen=True)
@@ -54,6 +74,7 @@ class RemoteRuntimeInfo:
 
 
 class RemoteManager:
+    _last_successful_verification: datetime | None = None
     COMFYUI_PORT = 8188
     COMFYUI_SYSTEM_STATS_PATH = "/system_stats"
     COMFYUI_QUEUE_PATH = "/queue"
@@ -63,6 +84,23 @@ class RemoteManager:
             name="Main Workstation",
             role="AI Runtime",
             endpoint="thing",
+        )
+
+    def heartbeat(self) -> RemoteHeartbeatInfo:
+        checked_at = datetime.now(timezone.utc)
+        endpoint_resolvable = self.workstation.endpoint_resolvable()
+        service_available = self.comfyui_available()
+        api_available = self.comfyui_system_stats() is not None
+
+        if api_available:
+            RemoteManager._last_successful_verification = checked_at
+
+        return RemoteHeartbeatInfo(
+            endpoint_resolvable=endpoint_resolvable,
+            service_available=service_available,
+            api_available=api_available,
+            checked_at=checked_at,
+            last_successful_at=RemoteManager._last_successful_verification,
         )
 
     def comfyui_available(self) -> bool:

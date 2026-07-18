@@ -1,7 +1,7 @@
 # HANDOFF
 
 Status: Draft
-Version: 0.5.0
+Version: 0.6.0
 Owner: Project Curvature
 Last Updated: 2026-07-18
 
@@ -15,11 +15,11 @@ Curvature Platform is the production workshop.
 
 The final objective is a persistent living world accessible through:
 
-- Chronicle Client / MUD,
-- 2D,
-- 3D,
-- VR,
-- future multiplayer and MMORPG scale.
+- Chronicle Client / MUD
+- 2D
+- 3D
+- VR
+- future multiplayer and MMORPG scale
 
 Those frontends must expose the same world state, history, characters and consequences.
 
@@ -27,37 +27,74 @@ Those frontends must expose the same world state, history, characters and conseq
 
 # 2. Current Priority
 
-Restore and harden remote access to the Main Workstation.
+The next software sprint is:
 
-The Main Workstation is physically powered on, but Tailscale device `thing` is offline.
+WORLD-001 — Persistent World State
 
-Immediate recovery goals:
+REMOTE-004 is complete and verified.
 
-- restore Tailscale connectivity,
-- identify the actual failure cause,
-- prevent recurrence,
-- verify remote ComfyUI access.
+The Main Workstation is currently reachable again through Tailscale and ComfyUI.
 
-Working hypothesis:
+Verified current remote state:
 
-- Run Unattended may not be enabled,
-- the Windows user session may not be logged in,
-- Tailscale may therefore not have returned.
-
-This remains unverified.
+- endpoint `thing` resolves
+- Tailscale connectivity is available
+- port `8188` is online
+- `/system_stats` is available
+- AI Runtime Heartbeat is READY
+- ComfyUI runtime diagnostics are available
 
 ---
 
-# 3. Strategic Direction
+# 3. Infrastructure Incident Status
 
-After infrastructure recovery:
+The earlier loss of remote access is not fully diagnosed.
 
-1. REMOTE-004 — Minimal Service Heartbeat
-2. WORLD-001 — Persistent World State
-3. LANG-001 — Historical Reconstruction Foundation
-4. WORLD-002 — Time, Events and Chronicle
-5. NPC-001 — Identity, Memory, Goals and Voice
-6. CHRONICLE-001 — First Playable Chronicle Client
+Observed sequence:
+
+- Main Workstation remained physically powered on
+- Tailscale device `thing` became unavailable
+- Windows was later started and the user logged in
+- Tailscale returned online
+- ComfyUI was started
+- remote API access returned
+
+Most likely operational explanation:
+
+- Windows Update or another event restarted the workstation
+- GRUB booted Linux Mint because Mint is the current default
+- Windows, Windows Tailscale and ComfyUI therefore remained unavailable
+
+This explanation is plausible but not fully verified.
+
+Do not record Tailscale itself as the confirmed root cause.
+
+Remaining physical-access tasks:
+
+- set Windows as the default GRUB entry
+- verify Tailscale Windows service status and startup type
+- verify Run Unattended
+- check device key expiry
+- verify Tailscale Serve after restart
+- configure ComfyUI autostart
+- install and verify a remote desktop path
+- perform a controlled restart without login
+- configure native service recovery if required
+- add a watchdog only if native recovery is insufficient
+
+Do not restart the workstation remotely while GRUB still defaults to Mint and nobody is physically present.
+
+---
+
+# 4. Strategic Direction
+
+Approved development order:
+
+1. WORLD-001 — Persistent World State
+2. LANG-001 — Historical Reconstruction Foundation
+3. WORLD-002 — Time, Events and Chronicle
+4. NPC-001 — Identity, Memory, Goals and Voice
+5. CHRONICLE-001 — First Playable Chronicle Client
 
 The Chronicle Client / MUD is the first world-facing frontend.
 
@@ -69,7 +106,7 @@ Missing language elements must be created through explicit and documented rules.
 
 ---
 
-# 4. Current Architecture
+# 5. Current Architecture
 
 Current Platform:
 
@@ -79,6 +116,7 @@ Current Platform:
 - Remote Runtime
 - AI Runtime
 - Workflow foundation
+- Minimal Service Heartbeat
 
 Approved planned architecture:
 
@@ -100,7 +138,7 @@ World Core will become the source of truth for world state.
 
 ---
 
-# 5. Engineering Rules
+# 6. Engineering Rules
 
 1. Never guess.
 2. Request current files before modifying existing code when their state is uncertain.
@@ -116,53 +154,72 @@ World Core will become the source of truth for world state.
 
 ---
 
-# 6. Completed Work
+# 7. Completed Work
 
 ## BUILD-001
 
 Completed and verified:
 
-- dedicated Curvature Conda environment,
-- reproducible environment definition,
-- pinned Python dependencies,
-- installation guide,
-- automated tests,
-- Console operation.
+- dedicated Curvature Conda environment
+- reproducible environment definition
+- pinned Python dependencies
+- installation guide
+- automated tests
+- Console operation
 
 ## REMOTE-001
 
 Completed and verified:
 
-- Tailscale communication,
-- remote workstation abstraction,
-- ComfyUI detection.
+- Tailscale communication
+- remote workstation abstraction
+- ComfyUI detection
 
 ## REMOTE-002
 
 Completed and verified:
 
-- AI Runtime Console,
-- RemoteManager integration,
-- live READY and OFFLINE state.
+- AI Runtime Console
+- RemoteManager integration
+- live READY and OFFLINE state
 
 ## REMOTE-003
 
 Completed and verified:
 
-- HTTP JSON requests,
-- `/system_stats`,
-- `/queue`,
-- GPU,
-- VRAM,
-- queue,
-- operating system,
-- RAM,
-- ComfyUI version,
-- Python version,
-- PyTorch version,
-- READY, ATTENTION and OFFLINE state,
-- 16 automated tests,
-- commit and push.
+- HTTP JSON requests
+- `/system_stats`
+- `/queue`
+- GPU
+- VRAM
+- queue
+- operating system
+- RAM
+- ComfyUI version
+- Python version
+- PyTorch version
+- READY, ATTENTION and OFFLINE state
+- 16 automated tests
+- commit and push
+
+## REMOTE-004
+
+Completed and verified:
+
+- endpoint resolution state
+- ComfyUI port state
+- ComfyUI API state
+- READY, ATTENTION and OFFLINE heartbeat
+- current check timestamp
+- last successful check timestamp
+- last successful timestamp preserved after failure
+- AI Runtime Console heartbeat display
+- 21 automated project tests passed
+- live verification against `thing`
+- endpoint RESOLVED
+- port `8188` ONLINE
+- API READY
+- Heartbeat READY
 
 Verified AI Runtime endpoint:
 
@@ -170,76 +227,73 @@ Verified AI Runtime endpoint:
 
 ---
 
-# 7. Current Operational Task
-
-Tailscale Recovery and Resilience
-
-Required verification sequence:
-
-1. Marta logs in to Windows.
-2. Observe whether `thing` returns online.
-3. Check Tailscale service status.
-4. Check service startup type.
-5. Verify Run Unattended.
-6. Enable it if disabled.
-7. Check device key expiry.
-8. Verify authentication state.
-9. Verify Tailscale Serve.
-10. Verify ComfyUI startup.
-11. Configure service recovery if required.
-12. Add a watchdog only if native recovery is insufficient.
-13. Restart Windows.
-14. Do not log in.
-15. Verify `thing` from Curvature Dev.
-16. Verify `/system_stats`.
-17. Verify AI Runtime READY.
-
-No Curvature code changes are required during initial diagnosis.
-
----
-
 # 8. Exact Next Step
 
-From Curvature Dev after Marta logs in:
+Complete the REMOTE-004 repository closeout:
 
-    tailscale status
-    tailscale ping thing
-    curl --max-time 5 http://thing:8188/system_stats
+1. Replace `CHANGELOG.md`, `HANDOFF.md` and `ROADMAP.md`.
+2. Review staged changes.
+3. Commit.
+4. Push to `origin/main`.
 
-Then on the Main Workstation in elevated PowerShell:
+Then begin WORLD-001 planning.
 
-    Get-Service Tailscale |
-        Select-Object Name, Status, StartType
+Before modifying code for WORLD-001, inspect the current repository structure and request the current files that will own:
 
-    tailscale status
+- world identity
+- persistence
+- storage
+- state transitions
+- tests
 
-Capture the current state before changing recovery, scheduled tasks or watchdog configuration.
+Do not design implementation from assumed file paths.
 
 ---
 
-# 9. Paused and Deferred Work
+# 9. WORLD-001 Objective
+
+Create the minimum authoritative World Core.
+
+Required deliverables:
+
+- persistent world identifier
+- one place
+- basic entities
+- state storage
+- load after restart
+- verified state transitions
+- automated tests
+
+The first implementation should remain deliberately small.
+
+It must prove persistence and authoritative state without prematurely adding Chronicle, NPC intelligence, language processing or networking.
+
+---
+
+# 10. Paused and Deferred Work
 
 Paused:
 
 - WOL-001
+- full Tailscale recovery and restart verification until physical access is safe
 
 Deferred:
 
-- S20 FE Wake-on-LAN relay,
-- conventional Wake-on-LAN relay,
-- hardware validation,
-- battery and inverter testing,
-- hardware adjustments,
-- Curvature Assistant,
-- HUD,
-- Marian,
-- Windows/Linux benchmark.
+- S20 FE Wake-on-LAN relay
+- conventional Wake-on-LAN relay
+- hardware validation
+- battery and inverter testing
+- hardware adjustments
+- Curvature Assistant
+- HUD
+- Marian
+- Windows/Linux benchmark
 
 Hardware validation remains deferred until the user confirms that the inverter is available.
 
 ---
 
-# 10. Documentation Structure
+# 11. Documentation Structure
 
 - `CURVATURE.md` — project vision and philosophy
 - `BLUEPRINT.md` — current and approved technical architecture
@@ -253,7 +307,7 @@ Hardware validation remains deferred until the user confirms that the inverter i
 
 ---
 
-# 11. Session End Checklist
+# 12. Session End Checklist
 
 - Update HANDOFF.md
 - Run tests when code changed

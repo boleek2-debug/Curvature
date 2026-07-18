@@ -1,5 +1,8 @@
+from datetime import datetime
+
 from core.remote import (
     RemoteGpuInfo,
+    RemoteHeartbeatInfo,
     RemoteManager,
     RemoteQueueInfo,
     RemoteRuntimeInfo,
@@ -13,6 +16,26 @@ GIBIBYTE = 1024**3
 
 def format_gibibytes(value_bytes: int) -> str:
     return f"{value_bytes / GIBIBYTE:.2f} GB"
+
+
+def format_timestamp(value: datetime | None) -> str:
+    if value is None:
+        return "Never"
+
+    return value.astimezone().strftime("%Y-%m-%d %H:%M:%S %Z")
+
+
+def draw_heartbeat(heartbeat: RemoteHeartbeatInfo) -> None:
+    endpoint_state = "RESOLVED" if heartbeat.endpoint_resolvable else "UNRESOLVED"
+    service_state = "ONLINE" if heartbeat.service_available else "OFFLINE"
+    api_state = "READY" if heartbeat.api_available else "UNAVAILABLE"
+
+    print(f"Heartbeat  [{heartbeat.state}]")
+    print(f"Endpoint   [{endpoint_state}]")
+    print(f"Port 8188  [{service_state}]")
+    print(f"API        [{api_state}]")
+    print(f"Checked    {format_timestamp(heartbeat.checked_at)}")
+    print(f"Last good  {format_timestamp(heartbeat.last_successful_at)}")
 
 
 def draw_gpu_info(gpu: RemoteGpuInfo) -> None:
@@ -48,22 +71,20 @@ def show_ai_runtime() -> None:
     remote = RemoteManager()
     workstation = remote.workstation
 
-    system_stats = remote.comfyui_system_stats()
-    queue_data = remote.comfyui_queue()
+    heartbeat = remote.heartbeat()
+    system_stats = remote.comfyui_system_stats() if heartbeat.api_available else None
+    queue_data = remote.comfyui_queue() if heartbeat.api_available else None
 
-    if system_stats is not None:
-        comfyui_state = "READY"
-        gpu = remote.primary_gpu_info(system_stats)
-        runtime = remote.runtime_info(system_stats)
-    elif remote.comfyui_available():
-        comfyui_state = "ATTENTION"
-        gpu = None
-        runtime = None
-    else:
-        comfyui_state = "OFFLINE"
-        gpu = None
-        runtime = None
-
+    gpu = (
+        remote.primary_gpu_info(system_stats)
+        if system_stats is not None
+        else None
+    )
+    runtime = (
+        remote.runtime_info(system_stats)
+        if system_stats is not None
+        else None
+    )
     queue = (
         remote.queue_info(queue_data)
         if queue_data is not None
@@ -75,8 +96,9 @@ def show_ai_runtime() -> None:
 
     print(f"Name       {workstation.name}")
     print(f"Role       {workstation.role}")
-    print(f"Endpoint   {workstation.endpoint}")
-    print(f"ComfyUI    [{comfyui_state}]")
+    print(f"Host       {workstation.endpoint}")
+    print()
+    draw_heartbeat(heartbeat)
 
     if gpu is not None:
         print()
@@ -90,9 +112,13 @@ def show_ai_runtime() -> None:
         print()
         draw_runtime_info(runtime)
 
-    if comfyui_state == "ATTENTION":
+    if heartbeat.state == "ATTENTION":
         print()
-        print("Runtime diagnostics unavailable.")
+        print("ComfyUI port is reachable, but API diagnostics are unavailable.")
+
+    if heartbeat.state == "OFFLINE":
+        print()
+        print("Main Workstation or ComfyUI is not reachable on port 8188.")
 
     print()
     pause()

@@ -201,3 +201,82 @@ def test_workstation_get_json_returns_dictionary() -> None:
         "http://thing:8188/system_stats",
         timeout=2.0,
     )
+
+
+def test_workstation_endpoint_resolvable_returns_true() -> None:
+    workstation = Workstation(
+        name="Test",
+        role="AI Runtime",
+        endpoint="thing",
+    )
+
+    with patch(
+        "core.remote.workstation.socket.getaddrinfo",
+        return_value=[("mock",)],
+    ) as mocked_getaddrinfo:
+        result = workstation.endpoint_resolvable()
+
+    assert result is True
+    mocked_getaddrinfo.assert_called_once_with("thing", None)
+
+
+def test_workstation_endpoint_resolvable_returns_false() -> None:
+    workstation = Workstation(
+        name="Test",
+        role="AI Runtime",
+        endpoint="thing",
+    )
+
+    with patch(
+        "core.remote.workstation.socket.getaddrinfo",
+        side_effect=__import__("socket").gaierror("unresolved"),
+    ):
+        result = workstation.endpoint_resolvable()
+
+    assert result is False
+
+
+def test_heartbeat_records_successful_verification() -> None:
+    manager = RemoteManager()
+    RemoteManager._last_successful_verification = None
+    manager.workstation.endpoint_resolvable = Mock(return_value=True)
+    manager.workstation.service_available = Mock(return_value=True)
+    manager.workstation.get_json = Mock(return_value={"system": {}})
+
+    heartbeat = manager.heartbeat()
+
+    assert heartbeat.state == "READY"
+    assert heartbeat.endpoint_resolvable is True
+    assert heartbeat.service_available is True
+    assert heartbeat.api_available is True
+    assert heartbeat.last_successful_at == heartbeat.checked_at
+
+
+def test_heartbeat_preserves_last_success_after_failure() -> None:
+    manager = RemoteManager()
+    manager.workstation.endpoint_resolvable = Mock(return_value=True)
+    manager.workstation.service_available = Mock(return_value=True)
+    manager.workstation.get_json = Mock(return_value={"system": {}})
+
+    successful = manager.heartbeat()
+
+    manager.workstation.service_available = Mock(return_value=False)
+    manager.workstation.get_json = Mock(return_value=None)
+
+    failed = manager.heartbeat()
+
+    assert failed.state == "OFFLINE"
+    assert failed.last_successful_at == successful.checked_at
+
+
+def test_heartbeat_attention_when_port_responds_without_api() -> None:
+    manager = RemoteManager()
+    RemoteManager._last_successful_verification = None
+    manager.workstation.endpoint_resolvable = Mock(return_value=True)
+    manager.workstation.service_available = Mock(return_value=True)
+    manager.workstation.get_json = Mock(return_value=None)
+
+    heartbeat = manager.heartbeat()
+
+    assert heartbeat.state == "ATTENTION"
+    assert heartbeat.last_successful_at is None
