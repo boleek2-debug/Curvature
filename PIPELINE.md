@@ -1,7 +1,7 @@
 # PIPELINE
 
 Status: Draft
-Version: 0.6.0
+Version: 0.7.0
 Owner: Project Curvature
 Last Updated: 2026-07-18
 
@@ -11,13 +11,9 @@ Last Updated: 2026-07-18
 
 The Pipeline stores valuable ideas that are intentionally postponed.
 
-Items in this document must not interrupt the current operational task or software sprint.
+Items in this document must not interrupt the active sprint unless Project Curvature explicitly promotes them.
 
-Only when an item is promoted does it move into the Roadmap.
-
-Living World, historical language construction and Chronicle Client are no longer Pipeline items.
-
-They are part of the main Roadmap.
+ASSISTANT-001 has been promoted into ROADMAP and is no longer a Pipeline item.
 
 ---
 
@@ -27,31 +23,15 @@ They are part of the main Roadmap.
 
 Purpose
 
-Create a standard validation process for development laptops and workstations used by Project Curvature.
-
-Planned documentation
-
-Create a dedicated root-level document:
-
-    HARDWARE_VALIDATION.md
-
-Planned validation scope
-
-- Battery health check
-- Full-shutdown self-discharge test
-- Real runtime test
-- Peak-load battery stability test
-- AC and inverter compatibility test
-- Full Curvature development mission test
-- Suspend and sleep behaviour test
+Create a standard validation process for development laptops and workstations.
 
 Activation condition
 
-Do not promote or schedule hardware validation until the user explicitly confirms that the inverter is available.
+Do not promote until the inverter is available.
 
 Status
 
-Deferred pending inverter confirmation.
+Deferred.
 
 ---
 
@@ -59,53 +39,17 @@ Deferred pending inverter confirmation.
 
 Purpose
 
-Use the retired Samsung Galaxy S20 FE as an always-on Wake-on-LAN relay for the Main Workstation.
-
-Planned topology
-
-    Remote Operator Device
-        |
-    Tailscale
-        |
-    Samsung Galaxy S20 FE
-        |
-    Home Wi-Fi
-        |
-    Wake-on-LAN Magic Packet
-        |
-    Main Workstation
-
-Required configuration
-
-- permanent home Wi-Fi,
-- permanent charger connection,
-- Tailscale,
-- Termux,
-- Wake-on-LAN utility,
-- authenticated wake path,
-- local Wake-on-LAN test,
-- remote Wake-on-LAN test,
-- Main Workstation startup verification,
-- ComfyUI READY verification after startup.
-
-Known Main Workstation data
-
-- adapter: Intel I219-V,
-- MAC address: D4-5D-64-27-5E-9B,
-- wired Ethernet verified,
-- Wake on Magic Packet enabled,
-- Windows wake permission enabled,
-- Fast Startup not blocking Wake-on-LAN.
+Use the retired Samsung Galaxy S20 FE as an always-on Wake-on-LAN relay.
 
 Status
 
-Deferred until after the trip.
+Deferred until after the trip and safe physical-access configuration.
 
 ---
 
 ## Conventional Wake-on-LAN Relay
 
-Potential relay devices
+Potential relay devices:
 
 - Raspberry Pi
 - Mini-PC
@@ -115,7 +59,7 @@ Potential relay devices
 
 Status
 
-Deferred
+Deferred.
 
 ---
 
@@ -123,98 +67,48 @@ Deferred
 
 Purpose
 
-Detect and recover loss of the Main Workstation Tailscale connection after native Windows service configuration has been verified.
-
-Activation rule
-
-Do not implement before checking:
-
-- Run Unattended,
-- service startup type,
-- service recovery,
-- key expiry,
-- authentication,
-- Tailscale Serve recovery.
-
-A watchdog is a fallback, not the first repair.
+Recover connectivity only if native Tailscale and Windows service recovery proves insufficient.
 
 Status
 
-Candidate after recovery diagnostics.
+Candidate after physical recovery diagnostics.
 
 ---
 
 ## Windows vs Linux AI Runtime Benchmark
 
-Compare identical AI workflows on both operating systems before deciding whether migration is beneficial.
+Purpose
+
+Compare identical AI workflows before considering migration.
 
 Status
 
-Deferred
+Deferred.
+
+---
+
+# Curvature Console Future Features
+
+These features are outside ASSISTANT-001B MVP:
+
+- repository write integration
+- Git operations
+- automatic HANDOFF generation
+- automatic context refresh
+- department-to-department messaging
+- shared knowledge index
+- plugin architecture
+- Chronicle interface integration
+- voice mode
+- local AI provider
+- remote synchronization
+- multi-user collaboration
+
+They may be promoted only after the MVP is operational and verified.
 
 ---
 
 # Platform
-
-## ASSISTANT-001 — Curvature Console MVP
-
-Purpose
-
-Create an official internal developer tool for persistent, role-based AI workspaces with automatic context loading.
-
-Permanent workspaces
-
-- Curvature Project
-- Curvature Core
-- Curvature Research
-
-MVP requirements
-
-- automatic role loading
-- automatic documentation loading
-- department state restoration
-- loaded context display
-- immediate usability without manual copy and paste
-- strict department separation
-
-Required planning deliverables
-
-- architecture proposal
-- technology evaluation
-- implementation roadmap
-- estimated development effort
-- repository structure
-- MVP specification
-
-Future features outside the MVP
-
-- repository and Git integration
-- automatic handoff generation
-- context refresh
-- department messaging
-- shared knowledge index
-- plugin support
-- Chronicle integration
-- voice mode
-- local AI support
-
-Boundary
-
-Curvature Console is not part of Curvature Platform and not part of gameplay.
-
-Status
-
-Approved for future implementation.
-
-Priority
-
-High — Developer Tooling
-
-Activation rule
-
-Do not interrupt the active software sprint.
-
----
 
 ## HUD
 
@@ -222,34 +116,25 @@ Do not interrupt the active software sprint.
 
 Status
 
-Deferred
-
----
+Deferred.
 
 ## Design Language
 
-Unified visual language for:
-
-- Console
-- HUD
-- Mobile
-- Web
-- Chronicle Client
-- future world-facing frontends
+Unified visual language for Console, HUD, Mobile, Web, Chronicle Client and future world-facing interfaces.
 
 Status
 
-Deferred
+Deferred.
 
 ---
 
 # Mobile
 
-Reconnect the existing Android application once the Platform foundation is stable.
+Reconnect the existing Android application after higher-priority foundations are stable.
 
 Status
 
-Deferred
+Deferred.
 
 ---
 
@@ -257,11 +142,11 @@ Deferred
 
 ## Marian
 
-Marian remains part of Project Curvature but is intentionally postponed until the Platform foundation is complete.
+Marian remains part of Project Curvature but is intentionally postponed.
 
 Status
 
-Deferred
+Deferred.
 
 ---
 
@@ -271,16 +156,14 @@ Deferred
 
 Curvature Platform prepares assets, workflows and data.
 
-The game engine remains an independent future phase.
+Game-engine integration remains a separate later phase.
 
 Status
 
-Deferred
+Deferred.
 
 ---
 
 # Rule
 
-Pipeline items never interrupt the active operational task or software sprint.
-
-They are reviewed only when current work is complete or when the user explicitly promotes one.
+Pipeline items never interrupt the active sprint without explicit promotion.

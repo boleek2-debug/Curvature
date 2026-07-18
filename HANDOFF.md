@@ -1,7 +1,7 @@
 # HANDOFF
 
 Status: Draft
-Version: 0.7.0
+Version: 0.8.0
 Owner: Project Curvature
 Last Updated: 2026-07-18
 
@@ -13,167 +13,254 @@ Project Curvature is a long-term engineering and world-building project.
 
 Curvature Platform is the production workshop.
 
-The final objective is a persistent living world accessible through Chronicle Client / MUD, 2D, 3D, VR and future multiplayer scale.
+The final objective is a persistent living world accessible through:
+
+- Chronicle Client / MUD
+- 2D
+- 3D
+- VR
+- future multiplayer and MMORPG scale
+
+Those interfaces must expose the same authoritative world state, history, characters and consequences.
 
 ---
 
 # 2. Current Priority
 
-The next software sprint is:
+The next active sprint is:
 
-WORLD-002 — Time, Events and Chronicle
+ASSISTANT-001A — Architecture and Technology Evaluation
+
+Purpose:
+
+Design the Curvature Console as a standalone internal development application that provides persistent, role-based AI workspaces and removes the need to rebuild context manually.
+
+The first practical use case is Curvature Research work on LANGUAGE.
 
 Completed and verified:
 
 - WORLD-001 — Persistent World State
-- LANG-001 — Historical Reconstruction Foundation
+- LANG-001 — Technical Language Foundation
 - 36 automated project tests passed
 - commit and push completed
 
-The Main Workstation is currently reachable through Tailscale and ComfyUI.
+---
+
+# 3. Why Curvature Console Is Now Required
+
+LANG-001 created the technical structures that can store classified language data, provenance and confidence.
+
+It did not create the scientific content of the language.
+
+That content must be produced through long-running Curvature Research work involving:
+
+- academic publications
+- competing reconstructions
+- evidence assessment
+- confidence evaluation
+- reference analysis
+- missing-knowledge identification
+- follow-up research tasks
+- a connected research graph
+
+The current workflow based on separate ChatGPT conversations requires repeated manual context reconstruction and risks losing research continuity.
+
+Curvature Console is therefore a prerequisite for efficient LANGUAGE research rather than a distant convenience.
 
 ---
 
-# 3. Completed Living World Foundations
+# 4. Curvature Console Definition
 
-## WORLD-001
+Curvature Console is a standalone internal developer tool.
 
-- persistent world identifier
-- Place and Entity models
-- authoritative WorldState
-- controlled state transitions
-- versioned JSON storage
-- load after restart
-- automated tests
+It is not:
 
-## LANG-001
+- Curvature Platform
+- World Core
+- Chronicle Client
+- gameplay
+- a wrapper around one shared chat
 
-- language form classifications
-- confidence levels
-- provenance model
-- LanguageEntry
-- versioned Lexicon
-- JSON lexicon storage
-- validation separating evidence from invention
-- automated tests
+It must provide three permanent and strictly separated workspaces:
 
-Curvature Research owns scientific sources, reconstructions, competing hypotheses and confidence assessments.
+1. Curvature Project
+2. Curvature Core
+3. Curvature Research
 
-Curvature Core owns data structures, validation, persistence and integration.
+Each workspace must own:
+
+- a role definition
+- allowed and prohibited responsibilities
+- required documents
+- department state
+- active task
+- conversation history
+- context assembly rules
+
+Opening a workspace must automatically restore the department to a usable state without manual copying and pasting.
 
 ---
 
-# 4. Exact Next Step
+# 5. Programmatic Responsibilities
 
-Begin WORLD-002 planning.
+The application must include the following logical components:
+
+- Desktop UI
+- Workspace Manager
+- Context Orchestrator
+- Document Loader
+- Repository Reader
+- Department State Store
+- Conversation Store
+- AI Provider abstraction
+- Workspace configuration
+
+Required workflow:
+
+    select workspace
+    → load role
+    → load assigned documents
+    → load department state
+    → assemble context
+    → display loaded context
+    → start or restore AI conversation
+    → persist conversation and department state
+
+The repository and explicit department state are the durable source of continuity.
+
+AI conversation memory alone must not be treated as authoritative project storage.
+
+---
+
+# 6. MVP Scope
+
+ASSISTANT-001B — Curvature Console MVP must provide:
+
+- standalone desktop application
+- three permanent workspaces
+- automatic role loading
+- automatic document loading
+- separate conversation histories
+- persistent department state
+- context preview
+- visible list of loaded files
+- manual context refresh
+- AI provider integration
+- strict department separation
+
+Outside the MVP:
+
+- automatic Git operations
+- automatic HANDOFF generation
+- department-to-department messaging
+- shared knowledge index
+- plugin system
+- Chronicle interface integration
+- voice mode
+- local AI support
+
+---
+
+# 7. Curvature Research Workspace
+
+The Curvature Research workspace is the first operational target.
+
+It must be able to load:
+
+- Research role definition
+- research protocol
+- LANGUAGE.md
+- research roadmap
+- research state
+- research queue
+- active publication or research project
+- source and reference records
+- research graph state
+
+The research workflow must support:
+
+    publication
+    → summary
+    → confirmed facts
+    → hypotheses
+    → evidence
+    → confidence
+    → reference analysis
+    → missing knowledge
+    → follow-up tasks
+    → research graph update
+
+Curvature Research owns scientific interpretation.
+
+Curvature Core owns application architecture, schemas, validation, persistence and integration.
+
+---
+
+# 8. Exact Next Step
+
+Complete ASSISTANT-001A.
 
 Required deliverables:
 
-- world time
-- verified events
-- cause and effect links
-- persistent Chronicle entries
-- restart continuity
-- automated tests
+1. architecture proposal
+2. technology evaluation
+3. selected implementation approach
+4. repository boundary decision
+5. proposed repository structure
+6. state and context storage design
+7. AI provider strategy
+8. MVP specification
+9. implementation roadmap
+10. development effort estimate
 
-Before implementation, inspect the current:
+Technologies to evaluate include:
 
-- `core/world/state.py`
-- `core/world/storage.py`
-- `core/world/__init__.py`
-- `core/events/__init__.py`
-- `tests/test_world.py`
-- `CHRONICLE`
+- OpenAI API and Responses API
+- Electron
+- Tauri
+- native Python desktop approaches
+- browser-based local application
+- other suitable desktop architectures
 
-Do not design from assumed file state.
-
----
-
-# 5. Chronicle Principle
-
-`CHRONICLE` is the persistent record of events in the world.
-
-It is not a technical log and not a free-form AI story.
-
-The design must distinguish:
-
-- what objectively happened
-- who witnessed it
-- who learned about it
-- how information spread
-- how accounts changed
-- how events are narrated
-
-WORLD-002 begins with authoritative facts, ordered time, cause and effect, and persistent Chronicle entries.
+Do not begin implementation until the evaluation produces a clear recommendation.
 
 ---
 
-# 6. Strategic Direction
+# 9. Approved Development Order
 
-1. WORLD-002 — Time, Events and Chronicle
-2. NPC-001 — Identity, Memory, Goals and Voice
-3. CHRONICLE-001 — First Playable Chronicle Client
-4. expand World Core and Platform together
-5. 2D
-6. 3D
-7. VR
-8. multiplayer and MMORPG scale
+1. ASSISTANT-001A — Architecture and Technology Evaluation
+2. ASSISTANT-001B — Curvature Console MVP
+3. RESEARCH-001 — Operational Research Workspace
+4. LANGUAGE Research Foundation
+5. LANG-002 — Research Data Intake
+6. WORLD-002 — Time, Events and Chronicle
+7. NPC-001 — Identity, Memory, Goals and Voice
+8. CHRONICLE-001 — First Playable Chronicle Client
+9. expand World Core and Platform together
+10. 2D
+11. 3D
+12. VR
+13. multiplayer and MMORPG scale
 
----
-
-# 7. ASSISTANT-001 Status
-
-ASSISTANT-001 — Curvature Console MVP is officially approved as a future developer tool.
-
-It is not part of Curvature Platform and not part of gameplay.
-
-Purpose:
-
-- persistent role-based AI workspaces
-- automatic context loading
-- department separation
-- immediate readiness for Curvature Project, Curvature Core and Curvature Research
-
-Status:
-
-Approved for future implementation.
-
-It must not interrupt WORLD-002.
-
-The first future step is architecture and technology evaluation at a safe stopping point.
+Research can continue in parallel after RESEARCH-001 becomes operational.
 
 ---
 
-# 8. Infrastructure Incident Status
+# 10. Infrastructure Status
 
-Remote access is currently restored.
+The Main Workstation is currently reachable through Tailscale and ComfyUI.
 
 The earlier outage is not fully diagnosed.
 
-Most likely explanation:
+The restart-to-Linux explanation remains plausible but unverified.
 
-- Windows Update or another event restarted the workstation
-- GRUB booted Linux Mint
-- Windows, Tailscale and ComfyUI therefore remained unavailable
+Do not restart the workstation remotely while GRUB defaults to Mint and nobody is physically present.
 
-This remains plausible, not verified.
-
-Remaining physical-access tasks:
-
-- set Windows as the default GRUB entry
-- verify Tailscale service and Run Unattended
-- check key expiry
-- verify Tailscale Serve after restart
-- configure ComfyUI autostart
-- install remote desktop
-- perform a controlled restart without login
-- configure recovery or watchdog only if needed
-
-Do not restart remotely while GRUB defaults to Mint and nobody is physically present.
+Remaining physical-access tasks stay deferred until safe access is available.
 
 ---
 
-# 9. Engineering Rules
+# 11. Engineering Rules
 
 1. Never guess.
 2. Request current files before modifying uncertain code.
@@ -184,33 +271,12 @@ Do not restart remotely while GRUB defaults to Mint and nobody is physically pre
 7. Every displayed state must be verifiable.
 8. Test → Commit → Push.
 9. Update HANDOFF after completed work.
-10. Documentation is written in English.
+10. Project documentation is written in English.
 11. Development discussion is in Polish.
 
 ---
 
-# 10. Paused and Deferred Work
-
-Paused:
-
-- WOL-001
-- full restart verification until safe physical access
-
-Deferred:
-
-- S20 FE Wake-on-LAN relay
-- conventional Wake-on-LAN relay
-- hardware validation
-- battery and inverter testing
-- HUD
-- Marian
-- Windows/Linux benchmark
-
-Hardware validation remains deferred until the inverter is confirmed available.
-
----
-
-# 11. Session End Checklist
+# 12. Session End Checklist
 
 - Update HANDOFF.md
 - Run tests when code changed

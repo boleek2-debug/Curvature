@@ -1,7 +1,7 @@
 # ROADMAP
 
 Status: Draft
-Version: 0.7.0
+Version: 0.8.0
 Owner: Project Curvature
 Last Updated: 2026-07-18
 
@@ -9,174 +9,260 @@ Last Updated: 2026-07-18
 
 # Purpose
 
-This roadmap describes the planned evolution of Project Curvature.
-
-It shows where the project is today and the intended order of development.
+This roadmap describes the approved order of Project Curvature development.
 
 It is not a changelog.
+
+Completed work belongs in CHANGELOG.
+
+Deferred ideas belong in PIPELINE.
 
 ---
 
 # Current Position
 
-Current Development Phase
+Current phase:
 
-Transition from Curvature Platform Foundation to Living World Foundation
+Research Enablement and Living World Foundation
 
-Most recently completed sprint
+Most recently completed sprint:
 
-LANG-001 — Historical Reconstruction Foundation
+LANG-001 — Technical Language Foundation
 
-Current verified remote state
+Current verified state:
 
-- endpoint `thing` resolves
-- port `8188` is online
-- ComfyUI API is READY
-- AI Runtime Heartbeat is READY
-- current and last successful verification timestamps are displayed
+- WORLD-001 completed
+- LANG-001 completed
 - 36 automated project tests pass
-- WORLD-001 verified
-- LANG-001 verified
+- persistent World Core exists
+- technical language storage and validation foundation exists
 
-Next software sprint
+Next active sprint:
 
-WORLD-002 — Time, Events and Chronicle
+ASSISTANT-001A — Architecture and Technology Evaluation
 
 ---
 
-# Strategic Direction
+# Strategic Decision
 
-Curvature will now move from the minimum reliable workshop into an early living-world vertical slice.
+Curvature now requires a dedicated internal development application before large-scale LANGUAGE research begins.
 
-The workshop will not be expanded indefinitely before the world begins.
+LANG-001 provides technical structures for language data.
 
-Approved progression:
+Curvature Research must provide the actual scientific content.
 
-1. create persistent world state
-2. establish the historical language foundation
-3. add time, events and Chronicle
-4. add character identity, memory, goals and voice
-5. create the first playable Chronicle Client / MUD
-6. expand the Platform and world together
-7. add 2D
-8. add 3D
-9. add VR
-10. grow toward multiplayer and MMORPG scale
+The Curvature Console is required to preserve:
+
+- department roles
+- research context
+- research state
+- publication analysis
+- research queues
+- source relationships
+- missing knowledge
+- continuous research graphs
+
+For this reason, ASSISTANT-001 has been promoted ahead of WORLD-002.
+
+WORLD-002 remains approved and is postponed, not cancelled.
 
 ---
 
 # Completed Milestones
 
-## Foundation
+## BUILD-001 — Reproducible Development Environment
 
-- Linux development environment
-- Git repository
-- VS Code workspace
-- Conda environment
-- ComfyUI environment
-- BUILD-001 completed
-- Dedicated Curvature environment
-- Reproducible environment definition
-- Pinned Python dependencies
-- Installation and verification guide
+Completed and verified.
 
-## Curvature Core
+## REMOTE-001 — Remote Runtime Foundation
 
-- Telemetry
-- Diagnostics
-- Indicators
-- Console foundation
+Completed and verified.
 
-## Workflow
+## REMOTE-002 — AI Runtime Console
 
-- Workflow registry
-- Workflow states
+Completed and verified.
 
-## Remote
+## REMOTE-003 — Remote Runtime Diagnostics
 
-- REMOTE-001 completed
-- Tailscale integration
-- Remote AI Runtime detection
-- ComfyUI service verification
-- REMOTE-002 completed
-- AI Runtime Console
-- RemoteManager integration
-- Live ComfyUI status
-- REMOTE-003 completed
-- Remote GPU information
-- Remote VRAM usage
-- Queue monitoring
-- Remote operating system information
-- Remote RAM usage
-- ComfyUI version diagnostics
-- Remote Python version diagnostics
-- Remote PyTorch version diagnostics
-- REMOTE-004 completed
-- endpoint resolution state
-- ComfyUI port state
-- ComfyUI API state
-- Heartbeat READY, ATTENTION and OFFLINE states
-- current verification timestamp
-- last successful verification timestamp
-- failure transition handling
-- automated Remote Runtime and heartbeat tests
-- 21 automated project tests passed
+Completed and verified.
 
----
+## REMOTE-004 — Minimal Service Heartbeat
 
-# Completed Living World Milestones
+Completed and verified.
 
 ## WORLD-001 — Persistent World State
 
-Goal
-
-Create the minimum authoritative World Core.
-
-Required deliverables
+Completed and verified:
 
 - persistent world identifier
-- one place
-- basic entities
-- state storage
+- Place and Entity models
+- authoritative WorldState
+- controlled state transitions
+- versioned JSON storage
 - load after restart
-- verified state transitions
 - automated tests
 
-Scope rule
+## LANG-001 — Technical Language Foundation
 
-WORLD-001 must remain small.
+Completed and verified:
 
-It must prove authoritative persistence before adding:
+- language form classifications
+- confidence levels
+- provenance model
+- LanguageEntry model
+- versioned Lexicon model
+- JSON storage
+- validation separating historical evidence from controlled invention
+- automated tests
 
-- Chronicle
-- NPC intelligence
-- language interpretation
-- multiplayer
-- graphical frontends
-- large-scale procedural generation
+LANG-001 is infrastructure.
+
+It does not claim that the scientific reconstruction, phonology, lexicon or naming system is complete.
 
 ---
 
-## LANG-001 — Historical Reconstruction Foundation
+# Active Milestone
+
+## ASSISTANT-001A — Architecture and Technology Evaluation
 
 Goal
 
-Create a trustworthy method for reconstructing and extending the world's language.
+Select a reliable architecture for the Curvature Console.
 
 Required deliverables
 
-- provenance model
-- confidence categories
-- Proto-Slavic research structure
-- early West Slavic and Polan reference framework
-- initial phonological assumptions
-- controlled construction rules
-- small initial lexicon
-- naming rules
+- architecture proposal
+- technology comparison
+- selected implementation approach
+- repository boundary decision
+- repository structure
+- workspace configuration model
+- context assembly model
+- department state model
+- conversation persistence model
+- AI provider strategy
+- MVP specification
+- effort estimate
+- implementation roadmap
+
+Evaluation targets
+
+- OpenAI API and Responses API
+- Electron
+- Tauri
+- native Python desktop frameworks
+- local browser application
+- other suitable approaches
+
+Completion rule
+
+No implementation begins until the recommendation is explicit and justified.
 
 ---
 
-# Active Software Milestone
+# Next Milestone
+
+## ASSISTANT-001B — Curvature Console MVP
+
+Goal
+
+Create a standalone desktop application that restores permanent AI workspaces without manual context rebuilding.
+
+Required workspaces
+
+- Curvature Project
+- Curvature Core
+- Curvature Research
+
+Required MVP capabilities
+
+- automatic role loading
+- automatic document loading
+- separate conversation histories
+- persistent department state
+- context preview
+- loaded-file visibility
+- manual context refresh
+- AI provider integration
+- strict department separation
+
+Boundary
+
+Curvature Console is not Curvature Platform and is not gameplay.
+
+---
+
+# Research Enablement Milestone
+
+## RESEARCH-001 — Operational Research Workspace
+
+Goal
+
+Make Curvature Research operational inside Curvature Console.
+
+Required capabilities
+
+- load research role and protocol
+- load LANGUAGE research context
+- maintain research state and queue
+- track active publications
+- record references
+- identify missing knowledge
+- create follow-up research tasks
+- maintain a connected research graph
+- preserve department continuity
+
+---
+
+# Language Research Phase
+
+## LANGUAGE Research Foundation
+
+Owned by Curvature Research.
+
+Research scope
+
+- Proto-Slavic evidence
+- early West Slavic evidence
+- the probable linguistic environment of the Polans
+- competing reconstructions
+- phonological hypotheses
+- morphology
+- naming evidence
+- confidence assessment
+- explicit uncertainty
+- documented construction rules for missing material
+
+Outputs must distinguish:
+
+- reconstructed
+- plausible
+- Curvature-derived
+- intentionally fictional
+- uncertain
+
+---
+
+## LANG-002 — Research Data Intake
+
+Goal
+
+Import verified Curvature Research outputs into the Core language system.
+
+Required deliverables
+
+- documented research interchange format
+- validation of imported records
+- provenance preservation
+- confidence preservation
+- competing-form preservation
+- rejection of invalid records
+- versioned import
+- automated tests
+
+---
+
+# Living World Milestones
 
 ## WORLD-002 — Time, Events and Chronicle
 
@@ -193,209 +279,40 @@ Required deliverables
 - restart continuity
 - automated tests
 
----
-
 ## NPC-001 — Identity, Memory, Goals and Voice
 
 Goal
 
-Create characters that persist as world entities.
-
-Required deliverables
-
-- identity
-- knowledge
-- memory
-- goals
-- relationships
-- cultural profile
-- linguistic profile
-- recognisable voice constraints
-
----
+Create persistent characters with identity, knowledge, memory, goals, relationships and voice constraints.
 
 ## CHRONICLE-001 — First Playable Chronicle Client
 
 Goal
 
-Create the first world-facing frontend.
-
-Required vertical slice
-
-- one persistent place
-- several characters
-- natural-language player intent
-- verified world actions
-- memory
-- consequences
-- Chronicle output
-- restart continuity
-
-The first version may be single-player.
-
-It is the first proof that the living world exists.
+Create the first world-facing frontend and prove the living world through a text-first vertical slice.
 
 ---
 
-# Approved Developer Tooling
+# Later Direction
 
-## ASSISTANT-001 — Curvature Console MVP
-
-Purpose
-
-Create an internal development client with permanent workspaces for:
-
-- Curvature Project
-- Curvature Core
-- Curvature Research
-
-Each workspace automatically loads its role, documentation and current state.
-
-Status
-
-Approved for future implementation.
-
-Priority
-
-High — Developer Tooling
-
-Scheduling rule
-
-Do not interrupt WORLD-002 or another active sprint.
-
-The first future milestone is architecture and technology evaluation at a safe stopping point.
-
-Required planning deliverables
-
-- architecture proposal
-- technology evaluation
-- implementation roadmap
-- estimated development effort
-- repository structure
-- MVP specification
-
-Curvature Console is not part of Curvature Platform and not part of gameplay.
+1. expand Language and World Core together
+2. expand Chronicle Client
+3. add 2D
+4. add 3D
+5. add VR
+6. add multiplayer foundations
+7. grow toward MMORPG scale
 
 ---
 
 # Infrastructure Hardening
 
-## Main Workstation Recovery and Restart Safety
+Main Workstation restart safety and Wake-on-LAN remain paused until safe physical access is available.
 
-Current condition
-
-Remote access is restored, but the original outage is not fully diagnosed.
-
-Likely operational explanation
-
-A restart may have caused GRUB to boot Linux Mint instead of Windows.
-
-This remains a working explanation, not a verified root cause.
-
-Required physical-access tasks
-
-- set Windows as the default GRUB entry
-- verify Tailscale Windows service status and startup type
-- verify Run Unattended
-- check device key expiry
-- verify Tailscale Serve after restart
-- configure ComfyUI autostart
-- install a remote desktop path
-- perform a controlled restart without login
-- configure native service recovery if required
-- add a watchdog only if required
-
-Safety rule
-
-Do not remotely restart the workstation while GRUB still defaults to Mint and nobody is physically present.
-
-This infrastructure work must be completed when safe physical access is available, but it does not block WORLD-001 while the current remote runtime remains available.
+Do not remotely restart while GRUB defaults to Mint and nobody is physically present.
 
 ---
 
-# Later Milestones
+# Rule
 
-## Language Development
-
-- expanded lexicon
-- grammar growth
-- dialects
-- language evolution
-- ritual and social registers
-- translated and original dialogue
-
-## World Development
-
-- additional places
-- expanded characters
-- economy
-- conflict
-- travel
-- cultures
-- larger histories
-
-## Frontend Progression
-
-- 2D client
-- 3D client
-- VR client
-
-## Multiplayer Progression
-
-- networking
-- shared world rules
-- concurrency
-- multiplayer systems
-- MMORPG scale
-
----
-
-# Paused Milestone
-
-## WOL-001 — Wake-on-LAN
-
-Verified preparation
-
-- ASUS PRIME Z490M-PLUS identified
-- Intel I219-V identified
-- wired Ethernet verified
-- MAC address recorded
-- Wake on Magic Packet enabled
-- Windows wake permission enabled
-- Fast Startup not blocking Wake-on-LAN
-
-Status
-
-Paused until after the trip.
-
-The planned S20 FE relay remains in PIPELINE.
-
----
-
-# Deferred Hardware Validation
-
-Curvature hardware validation includes:
-
-- battery health
-- full-shutdown self-discharge
-- real runtime
-- peak-load stability
-- vehicle AC or inverter compatibility
-- full Curvature mission
-- suspend and sleep behaviour
-
-Status
-
-Deferred until the user confirms that the inverter is available.
-
-It must not interrupt the software roadmap before that confirmation.
-
----
-
-# Notes
-
-Only completed work belongs in CHANGELOG.
-
-Ideas intentionally postponed belong in PIPELINE.
-
-Living World, Language and Chronicle are core roadmap items, not Pipeline ideas.
+An active sprint may be interrupted only by an explicit Project Curvature priority decision.
