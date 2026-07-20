@@ -1,7 +1,7 @@
 # HANDOFF
 
 Status: Active
-Version: 1.1.0
+Version: 1.1.1
 Owner: Project Curvature
 Last Updated: 2026-07-20
 
@@ -60,33 +60,25 @@ Document responsibilities:
 
 # 3. Current Priority
 
-The active cross-repository work is:
+The active implementation sprint is:
 
 ```text
-Curvature Console documentation alignment
+ASSISTANT-001B5.2D — Generated File Download Capture
 ```
 
-Curvature Console is implemented in the separate repository:
+Curvature Console repository:
 
 ```text
 ~/curvature-console
 ```
 
-The main Project Curvature repository is:
+Main Project Curvature repository:
 
 ```text
 ~/Curvature
 ```
 
-Curvature Console is currently ahead of the stale architecture previously recorded in this repository.
-
-The Console repository has completed and pushed:
-
-```text
-ASSISTANT-001B5.2C — Reliable ChatGPT Conversation Routing
-```
-
-Verified Console state:
+Verified Curvature Console state:
 
 ```text
 56 automated tests passed
@@ -100,6 +92,15 @@ Verified live response:
 
 ```text
 PROJECT_SCOPED_ROUTE_OK
+```
+
+Verified main Project Curvature documentation state:
+
+```text
+36 automated tests passed
+documentation alignment commit 1c011be pushed
+main == origin/main
+working tree clean except intentional local .gitignore.old
 ```
 
 ---
@@ -186,13 +187,13 @@ Current browser model:
 
 # 6. Package and File-Transfer Direction
 
-The next Console sprint is:
+The active Console sprint is:
 
 ```text
 ASSISTANT-001B5.2D — Generated File Download Capture
 ```
 
-Planned flow:
+Required flow:
 
 ```text
 ChatGPT response
@@ -237,10 +238,10 @@ Completed and verified in the main Project Curvature repository:
 - WORLD-001
 - LANG-001
 
-Current verified Project Curvature baseline recorded by the repository:
+Current verified Project Curvature baseline:
 
 ```text
-36 automated project tests passed
+36 automated tests passed
 ```
 
 WORLD-002 remains approved and postponed, not cancelled.
@@ -275,13 +276,13 @@ Current rule:
 
 # 9. Exact Next Step
 
-1. Apply this documentation alignment package to `~/Curvature`.
-2. Run the Project Curvature test suite.
-3. Run `git diff --check`.
-4. Review `git status` and `git diff --stat`.
-5. Commit and push the documentation alignment.
-6. Confirm both repositories have current documentation.
-7. Start `ASSISTANT-001B5.2D — Generated File Download Capture`.
+1. Replace `~/Curvature/HANDOFF.md` with this current version.
+2. Run `git diff --check`.
+3. Commit and push the HANDOFF state update.
+4. Create a fresh snapshot of `~/curvature-console`.
+5. Begin `ASSISTANT-001B5.2D — Generated File Download Capture`.
+6. Implement only download capture in this sprint.
+7. Keep documentation updated after every confirmed implementation or verification change.
 
 ---
 
