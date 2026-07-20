@@ -1,9 +1,9 @@
 # CURVATURE CONSOLE ARCHITECTURE
 
-Status: Approved and Amended
-Version: 1.0.0
+Status: Approved and Active
+Version: 1.1.0
 Owner: Project Curvature
-Last Updated: 2026-07-18
+Last Updated: 2026-07-20
 Milestone: ASSISTANT-001
 
 ---
@@ -12,18 +12,18 @@ Milestone: ASSISTANT-001
 
 Curvature Console is a standalone internal development application coordinating:
 
-- Curvature Project;
-- Curvature Core;
-- Curvature Research.
+- Curvature Project
+- Curvature Core
+- Curvature Research
+
+It preserves department state, context, authority boundaries and controlled continuity across ChatGPT conversations.
 
 It is separate from:
 
-- Curvature Platform;
-- World Core;
-- Chronicle Client;
-- gameplay.
-
-It preserves department state, context, authority boundaries and controlled continuity across ChatGPT threads.
+- Curvature Platform
+- World Core
+- Chronicle Client
+- gameplay
 
 ---
 
@@ -31,61 +31,28 @@ It preserves department state, context, authority boundaries and controlled cont
 
 Normal Console operation must not require spending beyond the user's existing ChatGPT Plus subscription.
 
-Therefore the MVP:
+Therefore the current architecture:
 
-- does not use the paid OpenAI API;
-- does not require an API key;
-- does not perform automatic paid requests;
-- uses official ChatGPT Projects as the AI conversation environment;
-- uses local manual transfer packages;
-- keeps all transfer actions user-controlled.
+- does not require the paid OpenAI API
+- does not require an API key
+- does not perform hidden paid requests
+- uses the official ChatGPT web interface
+- uses Playwright browser automation
+- keeps local state in Curvature Console
+- keeps repository changes explicit and user-approved
 
-Any future provider integration must be optional, disabled by default and approved through a new explicit architecture decision.
+Any future paid provider requires a new explicit Project decision.
 
 ---
 
 # 3. Selected Technology
 
-## Language
-
-Python 3.11.
-
-## Desktop UI
-
-PySide6 with Qt Widgets.
-
-## Operational Storage
-
-SQLite.
-
-## Human-Readable Configuration
-
-YAML and Markdown.
-
-## Repository Access
-
-Read-only access to Project Curvature during the MVP.
-
-## AI Workflow
-
-Official ChatGPT under the user's existing Plus subscription.
-
-Curvature Console owns:
-
-- roles;
-- context assembly;
-- local state;
-- transfer packages;
-- conversation records;
-- attachment manifests;
-- thread handoffs;
-- later Department State Bus and cross-department handoffs.
-
-ChatGPT provides AI responses through the official user interface.
-
----
-
-# 4. Repository Boundary
+- Python 3.11
+- PySide6 with Qt Widgets
+- SQLite
+- YAML and Markdown
+- Playwright
+- Google Chrome with a dedicated Console profile
 
 Curvature Console repository:
 
@@ -99,36 +66,31 @@ Project Curvature repository:
 ~/Curvature
 ```
 
-Console must not automatically edit or run Git operations in the Project Curvature repository during the MVP.
+---
+
+# 4. Three-Panel Workspace
+
+All departments remain visible simultaneously.
+
+Each panel owns independent:
+
+- role
+- context
+- draft
+- local conversation
+- attachments
+- route state
+- browser request state
+- persistence
+- focus state
+
+Only the department that submits a browser request is locked.
+
+Other panels remain usable.
 
 ---
 
-# 5. Three-Panel Workspace
-
-All departments are visible simultaneously:
-
-```text
-+----------------------+----------------------+----------------------+
-| Curvature Project    | Curvature Core       | Curvature Research   |
-+----------------------+----------------------+----------------------+
-```
-
-Each panel has independent:
-
-- role;
-- context;
-- draft;
-- local conversation;
-- attachments;
-- transfer actions;
-- persistence;
-- Focus state.
-
-Attachments are not shared automatically.
-
----
-
-# 6. Department Authority
+# 5. Department Authority
 
 ## Project
 
@@ -150,120 +112,183 @@ Cross-department action requires an explicit handoff.
 
 ---
 
-# 7. ChatGPT Projects Model
+# 6. Shared ChatGPT Project Model
 
 Approved structure:
 
 ```text
-ChatGPT Project: Curvature Project
-ChatGPT Project: Curvature Core
-ChatGPT Project: Curvature Research
+ChatGPT Project: Curvature
+├── Project / System Theorist conversation
+├── Core conversation
+└── Research conversation
 ```
 
-Each Project may contain successive department chats.
+Conversation titles are mutable and presentation-only.
 
-Project memory is helpful but is not authoritative storage.
+They are forbidden as technical routing identifiers.
 
-Authoritative continuity comes from:
-
-- repository documentation;
-- SQLite department state;
-- explicit package content;
-- thread handoffs;
-- later structured State Bus and handoffs.
-
----
-
-# 8. Transfer Package Model
-
-## Task Package
-
-Purpose:
-
-Frequent work inside the current ChatGPT thread.
-
-Content:
-
-- department identity;
-- authority boundary;
-- full role;
-- bounded excerpts from configured documents;
-- bounded recent local conversation;
-- current task;
-- attachment manifest;
-- response instructions.
-
-The Task Package favours compactness.
-
-## Thread Handoff Package
-
-Purpose:
-
-Continue work in a new chat inside the same ChatGPT Project.
-
-Content:
-
-- department identity;
-- authority boundary;
-- full loaded context;
-- larger bounded conversation excerpt;
-- current task;
-- attachment manifest;
-- explicit continuation instructions.
-
-The Thread Handoff Package favours continuity.
-
----
-
-# 9. Thread Pressure
-
-Official ChatGPT does not expose exact remaining thread capacity to Curvature Console.
-
-Console may maintain an advisory estimate:
+The routing model is:
 
 ```text
-GREEN
-AMBER
-RED
+department_id
+→ active_conversation_url
+→ conversation URL history
 ```
 
-The estimate may use:
-
-- recorded package size;
-- recorded imported response size;
-- local conversation size;
-- attachment count;
-- time and work since the last handoff.
-
-AMBER prepares the user for a handoff.
-
-RED recommends a new chat in the same ChatGPT Project.
-
-Console must not claim the estimate is an exact ChatGPT token reading.
-
----
-
-# 10. Manual Processing Flow
+Verified route forms:
 
 ```text
-start Console
-→ restore three workspaces
-→ load roles and configured documents
-→ restore local state and attachments
-→ prepare Task or Thread Handoff Package
-→ preview package
-→ copy package
-→ user pastes package into official ChatGPT
-→ user receives response
-→ user imports response into Console
-→ Console persists department continuity
+https://chatgpt.com/c/<conversation-id>
+https://chatgpt.com/g/<project-id>/c/<conversation-id>
 ```
 
-No paid request is made by Console.
+The shared Project URL is used only when creating a new chat during Thread Handoff.
 
 ---
 
-# 11. Logical Components
+# 7. Browser Bridge
+
+The browser bridge:
+
+- connects through Chrome DevTools Protocol
+- uses a dedicated browser profile
+- opens the persisted conversation URL
+- enters the prepared task
+- sends it
+- waits for a completed assistant response
+- returns the response to the originating panel
+- persists a verified resulting route
+- releases the UI after success or failure
+
+Visible Chrome is an approved fallback when headless rendering does not expose the required ChatGPT interface.
+
+Browser lifecycle failures must:
+
+- be detected
+- return an explicit error
+- stop owned browser processes
+- release the active panel
+- never leave the application permanently waiting
+
+The ChatGPT DOM is an external and changeable dependency.
+
+Selectors and route handling must be based on observed behavior and verified through tests and live checks.
+
+---
+
+# 8. User Interaction
+
+## Send Task
+
+```text
+enter task
+→ click Send Task once
+→ send immediately to the active department route
+```
+
+There is no second confirmation.
+
+## Thread Handoff
+
+```text
+prepare handoff
+→ one explicit confirmation
+→ open shared Project
+→ create new chat
+→ send handoff
+→ capture new conversation URL
+→ persist it as active for the department
+```
+
+---
+
+# 9. Persistence
+
+SQLite state includes or is planned to include:
+
+- department conversation text
+- department draft
+- attachment metadata
+- layout and focus state
+- active conversation URL
+- conversation URL history
+- structured conversation records
+- generated-file records
+- handoff records
+- thread pressure state
+
+The active route is authoritative for browser delivery.
+
+Conversation title is not authoritative.
+
+---
+
+# 10. Generated File Capture
+
+Next implementation unit:
+
+```text
+ASSISTANT-001B5.2D
+```
+
+Required behavior:
+
+```text
+ChatGPT response
+→ detect download
+→ save to data/inbox/<department>/
+→ preserve original name
+→ avoid collision
+→ record source conversation URL
+→ associate file with the response
+→ expose it in the Console
+```
+
+Downloading into the Console inbox does not require a second confirmation.
+
+Writing into a repository does require explicit approval.
+
+---
+
+# 11. Package Apply Engine
+
+Planned implementation unit:
+
+```text
+ASSISTANT-001B5.2E
+```
+
+Approved package contract:
+
+```text
+root of ZIP = root of target repository
+```
+
+Every package must include a machine-readable manifest describing:
+
+- package type
+- target repository
+- files
+- repository-relative paths
+- intended action
+
+Required safety:
+
+- reject absolute paths
+- reject `..`
+- reject path traversal
+- reject unsafe symlinks
+- reject ambiguous target repositories
+- classify replace, add, conflict and skip
+- show an apply preview
+- require one explicit approval
+- do not commit or push automatically
+
+The assistant is responsible for generating conforming packages.
+
+---
+
+# 12. Logical Components
 
 ```text
 Curvature Console
@@ -271,137 +296,74 @@ Curvature Console
 +-- Presentation
 |   +-- MainWindow
 |   +-- DepartmentPanel
-|   +-- ContextPreviewDialog
+|   +-- BrowserBridgeWorker
 |   +-- TransferPackageDialog
+|   +-- future Download Inbox
+|   +-- future Package Apply Preview
 |
 +-- Infrastructure
 |   +-- RepositoryReader
 |   +-- WorkspaceContextLoader
 |   +-- TransferPackageBuilder
 |   +-- SQLiteStateStore
+|   +-- ChatGPTBrowserBridge
+|   +-- future DownloadCapture
+|   +-- future PackageValidator
+|   +-- future PackageApplyEngine
 |
 +-- Configuration
-|   +-- workspace YAML
-|   +-- role Markdown
-|
-+-- Planned
-    +-- ResponseImporter
-    +-- ConversationRecordStore
-    +-- ThreadPressureEstimator
-    +-- DepartmentStateBus
-    +-- HandoffManager
+    +-- workspace YAML
+    +-- role Markdown
 ```
 
-There is no mandatory AI provider component in the MVP.
-
 ---
 
-# 12. Persistence
+# 13. Verification State
 
-Current SQLite state includes:
-
-- department conversation text;
-- department draft;
-- attachment metadata;
-- splitter layout;
-- focused department.
-
-Planned additions:
-
-- structured conversation entries;
-- package records;
-- thread identifiers;
-- handoff records;
-- thread pressure state;
-- department summaries.
-
----
-
-# 13. MVP Scope
-
-The MVP must provide:
-
-- standalone PySide6 application;
-- three simultaneous department panels;
-- isolated roles and context;
-- independent state and attachments;
-- persistent restart continuity;
-- Task Package;
-- Thread Handoff Package;
-- response import;
-- structured local conversation records;
-- thread pressure estimation;
-- controlled Department State Bus;
-- explicit handoffs;
-- strict authority boundaries;
-- zero mandatory paid API usage.
-
----
-
-# 14. Outside the MVP
-
-- automatic repository writes;
-- automatic Git operations;
-- unrestricted department messaging;
-- unsupported browser automation;
-- shared unrestricted conversation history;
-- plugin architecture;
-- voice mode;
-- remote synchronisation;
-- multi-user collaboration;
-- mandatory paid providers.
-
----
-
-# 15. Implementation Roadmap
-
-## B1
-
-Repository and application foundation — completed.
-
-## B2
-
-Three-panel desktop shell — completed.
-
-## Attachments
-
-Independent attachment queues — completed.
-
-## B3
-
-Workspace configuration and context loading — completed.
-
-## B4
-
-Local state and restart persistence — completed.
-
-## B5
-
-ChatGPT Plus workflow:
-
-1. Task and Thread Handoff packages;
-2. response import;
-3. structured conversation records;
-4. thread pressure estimation;
-5. workflow verification.
-
-## B6
-
-Department State Bus and handoffs.
-
-## B7
-
-MVP verification and closeout.
-
----
-
-# 16. Governing Rules
+Latest completed Console unit:
 
 ```text
-Observe other departments.
-Respect their authority.
-Do not perform their work.
-Create a handoff when their action is required.
-Use official ChatGPT through the existing Plus subscription.
-Do not create hidden or automatic paid operations.
+ASSISTANT-001B5.2C — Reliable ChatGPT Conversation Routing
+```
+
+Verified:
+
+```text
+56 automated tests passed
+PROJECT_SCOPED_ROUTE_OK
+commit b55c7e6 pushed
+```
+
+---
+
+# 14. Documentation Rule
+
+Documentation is updated immediately after each confirmed change to:
+
+- state
+- architecture
+- decision
+- plan
+- verification
+- commit or push status
+- known issue
+- exact next step
+
+Documentation is not deferred to sprint closeout.
+
+---
+
+# 15. Governing Rules
+
+```text
+Never guess.
+Use current files and observed behavior.
+Route by persisted URL, never by conversation title.
+One sprint, one goal.
+One-click normal task.
+One confirmation for Thread Handoff.
+Automatic file download to a controlled inbox.
+Explicit approval before repository writes.
+No hidden paid operations.
+Keep documentation current at all times.
 ```

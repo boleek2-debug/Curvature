@@ -30,20 +30,47 @@ Implemented foundations include:
 - telemetry
 - diagnostics
 - indicators
-- Console
 - Workflow Engine foundation
 - Remote Runtime
 - Tailscale integration
 - remote ComfyUI detection
 - GPU and VRAM diagnostics
 - queue monitoring
-- remote runtime diagnostics
-- reproducible Curvature environment
+- persistent World Core foundation
+- language data foundation
 - automated tests
 
-The current operational priority is restoring reliable unattended Tailscale access to the Main Workstation.
+Curvature Console is maintained in a separate repository:
 
-The next software sprint is `REMOTE-004 — Minimal Service Heartbeat`.
+```text
+~/curvature-console
+```
+
+Its current verified state includes:
+
+- three simultaneous department panels
+- local persistence
+- context and transfer packages
+- browser-mediated ChatGPT send and receive
+- one shared ChatGPT Project
+- URL-only conversation routing
+- one-click normal task submission
+- visible Chrome fallback
+- independent panel request state
+
+Latest verified Console result:
+
+```text
+56 automated tests passed
+PROJECT_SCOPED_ROUTE_OK
+commit b55c7e6 pushed
+```
+
+The next Console sprint is:
+
+```text
+ASSISTANT-001B5.2D — Generated File Download Capture
+```
 
 ## Strategic Direction
 
@@ -159,9 +186,11 @@ Frontends never invent authoritative state.
 9. World Core will be the source of truth for world state.
 10. Test before commit.
 11. Commit before push.
-12. Update `HANDOFF.md` after completed work.
-13. Code and documentation are written in English.
-14. Development discussion is conducted in Polish.
+12. Update the appropriate documentation immediately after every confirmed change.
+13. Keep `HANDOFF.md` accurate as the current operational source of truth.
+14. Code and documentation are written in English.
+15. Development discussion is conducted in Polish.
+16. Route ChatGPT conversations by persisted URL, never by title.
 
 ## Development Environment
 

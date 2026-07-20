@@ -3,7 +3,7 @@
 Status: Draft
 Version: 0.7.0
 Owner: Project Curvature
-Last Updated: 2026-07-18
+Last Updated: 2026-07-20
 
 ---
 
@@ -89,10 +89,9 @@ Deferred.
 
 # Curvature Console Future Features
 
-These features are outside ASSISTANT-001B MVP:
+The following features remain deferred beyond the current B5.2D and B5.2E work:
 
-- repository write integration
-- Git operations
+- automatic Git commit or push
 - automatic HANDOFF generation
 - automatic context refresh
 - department-to-department messaging
@@ -104,7 +103,11 @@ These features are outside ASSISTANT-001B MVP:
 - remote synchronization
 - multi-user collaboration
 
-They may be promoted only after the MVP is operational and verified.
+Generated-file capture and the Package Apply Engine are no longer Pipeline items.
+
+They are promoted into `ROADMAP.md` as B5.2D and B5.2E.
+
+Repository writes remain user-approved and are not automatic.
 
 ---
 

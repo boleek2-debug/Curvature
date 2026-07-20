@@ -1,9 +1,68 @@
 # CHANGELOG
 
 Status: Active
-Version: 0.6.0
+Version: 0.7.0
 Owner: Project Curvature
-Last Updated: 2026-07-18
+Last Updated: 2026-07-20
+
+---
+
+# Purpose
+
+This document records completed and verified work only.
+
+Planned work belongs in `ROADMAP.md`.
+
+Ideas belong in `PIPELINE.md`.
+
+Current operational state belongs in `HANDOFF.md`.
+
+Architecture belongs in `BLUEPRINT.md`.
+
+---
+
+## 2026-07-20
+
+### ASSISTANT-001B5.2C — Reliable ChatGPT Conversation Routing
+
+Completed
+
+- one shared ChatGPT Project selected for all three departments
+- three departmental conversations retained inside the shared Project
+- conversation titles removed from technical routing
+- URL-only routing implemented
+- active conversation URL persisted per department
+- conversation URL history retained
+- standard conversation URL support
+- project-scoped conversation URL support
+- one-click `Send Task`
+- one explicit confirmation for `Thread Handoff`
+- visible Chrome fallback
+- browser lifecycle failure handling
+- correct UI release after browser errors
+- only the originating department panel locked during a request
+- response returned to the correct department panel
+- Console documentation aligned with the verified architecture
+
+Verified
+
+```text
+56 automated tests passed
+PROJECT_SCOPED_ROUTE_OK
+commit b55c7e6 pushed
+main == origin/main
+working tree clean
+```
+
+Verified project-scoped route form
+
+```text
+https://chatgpt.com/g/<project-id>/c/<conversation-id>
+```
+
+Result
+
+Curvature Console can reliably send a task to the persisted departmental conversation and return the response without depending on a mutable conversation title.
 
 ---
 

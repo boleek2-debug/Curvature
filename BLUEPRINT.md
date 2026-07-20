@@ -1,9 +1,9 @@
 # BLUEPRINT
 
 Status: Draft
-Version: 0.3.0
+Version: 0.4.0
 Owner: Project Curvature
-Last Updated: 2026-07-18
+Last Updated: 2026-07-20
 
 ---
 
@@ -113,26 +113,41 @@ Its purpose is to coordinate three permanent departments:
 - Curvature Core
 - Curvature Research
 
+## Shared ChatGPT Project Model
+
+The approved runtime structure is:
+
+```text
+ChatGPT Project: Curvature
+├── Project / System Theorist conversation
+├── Core conversation
+└── Research conversation
+```
+
+Conversation titles are mutable presentation data and are never used for routing.
+
+Each department is routed through:
+
+```text
+department_id
+→ persisted active_conversation_url
+→ conversation URL history
+```
+
+Verified conversation route forms:
+
+```text
+https://chatgpt.com/c/<conversation-id>
+https://chatgpt.com/g/<project-id>/c/<conversation-id>
+```
+
+The shared Project URL is used only to create a new chat during Thread Handoff.
+
 ## Three-Panel Workspace Model
 
-All three departmental workspaces must be visible at the same time.
+All three departmental workspaces are visible simultaneously.
 
-The default desktop layout is:
-
-    +----------------------+----------------------+----------------------+
-    | Curvature Project    | Curvature Core       | Curvature Research   |
-    +----------------------+----------------------+----------------------+
-    | direction            | architecture         | sources              |
-    | decisions            | implementation       | evidence             |
-    | priorities           | tests                | hypotheses           |
-    | roadmap              | repository state     | confidence           |
-    +----------------------+----------------------+----------------------+
-
-The workspaces are peers.
-
-No workspace is treated as the primary workspace with the other two hidden behind tabs.
-
-Each panel must support:
+Each panel supports:
 
 - independent scrolling
 - independent conversation history
@@ -140,8 +155,12 @@ Each panel must support:
 - independent loaded context
 - visible department status
 - resizable width
-- temporary focus or enlargement
-- restoration to the three-panel view without losing state
+- temporary focus
+- restoration without state loss
+
+During a browser request, only the originating panel is locked.
+
+The other departments remain usable.
 
 ## Department Responsibilities
 
@@ -155,12 +174,6 @@ Owns:
 - scope decisions
 - cross-department arbitration
 
-Must not:
-
-- write implementation code
-- decide scientific truth
-- replace Curvature Core or Curvature Research work
-
 ### Curvature Core
 
 Owns:
@@ -172,12 +185,6 @@ Owns:
 - persistence
 - tests
 - repository integration
-
-Must not:
-
-- decide scientific truth
-- invent research conclusions
-- independently change project direction
 
 ### Curvature Research
 
@@ -191,176 +198,54 @@ Owns:
 - missing knowledge
 - research graph maintenance
 
-Must not:
+A department must not perform work owned by another department.
 
-- define software architecture
-- write production implementation
-- independently change the project roadmap
+Cross-department work requires a handoff.
 
-## Cross-Department Awareness
+## Browser Bridge
 
-Every workspace must be aware of the current state of the other two departments.
+Current verified implementation:
 
-Awareness must be provided through explicit shared state, not uncontrolled access to all conversation history.
+- official ChatGPT web interface
+- existing ChatGPT Plus subscription
+- Playwright over Chrome DevTools Protocol
+- dedicated browser profile
+- URL-only conversation routing
+- one-click `Send Task`
+- one confirmation for `Thread Handoff`
+- response capture
+- visible Chrome fallback
+- browser lifecycle failure handling
+- persisted route state in SQLite
+- no mandatory paid API
 
-Each workspace receives:
+The browser interface is treated as an external, changeable dependency.
 
-- its own full role context
-- its own full department state
-- a concise status summary of the other departments
-- accepted cross-department outputs
-- relevant blockers
-- pending decisions
-- incoming and outgoing handoffs
+Selectors must be defensive, verified and covered by tests where practical.
 
-A workspace may observe another department's status.
+## Package and File Direction
 
-It must not perform work owned by that department.
+The next planned capability is generated-file download capture.
 
-When cross-department action is required, the workspace creates a handoff.
+Downloaded files will first enter a controlled per-department inbox.
 
-## Department State Bus
+Repository changes remain explicit and user-approved.
 
-Curvature Console must provide a controlled shared-state layer:
+The later Package Apply Engine will require:
 
-    Department State Bus
-    |
-    +-- Project status
-    +-- Core status
-    +-- Research status
-    +-- active tasks
-    +-- completed outputs
-    +-- blockers
-    +-- decisions required
-    +-- handoffs
+- root of ZIP equal to root of target repository
+- machine-readable manifest
+- repository-relative paths
+- path traversal protection
+- apply preview
+- explicit approval before writes
+- no automatic commit or push
 
-The State Bus is not a shared unrestricted conversation.
+## Documentation Rule
 
-It exposes only structured, relevant and intentionally published department information.
+Documentation is a live source of truth.
 
-## Handoff Model
-
-Handoffs are the approved mechanism for cross-department work.
-
-Required handoff fields:
-
-- identifier
-- source department
-- target department
-- type
-- subject
-- summary
-- requested action
-- supporting references
-- status
-- created timestamp
-- updated timestamp
-
-Initial handoff types:
-
-- Decision Required
-- Research Request
-- Research Result
-- Implementation Request
-- Technical Constraint
-- Clarification Request
-- Review Request
-
-Initial handoff statuses:
-
-- Proposed
-- Acknowledged
-- Accepted
-- Rejected
-- Completed
-
-A workspace must not bypass the handoff model by performing another department's work itself.
-
-## Context Isolation and Context Sharing
-
-Each department has an isolated context package containing:
-
-- role definition
-- allowed responsibilities
-- prohibited responsibilities
-- required documents
-- department state
-- active task
-- conversation history
-- context assembly rules
-
-Shared context contains only:
-
-- department summaries
-- accepted outputs
-- blockers
-- required decisions
-- relevant handoffs
-
-This preserves awareness without role collapse.
-
-## ChatGPT Plus Workflow
-
-Curvature Console uses official ChatGPT Projects through a manual, user-controlled workflow.
-
-Approved department projects:
-
-- Curvature Project
-- Curvature Core
-- Curvature Research
-
-The Console provides two package modes:
-
-- compact Task Package for normal work;
-- comprehensive Thread Handoff Package for moving to a new chat.
-
-The Console does not require the paid OpenAI API or an API key.
-
-## Logical Components
-
-Curvature Console requires:
-
-- Desktop UI
-- Three-Panel Layout Manager
-- Workspace Manager
-- Context Orchestrator
-- Document Loader
-- Repository Reader
-- Department State Store
-- Department State Bus
-- Handoff Manager
-- Conversation Store
-- ChatGPT Transfer Package Builder
-- Workspace configuration
-
-## Core Processing Flow
-
-    start application
-    → restore all three workspaces
-    → load each department role
-    → load each department documents
-    → load each department state
-    → load shared department summaries
-    → load handoffs
-    → assemble isolated context for each workspace
-    → display all three workspaces simultaneously
-    → prepare Task or Thread Handoff Package
-    → user transfers it to official ChatGPT
-    → import the response
-    → persist conversations, department state and handoffs
-
-## Authority Rule
-
-Curvature Console coordinates departments.
-
-It does not erase their boundaries.
-
-The governing rule for every workspace is:
-
-    Observe other departments.
-    Respect their authority.
-    Do not perform their work.
-    Create a handoff when their action is required.
+Confirmed changes to state, architecture, decisions or plan are recorded immediately in the appropriate document.
 
 
 ---
